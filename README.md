@@ -4,9 +4,8 @@ A kids' personal finance educational website (ages 7–12) built visual-first
 for visual learners. Built from the goal-oriented prompt in
 [`PROMPT.md`](PROMPT.md).
 
-**Live site:** enable GitHub Pages (Settings → Pages → Deploy from a branch →
-`main` / root) and it serves at
-`https://vinayakpimple.github.io/pennys-money-adventure/`.
+**Live site:** https://vinayakpimple.github.io/pennys-money-adventure/
+(auto-deployed from `main` by GitHub Actions)
 
 **To run locally:** open `index.html` in any browser. No build step, no
 server, no accounts, no ads, no data collection — progress is stored in
