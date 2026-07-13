@@ -32,6 +32,10 @@ narrows that gap. So v3 adds:
   Night" (real 3 jars + allowance) — because families are the primary driver of
   real behavior change, the app's biggest lever.
 
+> 📄 The full evidence base — verified findings with effect sizes, the sources,
+> what was *refuted*, the caveats, and how each finding maps to a feature — is
+> documented in [`docs/RESEARCH.md`](docs/RESEARCH.md).
+
 ## What's new in v2 — the living money world
 
 - **Penny Coins economy**: every activity pays coins (+10 first clear, +2 replays,
