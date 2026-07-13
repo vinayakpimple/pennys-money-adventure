@@ -4,7 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Penny's Money Adventure</title>
+  <meta name="description" content="A visual-first personal finance adventure for kids: earn, save, spend, and grow Penny Coins across 9 interactive lessons.">
+  <meta name="theme-color" content="#f7a8c4">
   <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
   <header class="topbar">
@@ -13,7 +18,7 @@
         <ellipse cx="60" cy="58" rx="44" ry="34" fill="#f7a8c4"/>
         <ellipse cx="60" cy="58" rx="44" ry="34" fill="none" stroke="#d97ba3" stroke-width="3"/>
         <rect x="48" y="20" width="24" height="8" rx="4" fill="#d97ba3"/>
-        <circle cx="38" cy="52" r="5" fill="#3a2b33"/>
+        <circle class="penny-eye" cx="38" cy="52" r="5" fill="#3a2b33"/>
         <circle cx="40" cy="50" r="1.6" fill="#fff"/>
         <ellipse cx="88" cy="60" rx="12" ry="10" fill="#f2c1d6" stroke="#d97ba3" stroke-width="3"/>
         <circle cx="84" cy="59" r="2.4" fill="#b05c86"/>
@@ -28,6 +33,10 @@
     </a>
 
     <div class="topbar-right">
+      <a href="#/bank" class="wallet-chip" id="walletChip" title="Your Penny Coins — tap to visit the bank">
+        <span role="img" aria-label="coin">🪙</span>
+        <b id="coinCount" aria-live="polite">0</b>
+      </a>
       <div class="progress-jar" id="progressJar" title="Your adventure progress">
         <div class="jar">
           <div class="jar-fill" id="jarFill"></div>
@@ -37,6 +46,7 @@
       <nav class="topnav" aria-label="Site">
         <a href="#/glossary" class="nav-btn" title="Picture dictionary"><span role="img" aria-label="Glossary">📖</span><span class="nav-word">Words</span></a>
         <a href="#/parents" class="nav-btn" title="For parents and teachers"><span role="img" aria-label="Parents">🧑‍🏫</span><span class="nav-word">Grown-ups</span></a>
+        <button class="nav-btn" id="soundToggle" title="Sounds on or off" aria-pressed="true"><span id="soundIcon" role="img" aria-label="Sound">🔊</span></button>
         <button class="nav-btn" id="fontToggle" title="Easy-read letters" aria-pressed="false"><span role="img" aria-label="Easy read font">🔤</span><span class="nav-word">Easy read</span></button>
       </nav>
     </div>
@@ -49,6 +59,7 @@
   </footer>
 
   <div id="confetti-layer" aria-hidden="true"></div>
+  <div id="coin-layer" aria-hidden="true"></div>
   <script src="app.js"></script>
 </body>
 </html>

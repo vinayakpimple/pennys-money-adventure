@@ -12,6 +12,20 @@ for visual learners. Built from the goal-oriented prompt in
 server, no accounts, no ads, no data collection — progress is stored in
 `localStorage` on the device only.
 
+## What's new in v2 — the living money world
+
+- **Penny Coins economy**: every activity pays coins (+10 first clear, +2 replays,
+  +5 per badge, +5 daily allowance) into a persistent wallet
+- **Penny Bank**: deposit coins and earn **1% interest per real hour**, compounding
+  while away — kids return the next day and *see* compound growth happen
+- **Penny Shop**: buy accessories Penny actually wears site-wide; big-ticket items
+  double as genuine savings goals
+- **Money Master Quest**: a 10-question final boss unlocked by all 9 badges,
+  with a **printable Certificate of Money Mastery**
+- **Name + avatar**: Penny greets each adventurer personally
+- **Sound effects**: synthesized coin clinks and fanfares (WebAudio, mutable)
+- **Installable PWA**: add to home screen on tablets; works fully offline
+
 ## What's inside
 
 - **Penny the piggy bank mascot** guides every page with speech bubbles
