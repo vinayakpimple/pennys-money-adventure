@@ -1013,3 +1013,146 @@ h2 { font-size: 1.5rem; margin-bottom: 10px; }
   main { max-width: none; padding: 0; }
   .cert { box-shadow: none; }
 }
+
+/* ================================================================
+   v3 — reflection step, daily challenge, kindness corner, parent kit
+   ================================================================ */
+
+/* ---------- reflection (Think) step ---------- */
+.reflect-q {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 6px 0 16px;
+  text-wrap: balance;
+}
+.reflect-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.reflect-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 3px solid rgba(51, 48, 94, 0.15);
+  border-radius: 16px;
+  padding: 18px 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--ink);
+  transition: transform 0.12s ease;
+}
+.reflect-choice .story-emoji { font-size: 2.4rem; margin: 0; }
+.reflect-choice:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--node-color, var(--spend)); }
+.reflect-choice.chosen { border-color: var(--node-color, var(--save)); background: var(--save-soft); transform: scale(1.03); }
+.reflect-choice:disabled { cursor: default; opacity: 0.55; }
+.reflect-choice.chosen:disabled { opacity: 1; }
+.reflect-resp { min-height: 30px; }
+
+/* ---------- daily challenge card ---------- */
+.daily-card {
+  background: linear-gradient(180deg, #efe9ff, #fdf6e3);
+  border: 3px solid #8e7cf2;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+  margin-bottom: 22px;
+}
+.daily-card.done { background: var(--save-soft); border-color: var(--save); }
+.daily-head {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #6b4fd0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.daily-card.done .daily-head { color: var(--save); }
+.daily-reward {
+  margin-left: auto;
+  background: var(--share-soft);
+  color: #a87400;
+  border-radius: 999px;
+  padding: 2px 12px;
+  font-size: 0.9rem;
+}
+.daily-q { font-weight: 700; font-size: 1.1rem; margin-bottom: 12px; }
+.daily-done { font-weight: 700; text-align: center; }
+.daily-done small { color: var(--ink-soft); font-weight: 600; }
+.daily-answers { display: flex; gap: 10px; flex-wrap: wrap; }
+.daily-answer {
+  flex: 1 1 140px;
+  background: #fff;
+  border: 3px solid rgba(51, 48, 94, 0.15);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--ink);
+  transition: transform 0.12s ease;
+}
+.daily-answer:hover:not(:disabled) { transform: translateY(-2px); border-color: #8e7cf2; }
+.daily-answer.right { border-color: var(--save); background: var(--save-soft); }
+.daily-answer.wrong { border-color: var(--danger); background: #fde3e3; }
+.daily-answer:disabled { cursor: default; }
+
+/* ---------- kindness corner ---------- */
+.kindness-garden {
+  min-height: 70px;
+  font-size: 2rem;
+  line-height: 1.5;
+  text-align: center;
+  background: linear-gradient(180deg, #eaf7ff 55%, #d9f2e3 55%);
+  border-radius: 16px;
+  padding: 14px;
+  margin: 8px 0;
+  word-break: break-word;
+}
+.garden-empty { font-size: 1rem; font-weight: 600; color: var(--ink-soft); }
+.garden-note { text-align: center; font-weight: 600; color: var(--ink-soft); margin-bottom: 12px; }
+.cause-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+.cause-card {
+  background: #fff;
+  border: 3px solid rgba(51, 48, 94, 0.12);
+  border-radius: 16px;
+  padding: 16px 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.cause-emoji { font-size: 2.8rem; line-height: 1; }
+.cause-card .big-btn { font-size: 0.95rem; padding: 10px 16px; margin-top: 4px; }
+.float-heart {
+  position: fixed;
+  z-index: 60;
+  font-size: 1.5rem;
+  pointer-events: none;
+  transition: top 1s ease, opacity 1s ease, transform 1s ease;
+}
+
+/* ---------- parent kit ---------- */
+.parent-list { margin: 8px 0 0 2px; padding-left: 20px; color: var(--ink-soft); }
+.parent-list li { margin-bottom: 8px; line-height: 1.5; }
+.parent-list li strong { color: var(--ink); }
+.family-kit { border-left: 6px solid var(--share); }
+.family-kit .big-btn { margin-top: 14px; }
+
+@media print {
+  body.print-kit-only main > *:not(.family-kit) { display: none !important; }
+  body.print-kit-only .family-kit {
+    box-shadow: none;
+    border: 2px solid #999;
+  }
+  body.print-kit-only .family-kit .no-print { display: none !important; }
+}

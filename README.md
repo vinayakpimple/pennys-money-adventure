@@ -11,6 +11,27 @@ for visual learners. Built from the goal-oriented prompt in
 server, no accounts, no ads, no data collection — progress is stored in
 `localStorage` on the device only.
 
+## What's new in v3 — evidence-based upgrades
+
+Informed by a deep review of the research on children's financial education
+(Kaiser & Menkhoff 2020 and Kaiser/Lusardi/Menkhoff/Urban 2022 meta-analyses
+of 76+ RCTs; the CFPB "building blocks" framework; Whitebread & Bingham 2013,
+Cambridge). The evidence: lessons reliably raise *knowledge* but only weakly
+change *behavior*, and guided "learning by doing" plus reflection is what
+narrows that gap. So v3 adds:
+
+- **Reflection step** on every lesson (Watch → Play → **Think** → Collect):
+  the child applies each idea to their *own* choices and gets warm feedback —
+  the guided-reflection the evidence says turns doing into learning. Never scored.
+- **Kindness Corner**: give coins to help causes, rewarded only by a growing
+  flower garden and gratitude — **deliberately never repaid in coins or badges**,
+  to avoid the over-justification effect (paying for generosity crowds it out).
+- **Daily Challenge**: one recall question from a past lesson each day, to fight
+  the knowledge decay the research documents (spaced retention).
+- **Real-money parent kit**: conversation scripts and a printable "Family Money
+  Night" (real 3 jars + allowance) — because families are the primary driver of
+  real behavior change, the app's biggest lever.
+
 ## What's new in v2 — the living money world
 
 - **Penny Coins economy**: every activity pays coins (+10 first clear, +2 replays,

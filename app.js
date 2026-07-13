@@ -47,6 +47,8 @@
     questBest: 0,
     lastAllowance: '',
     unseenInterest: 0,
+    lastChallenge: '',     // date string of last daily challenge
+    kindnessGiven: 0,      // total coins given away (intrinsic, never repaid)
     sound: true,
   };
 
@@ -1015,6 +1017,82 @@
   const QUEST_PASS = 8;
 
   /* ================================================================
+     REFLECTION — after each activity, the child applies the idea to
+     THEIR OWN choices and gets warm, non-judgmental feedback. The
+     evidence is clear that "doing" only teaches when paired with
+     guided reflection, so this step is never scored or paid.
+     ================================================================ */
+  const REFLECT = {
+    'what-is-money': {
+      q: 'Would you rather be paid for chores in CHICKENS or COINS?',
+      choices: [
+        ['🐔', 'Chickens', 'Ha! But what if the toy shop does not want chickens? That is exactly why people invented coins.'],
+        ['🪙', 'Coins', 'Smart! Coins work everywhere because everyone agrees they are worth something.'],
+      ],
+    },
+    'needs-wants': {
+      q: 'Think about YOUR life. Which one is a real NEED?',
+      choices: [
+        ['🍎', 'Food', 'Yes! Food is a true need — your body cannot go without it.'],
+        ['🎮', 'A new game', 'Games are a fun WANT! Needs come first, then we save up for wants.'],
+        ['🛏️', 'A warm bed', 'Exactly — a safe, warm place to sleep is a big need.'],
+      ],
+    },
+    'earning': {
+      q: 'Which job could YOU really do at home this week to earn?',
+      choices: [
+        ['🧹', 'Tidy up', 'Great pick! Ask a grown-up if you can help — work first, then earn.'],
+        ['🐕', 'Help a pet', 'Lovely! Feeding or walking a pet is real, helpful work.'],
+        ['🍽️', 'Help cook', 'Yum! Setting the table or helping cook is a real way to pitch in.'],
+      ],
+    },
+    'three-jars': {
+      q: 'What would YOU fill your green SAVE jar for?',
+      choices: [
+        ['🎯', 'Something big', 'Awesome goal! Big things take weeks of saving — and you can do it.'],
+        ['🎁', 'A gift for someone', 'So kind! Saving up to give is a wonderful plan.'],
+        ['🐷', 'Just to grow it', 'Love it — savers who keep their jar growing feel proud AND ready.'],
+      ],
+    },
+    'budgeting': {
+      q: 'When your $10 was running low, what is smartest to protect?',
+      choices: [
+        ['🟢', 'Some savings', 'Exactly! A great budget always keeps a little for savings.'],
+        ['🍿', 'Extra snacks', 'Snacks are fun — but a money boss protects savings first!'],
+      ],
+    },
+    'banks-interest': {
+      q: 'Your coins grow while you sleep. What would YOU do with 10 coins?',
+      choices: [
+        ['🏦', 'Bank them & wait', 'Smart saver! Left alone, they quietly grow bigger. That is interest!'],
+        ['🛍️', 'Spend them now', 'That is okay sometimes — but money left in the bank grows. Waiting can pay off!'],
+      ],
+    },
+    'goals': {
+      q: 'What real thing would YOU save up for?',
+      choices: [
+        ['🚲', 'Something big', 'Great goal! Save a bit each week and watch it get closer.'],
+        ['🎁', 'A present', 'So thoughtful! Saving up to give feels amazing.'],
+        ['📚', 'A hobby', 'Nice! A goal gives your saving a purpose.'],
+      ],
+    },
+    'lemonade': {
+      q: 'One price sold MORE cups; another earned more PER cup. Which is smarter?',
+      choices: [
+        ['💰', 'The best PROFIT one', 'That is the boss move — the biggest PROFIT wins, not the most cups!'],
+        ['🥤', 'The most cups', 'Selling lots is exciting — but check the profit! More cups is not always more money.'],
+      ],
+    },
+    'digital-safety': {
+      q: 'A game says "Enter your password for FREE coins!" What do YOU do?',
+      choices: [
+        ['🛑', 'Stop & tell a grown-up', 'PERFECT! That is a trick — you keep your password secret and always ask a grown-up.'],
+        ['🔑', 'Type my password', 'Uh oh — that is a trap! Real prizes never need your secret password. Always check with a grown-up.'],
+      ],
+    },
+  };
+
+  /* ================================================================
      VIEWS
      ================================================================ */
   function speechRow(text, opts) {
@@ -1087,13 +1165,17 @@
       app.appendChild(el('div', { class: 'allowance-banner', html: emoji('🎁', 'gift') + ' Daily allowance: <strong>+5 coins</strong> for coming back today!' }));
     }
 
-    /* Penny Town — bank, shop, quest */
+    /* Daily Challenge — spaced review of one past-lesson question */
+    app.appendChild(buildDailyChallenge());
+
+    /* Penny Town — bank, shop, kindness, quest */
     app.appendChild(el('h2', { class: 'section-title', html: emoji('🏘️', 'town') + ' Penny Town' }));
     const town = el('ul', { class: 'map town', 'aria-label': 'Penny Town places' });
     const questOpen = state.badges.length === MODULES.length;
     [
       { href: '#/bank', emoji: '🏦', title: 'Penny Bank', tag: 'Coins grow 1% every hour!', color: 'var(--save)', badge: state.bank.balance >= 1 ? '🌱' : '' },
       { href: '#/shop', emoji: '🛍️', title: 'Penny Shop', tag: 'Dress up Penny with your coins', color: 'var(--spend)', badge: state.owned.length ? '🎀' : '' },
+      { href: '#/kindness', emoji: '💛', title: 'Kindness Corner', tag: 'Give coins to help — just because', color: '#e05656', badge: state.kindnessGiven >= 1 ? '🌷' : '' },
       questOpen
         ? { href: '#/quest', emoji: '🏰', title: 'Money Master Quest', tag: state.questDone ? 'Conquered! Replay any time' : 'The final challenge awaits!', color: '#8e7cf2', badge: state.questDone ? '👑' : '⚔️' }
         : { href: '#/quest', emoji: '🏰', title: 'Money Master Quest', tag: '🔒 Earn all 9 badges to enter', color: '#9a97b8', badge: '' },
@@ -1134,9 +1216,153 @@
     app.appendChild(map);
   }
 
+  /* ---------- Daily Challenge (spaced review) ---------- */
+  function buildDailyChallenge() {
+    const today = new Date().toDateString();
+    const wrap = el('section', { class: 'daily-card' });
+
+    function doneState(msg) {
+      wrap.className = 'daily-card done';
+      wrap.innerHTML = '<div class="daily-head">' + emoji('⭐', 'star') + ' Daily Challenge</div>' +
+        '<p class="daily-done">' + msg + '<br><small>Come back tomorrow for a new one!</small></p>';
+    }
+
+    if (state.lastChallenge === today) {
+      doneState('Done for today — nice brain work! 🧠');
+      return wrap;
+    }
+
+    // one stable question per day, drawn from past lessons
+    let h = 0;
+    for (let i = 0; i < today.length; i++) h = (h * 31 + today.charCodeAt(i)) | 0;
+    const q = QUEST_POOL[Math.abs(h) % QUEST_POOL.length];
+
+    wrap.innerHTML = '<div class="daily-head">' + emoji('⭐', 'star') + ' Daily Challenge <span class="daily-reward">+3 🪙</span></div>' +
+      '<p class="daily-q">' + q.q + '</p>';
+    const answers = el('div', { class: 'daily-answers' });
+    const shuffled = q.a.slice().sort(() => Math.random() - 0.5);
+    let answered = false;
+    shuffled.forEach((ans) => {
+      const btn = el('button', { class: 'daily-answer', type: 'button', html: '<span role="img" aria-label="answer">' + ans[0] + '</span> ' + ans[1] });
+      btn.dataset.right = ans[2] ? '1' : '';
+      btn.addEventListener('click', () => {
+        if (answered) return;
+        answered = true;
+        state.lastChallenge = today;
+        $$('.daily-answer', answers).forEach((x) => { x.disabled = true; });
+        if (ans[2]) {
+          btn.classList.add('right');
+          awardCoins(3, btn);
+          sfx.win();
+          save();
+          setTimeout(() => doneState('Correct! +3 coins 🎉'), 950);
+        } else {
+          btn.classList.add('wrong');
+          $$('.daily-answer', answers).forEach((x, i) => { if (shuffled[i][2]) x.classList.add('right'); });
+          sfx.oops();
+          save();
+          setTimeout(() => doneState('Good try! You remembered a little more today 💪'), 1500);
+        }
+      });
+      answers.appendChild(btn);
+    });
+    wrap.appendChild(answers);
+    return wrap;
+  }
+
+  /* ---------- warm-glow hearts (giving has NO coin reward) ---------- */
+  function heartFloat(fromEl) {
+    const layer = $('#coin-layer');
+    const r = fromEl.getBoundingClientRect();
+    for (let i = 0; i < 6; i++) {
+      const h = el('span', { class: 'float-heart', text: ['💖', '💛', '💗', '🌸', '✨', '💕'][i % 6] });
+      h.style.left = r.left + r.width / 2 + (Math.random() * 44 - 22) + 'px';
+      h.style.top = r.top + r.height / 2 + 'px';
+      layer.appendChild(h);
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          h.style.top = (r.top - 90 - Math.random() * 50) + 'px';
+          h.style.opacity = '0';
+          h.style.transform = 'scale(1.4)';
+        }, i * 80);
+      });
+      setTimeout(() => h.remove(), 1300 + i * 80);
+    }
+  }
+
+  /* ---------- Kindness Corner (intrinsic giving — never repaid) ---------- */
+  function renderKindness(app) {
+    accrueBank();
+    app.appendChild(el('h1', { html: emoji('💛', 'yellow heart') + ' Kindness Corner' }));
+    app.appendChild(speechRow('Some things feel good for no reward at all! Give a few coins to help — you will <strong>not</strong> get coins or badges back, and that is the whole point. Giving is its own happy. ' + emoji('🌷', 'tulip')));
+
+    const causes = [
+      { id: 'shelter', emoji: '🐕', name: 'Animal shelter', thanks: 'The puppies say woof-woof THANK YOU!' },
+      { id: 'trees', emoji: '🌳', name: 'Plant trees', thanks: 'A brand-new tree will grow because of you!' },
+      { id: 'school', emoji: '✏️', name: 'School supplies', thanks: 'A kid somewhere gets crayons — thanks to you!' },
+      { id: 'food', emoji: '🍲', name: 'Food for families', thanks: 'A warm meal for someone hungry. So kind!' },
+    ];
+
+    const card = el('section', { class: 'lesson-card' });
+    card.style.setProperty('--node-color', '#e05656');
+
+    const garden = el('div', { class: 'kindness-garden', 'aria-label': 'Your kindness garden' });
+    function drawGarden() {
+      const flowers = Math.min(Math.floor(state.kindnessGiven / 5), 48);
+      garden.innerHTML = flowers > 0
+        ? Array.from({ length: flowers }, (_, i) => ['🌷', '🌸', '🌼', '🌻', '🏵️'][i % 5]).join('')
+        : '<span class="garden-empty">Your kindness garden is empty… plant your first flower by giving!</span>';
+    }
+    drawGarden();
+
+    const cheer = el('p', { class: 'cheer', 'aria-live': 'polite' });
+    const note = el('p', { class: 'garden-note' });
+    function drawNote() {
+      note.innerHTML = 'One flower grows for every 5 coins you give. Total given: <strong>' + Math.floor(state.kindnessGiven) + ' coins</strong> — thank you! 💖';
+    }
+    drawNote();
+
+    const grid = el('div', { class: 'cause-grid' });
+    causes.forEach((c) => {
+      const cc = el('div', { class: 'cause-card' });
+      cc.innerHTML = '<span class="cause-emoji" role="img" aria-label="' + c.name + '">' + c.emoji + '</span><h3>' + c.name + '</h3>';
+      const give = el('button', { class: 'big-btn gold', type: 'button', html: 'Give 5 ' + emoji('🪙', 'coin') });
+      give.addEventListener('click', () => {
+        accrueBank();
+        if (Math.floor(state.coins) < 5) {
+          cheer.classList.add('oops');
+          cheer.textContent = 'You need 5 coins to give — earn a few first, then share the kindness! 🎮';
+          sfx.oops();
+          return;
+        }
+        state.coins -= 5;
+        state.kindnessGiven += 5;
+        save();
+        updateWallet(true);
+        drawGarden();
+        drawNote();
+        heartFloat(cc);       // warm glow only — NO coins, NO badge
+        sfx.win();
+        cheer.classList.remove('oops');
+        cheer.textContent = c.thanks + ' 💖';
+      });
+      cc.appendChild(give);
+      grid.appendChild(cc);
+    });
+
+    card.appendChild(el('h2', { style: 'text-align:center;', html: emoji('🌼', 'flower') + ' Your Kindness Garden' }));
+    card.appendChild(garden);
+    card.appendChild(note);
+    card.appendChild(grid);
+    card.appendChild(cheer);
+    card.appendChild(el('div', { class: 'hint', html: emoji('💛', 'heart') + ' Giving here never pays you back in coins or badges — on purpose. Some of the best things we do with money are just to help someone else.' }));
+    app.appendChild(card);
+  }
+
   function renderModule(app, mod) {
-    let step = 0; // 0 intro, 1 activity, 2 recap
-    const stepNames = ['Watch', 'Play', 'Collect'];
+    let step = 0; // 0 intro, 1 activity, 2 reflect, 3 recap
+    const stepNames = ['Watch', 'Play', 'Think', 'Collect'];
+    const STEPS = stepNames.length;
 
     function draw() {
       app.innerHTML = '';
@@ -1144,8 +1370,8 @@
 
       const head = el('div', { class: 'lesson-head' });
       head.appendChild(el('p', { class: 'crumbs', html: '<a href="#/">' + emoji('🗺️', 'map') + ' Back to map</a>' }));
-      const dots = el('div', { class: 'steps-dots', 'aria-label': 'Step ' + (step + 1) + ' of 3: ' + stepNames[step] });
-      for (let i = 0; i < 3; i++) dots.appendChild(el('span', { class: 'dot' + (i === step ? ' on' : '') }));
+      const dots = el('div', { class: 'steps-dots', 'aria-label': 'Step ' + (step + 1) + ' of ' + STEPS + ': ' + stepNames[step] });
+      for (let i = 0; i < STEPS; i++) dots.appendChild(el('span', { class: 'dot' + (i === step ? ' on' : '') }));
       head.appendChild(dots);
       app.appendChild(head);
 
@@ -1170,7 +1396,7 @@
         next.innerHTML = 'Let’s play! ' + emoji('🎮', 'game');
         next.addEventListener('click', () => { step = 1; draw(); });
       } else if (step === 1) {
-        next.innerHTML = 'Collect my stickers! ' + emoji('🌟', 'star');
+        next.innerHTML = 'Think about it! ' + emoji('💭', 'thought bubble');
         next.disabled = true;
         const firstClear = !state.activityCleared[mod.id];
         const activity = ACTIVITIES[mod.activity](() => {
@@ -1183,6 +1409,34 @@
         });
         card.appendChild(activity);
         next.addEventListener('click', () => { step = 2; draw(); });
+      } else if (step === 2) {
+        // Reflection: apply the idea to your own choices. Never scored or paid.
+        const r = REFLECT[mod.id];
+        next.innerHTML = 'Collect my stickers! ' + emoji('🌟', 'star');
+        next.disabled = true;
+        card.appendChild(el('h2', { html: emoji('💭', 'thought bubble') + ' Your turn to think' }));
+        card.appendChild(el('p', { class: 'reflect-q', text: r.q }));
+        const choicesWrap = el('div', { class: 'reflect-choices' });
+        const resp = el('p', { class: 'cheer reflect-resp', 'aria-live': 'polite' });
+        r.choices.forEach((c) => {
+          const btn = el('button', {
+            class: 'reflect-choice', type: 'button',
+            html: '<span class="story-emoji" role="img" aria-label="choice">' + c[0] + '</span>' + c[1],
+          });
+          btn.addEventListener('click', () => {
+            $$('.reflect-choice', choicesWrap).forEach((x) => { x.disabled = true; x.classList.remove('chosen'); });
+            btn.classList.add('chosen');
+            resp.textContent = c[2];
+            sfx.pop();
+            next.disabled = false;
+            next.classList.add('green');
+          });
+          choicesWrap.appendChild(btn);
+        });
+        card.appendChild(choicesWrap);
+        card.appendChild(resp);
+        bodyText = r.q;
+        next.addEventListener('click', () => { step = 3; draw(); });
       } else {
         card.appendChild(el('h2', { html: emoji('🌟', 'star') + ' You learned…' }));
         const row = el('div', { class: 'sticker-row' });
@@ -1524,8 +1778,43 @@
 
     const eco = el('div', { class: 'info-card' });
     eco.innerHTML = '<h3>' + emoji('🪙', 'coin') + ' How the coin economy teaches</h3>' +
-      '<p>Kids earn Penny Coins from lessons (+10 first time, +2 on replays), a daily allowance (+5), and badges (+5). They can deposit coins in the Penny Bank — which pays 1% interest per real hour, so returning tomorrow makes compound growth tangible — or spend them in the Penny Shop, where expensive items become genuine savings goals. It is the save/spend/earn cycle, practiced rather than described.</p>';
+      '<p>Kids earn Penny Coins from lessons (+10 first time, +2 on replays), a daily allowance (+5), and badges (+5). They can deposit coins in the Penny Bank — which pays 1% interest per real hour, so returning tomorrow makes compound growth tangible — spend them in the Penny Shop (where expensive items become genuine savings goals), or give them away in the Kindness Corner. Each lesson also ends with a short <em>reflection</em> step, and a daily challenge resurfaces one past question to help it stick. It is the save/spend/give/earn cycle, practiced rather than described.</p>';
     app.appendChild(eco);
+
+    const research = el('div', { class: 'info-card' });
+    research.innerHTML = '<h3>' + emoji('🔬', 'microscope') + ' The evidence behind the design</h3>' +
+      '<p>The strongest research (Kaiser &amp; Menkhoff 2020; Kaiser, Lusardi, Menkhoff &amp; Urban 2022 — 76+ randomized trials; the CFPB “building blocks” framework; Whitebread &amp; Bingham 2013, Cambridge) finds that financial lessons reliably raise <strong>knowledge</strong> but only weakly change <strong>behavior</strong>, and that ages 7–12 is the key window when money <em>habits</em> form. So this app pairs every hands-on activity with reflection and feedback (guided “learning by doing,” which the evidence favors over facts alone), keeps abstract ideas like interest concrete, and — deliberately — <strong>never pays coins for giving</strong>, because rewarding generosity can crowd out the real motive. The biggest lever of all, though, is you: children learn money mostly from their families. The kit below turns that into a few concrete things to do at home.</p>';
+    app.appendChild(research);
+
+    const scripts = el('div', { class: 'info-card' });
+    scripts.innerHTML = '<h3>' + emoji('💬', 'speech') + ' Money talks — quick things to say this week</h3>' +
+      '<ul class="parent-list">' +
+      '<li><strong>At a shop:</strong> “Is this a <em>need</em> or a <em>want</em>? How can you tell?”</li>' +
+      '<li><strong>At the checkout:</strong> “This costs $4. If your allowance is $2 a week, how long to save for it?”</li>' +
+      '<li><strong>Paying by card/phone:</strong> “That card isn’t magic — it takes real money from the bank. Where did that money come from?”</li>' +
+      '<li><strong>When they want something now:</strong> “Want to buy it today, or save and have something bigger later?” (then honor their choice)</li>' +
+      '<li><strong>After a chore:</strong> “You earned this. Save some, spend some, share some?”</li>' +
+      '</ul>';
+    app.appendChild(scripts);
+
+    const kit = el('div', { class: 'info-card family-kit' });
+    kit.innerHTML = '<h3>' + emoji('🌙', 'moon') + ' Family Money Night — a 20-minute starter</h3>' +
+      '<p>The single best predictor of a child’s money habits is hands-on practice with <em>real</em> money at home. Try this once:</p>' +
+      '<ol class="parent-list">' +
+      '<li><strong>Make three real jars</strong> — label them SAVE (green), SPEND (blue), SHARE (yellow), matching the app’s colors.</li>' +
+      '<li><strong>Give a small real allowance</strong> (even a few coins) and let your child split it across the jars themselves. Resist steering — mistakes are the lesson.</li>' +
+      '<li><strong>Pick one real savings goal</strong> together and tape a picture of it to the SAVE jar. Add to it weekly and watch it fill.</li>' +
+      '<li><strong>Choose who the SHARE jar helps</strong> — a charity, a sibling, a neighbor. Let them decide; don’t reward it.</li>' +
+      '<li><strong>Revisit weekly for a month.</strong> Habits form through repetition, not a single talk.</li>' +
+      '</ol>';
+    const printBtn = el('button', { class: 'big-btn gold no-print', type: 'button', html: emoji('🖨️', 'printer') + ' Print this kit' });
+    printBtn.addEventListener('click', () => {
+      document.body.classList.add('print-kit-only');
+      window.print();
+      setTimeout(() => document.body.classList.remove('print-kit-only'), 500);
+    });
+    kit.appendChild(printBtn);
+    app.appendChild(kit);
 
     MODULES.forEach((m, i) => {
       const card = el('div', { class: 'info-card' });
@@ -1608,6 +1897,7 @@
     }
     if (hash.startsWith('#/bank')) { renderBank(app); document.title = 'Penny Bank · ' + siteTitle; return; }
     if (hash.startsWith('#/shop')) { renderShop(app); document.title = 'Penny Shop · ' + siteTitle; return; }
+    if (hash.startsWith('#/kindness')) { renderKindness(app); document.title = 'Kindness Corner · ' + siteTitle; return; }
     if (hash.startsWith('#/quest')) { renderQuest(app); document.title = 'Money Master Quest · ' + siteTitle; return; }
     if (hash.startsWith('#/certificate')) { renderCertificate(app); document.title = 'Certificate · ' + siteTitle; return; }
     if (hash.startsWith('#/parents')) { renderParents(app); document.title = 'For Grown-Ups · ' + siteTitle; return; }
