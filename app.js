@@ -1937,47 +1937,33 @@
     const voiceCard = el('div', { class: 'info-card' });
     voiceCard.innerHTML = '<h3>' + emoji('🗣️', 'speaking head') + ' Penny’s voice</h3>' +
       '<p>Penny reads every lesson and word in a <strong>built-in natural voice</strong> (an open-source AI voice baked into the app). There is nothing to set up — it sounds the same on every device including Safari and iPad, and it works offline. Tap to hear it:</p>';
-    const hearBtn = el('button', { class: 'big-btn gold', type: 'button', html: emoji('🔊', 'speaker') + ' Hear Penny’s voice' });
-    hearBtn.addEventListener('click', () => narrate(HOME_LINE));
+    const hearLabel = emoji('🔊', 'speaker') + ' Hear Penny’s voice';
+    const hearBtn = el('button', { class: 'big-btn gold', type: 'button', html: hearLabel });
+    hearBtn.addEventListener('click', () => {
+      // Play the real AI clip directly with visible pass/fail feedback — no
+      // silent fall-through to a device (robotic) voice.
+      stopClip();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      const restore = () => { hearBtn.innerHTML = hearLabel; };
+      hearBtn.innerHTML = emoji('🎵', 'music') + ' Playing…';
+      try {
+        const a = document.createElement('audio');
+        a.preload = 'auto';
+        a.setAttribute('playsinline', '');
+        a.src = 'audio/' + hashStr(clean(HOME_LINE)) + '.mp3';
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        currentClip = a;
+        const clear = () => { if (currentClip === a) currentClip = null; try { a.remove(); } catch (e) { /* ignore */ } };
+        const oops = () => { clear(); hearBtn.innerHTML = emoji('⚠️', 'warning') + ' This browser blocked the audio'; setTimeout(restore, 4000); };
+        a.addEventListener('ended', () => { clear(); restore(); });
+        a.addEventListener('error', oops);
+        const p = a.play();
+        if (p && p.catch) p.catch((err) => { if (!err || err.name !== 'AbortError') oops(); });
+      } catch (e) { hearBtn.innerHTML = emoji('⚠️', 'warning') + ' Audio not supported here'; setTimeout(restore, 4000); }
+    });
     voiceCard.appendChild(hearBtn);
-
-    // Secondary: the device-voice fallback, used only for the rare bit of text
-    // that includes the child's typed-in name.
-    const fbWrap = el('div', { class: 'voice-fallback' });
-    fbWrap.innerHTML = '<p class="voice-fallback-note">' + emoji('⚙️', 'gear') +
-      ' <strong>Backup voice</strong> — only used to read text that contains your child’s name (which the built-in voice can’t know in advance). This picks from the voices installed on <em>this</em> device; if they all sound robotic, that’s exactly why the lessons use the built-in voice above instead.</p>';
-    const fbRow = el('div', { class: 'voice-row' });
-    const select = el('select', { class: 'voice-select', 'aria-label': 'Backup device voice for names' });
-    function populateVoices() {
-      if (!select.isConnected) return;
-      loadVoices();
-      const en = VOICES.list
-        .filter((v) => (v.lang || '').toLowerCase().startsWith('en'))
-        .map((v) => ({ v, s: scoreVoice(v) }))
-        .sort((a, b) => b.s - a.s);
-      select.innerHTML = '';
-      select.appendChild(el('option', { value: '', text: 'Auto — best available' + (VOICES.best ? ' (' + VOICES.best.name + ')' : '') }));
-      en.forEach(({ v }) => {
-        const o = el('option', { value: v.name, text: v.name + ' · ' + v.lang });
-        if (v.name === state.voiceName) o.selected = true;
-        select.appendChild(o);
-      });
-      if (!en.length) select.appendChild(el('option', { value: '', text: 'No extra voices found on this device yet' }));
-    }
-    select.addEventListener('change', () => { state.voiceName = select.value; save(); });
-    // Preview the SELECTED backup voice (device speech engine, not the AI clip).
-    const testFb = el('button', { class: 'read-btn', type: 'button', html: emoji('🔊', 'speaker') + ' Test this one' });
-    testFb.addEventListener('click', () => speak('Hi! I am the backup voice on this device.'));
-    fbRow.appendChild(select);
-    fbRow.appendChild(testFb);
-    fbWrap.appendChild(fbRow);
-    voiceCard.appendChild(fbWrap);
     app.appendChild(voiceCard);
-    populateVoices(); // after the select is connected to the DOM
-    if ('speechSynthesis' in window) {
-      const onVoices = () => { if (!select.isConnected) { window.speechSynthesis.removeEventListener('voiceschanged', onVoices); return; } populateVoices(); };
-      window.speechSynthesis.addEventListener('voiceschanged', onVoices);
-    }
 
     const danger = el('div', { class: 'info-card' });
     danger.innerHTML = '<h3>' + emoji('🔄', 'reset') + ' Start fresh</h3><p>Hand-me-down device or a new adventurer? This erases all progress, coins, and purchases on this device.</p>';
