@@ -49,6 +49,7 @@
     unseenInterest: 0,
     lastChallenge: '',     // date string of last daily challenge
     kindnessGiven: 0,      // total coins given away (intrinsic, never repaid)
+    voiceName: '',         // parent-chosen read-aloud voice (auto-best if empty)
     sound: true,
   };
 
@@ -194,14 +195,66 @@
     $('#jarLabel').textContent = done + ' / ' + total;
   }
 
-  /* ---------- read-aloud ---------- */
+  /* ================================================================
+     READ-ALOUD — the browser's built-in speech engine only USES the
+     voices installed on the device, and it defaults to the most
+     robotic one. Modern browsers ship far better "natural / neural"
+     voices (Google, Microsoft Natural, Apple Siri/enhanced) — we just
+     have to find and select them instead of taking the default.
+     ================================================================ */
+  const VOICES = { list: [], best: null, ready: false };
+
+  // Higher score = more natural-sounding. Tuned from the naming
+  // conventions the big engines use for their neural voices.
+  function scoreVoice(v) {
+    const n = (v.name || '').toLowerCase();
+    const lang = (v.lang || '').toLowerCase();
+    let s = 0;
+    if (lang.startsWith('en')) s += 40;              // must be understandable
+    if (lang === 'en-us' || lang === 'en-gb') s += 8;
+    // strong neural / high-quality markers
+    if (/natural|neural|premium|enhanced|wavenet|journey|studio|online/.test(n)) s += 60;
+    if (/\bgoogle\b/.test(n)) s += 45;               // Chrome/Android cloud voices
+    if (/siri|\baria\b|\bjenny\b|\bemma\b|\bmichelle\b|\blibby\b|\bsonia\b|\bava\b|\ballison\b|samantha/.test(n)) s += 40;
+    if (v.localService === false) s += 15;           // cloud voices tend to be nicer
+    // penalise the classic robotic engines
+    if (/espeak|pico|compact|\bfred\b|\balbert\b|zarvox|robot/.test(n)) s -= 60;
+    return s;
+  }
+
+  function loadVoices() {
+    if (!('speechSynthesis' in window)) return;
+    const list = window.speechSynthesis.getVoices() || [];
+    if (!list.length) return; // not ready yet; voiceschanged will refire
+    VOICES.list = list;
+    VOICES.ready = true;
+    const ranked = list
+      .map((v) => ({ v, s: scoreVoice(v) }))
+      .filter((x) => x.s > 0)
+      .sort((a, b) => b.s - a.s);
+    VOICES.best = ranked.length ? ranked[0].v : (list.find((v) => (v.lang || '').startsWith('en')) || list[0]);
+  }
+
+  function currentVoice() {
+    if (!VOICES.ready) loadVoices();
+    if (state.voiceName) {
+      const chosen = VOICES.list.find((v) => v.name === state.voiceName);
+      if (chosen) return chosen;
+    }
+    return VOICES.best;
+  }
+
   function speak(text) {
     if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.rate = 0.95;
-    u.pitch = 1.1;
-    window.speechSynthesis.speak(u);
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      const voice = currentVoice();
+      if (voice) { u.voice = voice; u.lang = voice.lang; }
+      u.rate = 0.92;   // a touch slower — clearer for young readers
+      u.pitch = 1.05;  // warm, friendly, not chipmunky
+      window.speechSynthesis.speak(u);
+    } catch (e) { /* speech unavailable — silent, non-blocking */ }
   }
 
   function readBtn(getText) {
@@ -1827,6 +1880,40 @@
       '<p>Try the 3-jars system at home with real jars. Let kids handle small amounts of real money, make small mistakes safely, and talk openly about family spending choices. The “Read to me” buttons help pre-readers use the site independently. On a tablet, use “Add to Home Screen” — the site installs like an app and works offline.</p>';
     app.appendChild(tips);
 
+    const voiceCard = el('div', { class: 'info-card' });
+    voiceCard.innerHTML = '<h3>' + emoji('🗣️', 'speaking head') + ' Penny’s reading voice</h3>' +
+      '<p>The “Read to me” buttons use the voices <em>installed on this device</em> — the app can’t change how they sound, only which one it picks. Older devices fall back to a robotic voice; choose the most natural one below. Most phones and computers can download much better “natural / enhanced / neural” voices free in their own accessibility or language settings, and they’ll show up in this list automatically.</p>';
+    const pickRow = el('div', { class: 'voice-row' });
+    const select = el('select', { class: 'voice-select', 'aria-label': 'Choose Penny’s reading voice' });
+    function populateVoices() {
+      if (!select.isConnected) return;
+      loadVoices();
+      const en = VOICES.list
+        .filter((v) => (v.lang || '').toLowerCase().startsWith('en'))
+        .map((v) => ({ v, s: scoreVoice(v) }))
+        .sort((a, b) => b.s - a.s);
+      select.innerHTML = '';
+      select.appendChild(el('option', { value: '', text: 'Auto — best available' + (VOICES.best ? ' (' + VOICES.best.name + ')' : '') }));
+      en.forEach(({ v }) => {
+        const o = el('option', { value: v.name, text: v.name + ' · ' + v.lang });
+        if (v.name === state.voiceName) o.selected = true;
+        select.appendChild(o);
+      });
+      if (!en.length) select.appendChild(el('option', { value: '', text: 'No extra voices found on this device yet' }));
+    }
+    select.addEventListener('change', () => { state.voiceName = select.value; save(); });
+    const testBtn = el('button', { class: 'big-btn ghost', type: 'button', html: emoji('🔊', 'speaker') + ' Test voice' });
+    testBtn.addEventListener('click', () => speak('Hi! I am Penny. Let us learn about money together!'));
+    pickRow.appendChild(select);
+    pickRow.appendChild(testBtn);
+    voiceCard.appendChild(pickRow);
+    app.appendChild(voiceCard);
+    populateVoices(); // after the select is connected to the DOM
+    if ('speechSynthesis' in window) {
+      const onVoices = () => { if (!select.isConnected) { window.speechSynthesis.removeEventListener('voiceschanged', onVoices); return; } populateVoices(); };
+      window.speechSynthesis.addEventListener('voiceschanged', onVoices);
+    }
+
     const danger = el('div', { class: 'info-card' });
     danger.innerHTML = '<h3>' + emoji('🔄', 'reset') + ' Start fresh</h3><p>Hand-me-down device or a new adventurer? This erases all progress, coins, and purchases on this device.</p>';
     const resetBtn = el('button', { class: 'big-btn ghost', type: 'button', html: 'Reset all progress' });
@@ -1939,6 +2026,10 @@
   }
 
   /* ---------- boot ---------- */
+  if ('speechSynthesis' in window) {
+    loadVoices();                                   // often empty on first call…
+    window.speechSynthesis.onvoiceschanged = loadVoices; // …so refresh when ready
+  }
   window.addEventListener('hashchange', render);
   applyFontPref();
   applySoundPref();

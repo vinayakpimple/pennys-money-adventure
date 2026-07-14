@@ -1156,3 +1156,27 @@ h2 { font-size: 1.5rem; margin-bottom: 10px; }
   }
   body.print-kit-only .family-kit .no-print { display: none !important; }
 }
+
+/* ---------- voice picker (grown-ups page) ---------- */
+.voice-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 12px;
+}
+.voice-select {
+  flex: 1 1 240px;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 3px solid rgba(51, 48, 94, 0.2);
+  background: #fff;
+  cursor: pointer;
+}
+.voice-select:focus-visible { border-color: var(--spend); outline: none; }
+.voice-row .big-btn { flex: 0 0 auto; font-size: 1rem; padding: 12px 20px; }
