@@ -1946,6 +1946,7 @@
     const fbWrap = el('div', { class: 'voice-fallback' });
     fbWrap.innerHTML = '<p class="voice-fallback-note">' + emoji('⚙️', 'gear') +
       ' <strong>Backup voice</strong> — only used to read text that contains your child’s name (which the built-in voice can’t know in advance). This picks from the voices installed on <em>this</em> device; if they all sound robotic, that’s exactly why the lessons use the built-in voice above instead.</p>';
+    const fbRow = el('div', { class: 'voice-row' });
     const select = el('select', { class: 'voice-select', 'aria-label': 'Backup device voice for names' });
     function populateVoices() {
       if (!select.isConnected) return;
@@ -1964,7 +1965,12 @@
       if (!en.length) select.appendChild(el('option', { value: '', text: 'No extra voices found on this device yet' }));
     }
     select.addEventListener('change', () => { state.voiceName = select.value; save(); });
-    fbWrap.appendChild(select);
+    // Preview the SELECTED backup voice (device speech engine, not the AI clip).
+    const testFb = el('button', { class: 'read-btn', type: 'button', html: emoji('🔊', 'speaker') + ' Test this one' });
+    testFb.addEventListener('click', () => speak('Hi! I am the backup voice on this device.'));
+    fbRow.appendChild(select);
+    fbRow.appendChild(testFb);
+    fbWrap.appendChild(fbRow);
     voiceCard.appendChild(fbWrap);
     app.appendChild(voiceCard);
     populateVoices(); // after the select is connected to the DOM
