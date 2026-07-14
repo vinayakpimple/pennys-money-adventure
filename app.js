@@ -271,18 +271,30 @@
     return h.toString(36);
   }
   let currentClip = null;
-  function stopClip() { if (currentClip) { try { currentClip.pause(); } catch (e) { /* ignore */ } currentClip = null; } }
+  function stopClip() {
+    if (currentClip) {
+      try { currentClip.pause(); if (currentClip.parentNode) currentClip.parentNode.removeChild(currentClip); } catch (e) { /* ignore */ }
+      currentClip = null;
+    }
+  }
   function playClip(src, fallback) {
     stopClip();
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     try {
-      const a = new Audio();
+      // An <audio> element attached to the DOM plays more reliably on iOS/
+      // macOS Safari than a detached `new Audio()`.
+      const a = document.createElement('audio');
       a.preload = 'auto';
+      a.setAttribute('playsinline', '');
+      a.src = src;
+      a.style.display = 'none';
+      document.body.appendChild(a);
       currentClip = a;
       let fell = false;
-      const fail = () => { if (fell) return; fell = true; if (currentClip === a) currentClip = null; speak(fallback); };
+      const done = () => { if (currentClip === a) currentClip = null; try { a.remove(); } catch (e) { /* ignore */ } };
+      const fail = () => { if (fell) return; fell = true; done(); speak(fallback); };
       a.addEventListener('error', fail);
-      a.src = src;
+      a.addEventListener('ended', done);
       const p = a.play();
       // Only fall back on a genuine playback failure — a rapid re-tap aborts
       // the previous play() with AbortError, which is not a real error.
@@ -1921,11 +1933,20 @@
       '<p>Try the 3-jars system at home with real jars. Let kids handle small amounts of real money, make small mistakes safely, and talk openly about family spending choices. The “Read to me” buttons help pre-readers use the site independently. On a tablet, use “Add to Home Screen” — the site installs like an app and works offline.</p>';
     app.appendChild(tips);
 
+    const HOME_LINE = 'Hi there! Pick a spot on the map. Every game pays Penny Coins you can bank, grow, and spend in my shop!';
     const voiceCard = el('div', { class: 'info-card' });
-    voiceCard.innerHTML = '<h3>' + emoji('🗣️', 'speaking head') + ' Penny’s reading voice</h3>' +
-      '<p>The “Read to me” buttons use the voices <em>installed on this device</em> — the app can’t change how they sound, only which one it picks. Older devices fall back to a robotic voice; choose the most natural one below. Most phones and computers can download much better “natural / enhanced / neural” voices free in their own accessibility or language settings, and they’ll show up in this list automatically.</p>';
-    const pickRow = el('div', { class: 'voice-row' });
-    const select = el('select', { class: 'voice-select', 'aria-label': 'Choose Penny’s reading voice' });
+    voiceCard.innerHTML = '<h3>' + emoji('🗣️', 'speaking head') + ' Penny’s voice</h3>' +
+      '<p>Penny reads every lesson and word in a <strong>built-in natural voice</strong> (an open-source AI voice baked into the app). There is nothing to set up — it sounds the same on every device including Safari and iPad, and it works offline. Tap to hear it:</p>';
+    const hearBtn = el('button', { class: 'big-btn gold', type: 'button', html: emoji('🔊', 'speaker') + ' Hear Penny’s voice' });
+    hearBtn.addEventListener('click', () => narrate(HOME_LINE));
+    voiceCard.appendChild(hearBtn);
+
+    // Secondary: the device-voice fallback, used only for the rare bit of text
+    // that includes the child's typed-in name.
+    const fbWrap = el('div', { class: 'voice-fallback' });
+    fbWrap.innerHTML = '<p class="voice-fallback-note">' + emoji('⚙️', 'gear') +
+      ' <strong>Backup voice</strong> — only used to read text that contains your child’s name (which the built-in voice can’t know in advance). This picks from the voices installed on <em>this</em> device; if they all sound robotic, that’s exactly why the lessons use the built-in voice above instead.</p>';
+    const select = el('select', { class: 'voice-select', 'aria-label': 'Backup device voice for names' });
     function populateVoices() {
       if (!select.isConnected) return;
       loadVoices();
@@ -1943,11 +1964,8 @@
       if (!en.length) select.appendChild(el('option', { value: '', text: 'No extra voices found on this device yet' }));
     }
     select.addEventListener('change', () => { state.voiceName = select.value; save(); });
-    const testBtn = el('button', { class: 'big-btn ghost', type: 'button', html: emoji('🔊', 'speaker') + ' Test voice' });
-    testBtn.addEventListener('click', () => speak('Hi! I am Penny. Let us learn about money together!'));
-    pickRow.appendChild(select);
-    pickRow.appendChild(testBtn);
-    voiceCard.appendChild(pickRow);
+    fbWrap.appendChild(select);
+    voiceCard.appendChild(fbWrap);
     app.appendChild(voiceCard);
     populateVoices(); // after the select is connected to the DOM
     if ('speechSynthesis' in window) {

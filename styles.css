@@ -1180,3 +1180,8 @@ h2 { font-size: 1.5rem; margin-bottom: 10px; }
 }
 .voice-select:focus-visible { border-color: var(--spend); outline: none; }
 .voice-row .big-btn { flex: 0 0 auto; font-size: 1rem; padding: 12px 20px; }
+
+/* ---------- voice card: fallback demoted below the real-voice button ---------- */
+.info-card .voice-fallback { margin-top: 14px; padding-top: 12px; border-top: 2px dashed rgba(51, 48, 94, 0.12); }
+.voice-fallback-note { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 8px; }
+.voice-fallback .voice-select { width: 100%; }
