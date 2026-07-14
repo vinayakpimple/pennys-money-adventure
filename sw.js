@@ -1,15 +1,18 @@
 /* Penny's Money Adventure — offline service worker */
-const CACHE = 'penny-v2';
+const CACHE = 'penny-v3';
 const ASSETS = [
   './',
   'index.html',
   'styles.css',
   'app.js',
+  'audio-manifest.js',
   'manifest.webmanifest',
   'icon-192.png',
   'icon-512.png',
   'apple-touch-icon.png',
 ];
+// Narration MP3s under audio/ are cached on demand by the fetch handler
+// (network-first) after first play, so they work offline thereafter.
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));

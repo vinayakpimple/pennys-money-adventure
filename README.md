@@ -11,6 +11,15 @@ for visual learners. Built from the goal-oriented prompt in
 server, no accounts, no ads, no data collection — progress is stored in
 `localStorage` on the device only.
 
+## Natural AI narration (offline, no backend)
+
+The "Read to me" narration for all lessons and glossary terms is **pre-generated**
+with the open-source [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) voice
+(Apache-2.0) and shipped as MP3 files. It sounds natural and identical on **every
+browser — including Safari** — works **offline**, and needs **no cloud service, API
+key, or backend**. The device's built-in speech engine is only a fallback (e.g. for
+text with a child's typed-in name). See [`tts/`](tts/) to regenerate.
+
 ## What's new in v3 — evidence-based upgrades
 
 Informed by a deep review of the research on children's financial education

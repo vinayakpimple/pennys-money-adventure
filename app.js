@@ -257,12 +257,44 @@
     } catch (e) { /* speech unavailable — silent, non-blocking */ }
   }
 
+  /* ---------- narration: prefer pre-generated AI audio, else browser TTS ----------
+     Fixed narration is pre-rendered to MP3 with the open-source Kokoro voice
+     (build step in tts/). If a clip exists for the text, play it — it sounds
+     the same and natural on every browser, incl. Safari, and works offline.
+     Anything without a clip (e.g. text with the child's name) falls back to
+     the device's speech engine. The clip filename is a hash of the cleaned
+     text; the SAME hash + clean() run in tts/extract.mjs so they always match. */
+  function clean(s) { return String(s).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim(); }
+  function hashStr(s) {
+    let h = 0x811c9dc5 >>> 0;
+    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return h.toString(36);
+  }
+  let currentClip = null;
+  function stopClip() { if (currentClip) { try { currentClip.pause(); } catch (e) { /* ignore */ } currentClip = null; } }
+  function playClip(src, fallback) {
+    stopClip();
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    try {
+      const a = new Audio(src);
+      currentClip = a;
+      a.onerror = () => { if (currentClip === a) currentClip = null; speak(fallback); };
+      a.play().catch(() => { if (currentClip === a) currentClip = null; speak(fallback); });
+    } catch (e) { speak(fallback); }
+  }
+  function narrate(raw) {
+    const t = clean(raw);
+    const h = hashStr(t);
+    if (window.PENNY_AUDIO && window.PENNY_AUDIO[h]) playClip('audio/' + h + '.mp3', t);
+    else speak(t);
+  }
+
   function readBtn(getText) {
     return el('button', {
       class: 'read-btn',
       type: 'button',
       html: emoji('🔊', 'speaker') + ' Read to me',
-      onclick: () => speak(getText()),
+      onclick: () => narrate(getText()),
     });
   }
 
@@ -1972,6 +2004,7 @@
     if (window.__tick) { clearInterval(window.__tick); window.__tick = null; }
     const app = $('#app');
     app.innerHTML = '';
+    stopClip();
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     accrueBank();
     updateWallet();
