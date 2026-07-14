@@ -71,6 +71,13 @@ MODULES.forEach((m) => {
 // Glossary: term + '. ' + def
 GLOSSARY.forEach((g) => add(g.term + '. ' + g.def));
 
+// Extra fixed lines narrated outside the module/glossary data (keep these
+// byte-for-byte identical to the strings passed to readBtn() in app.js).
+const EXTRAS = [
+  'Hi there! Pick a spot on the map. Every game pays Penny Coins you can bank, grow, and spend in my shop!',
+];
+EXTRAS.forEach(add);
+
 fs.mkdirSync(path.join(here), { recursive: true });
 fs.writeFileSync(path.join(here, 'narration.json'), JSON.stringify(entries, null, 2));
 

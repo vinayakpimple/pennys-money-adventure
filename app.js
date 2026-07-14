@@ -276,10 +276,17 @@
     stopClip();
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     try {
-      const a = new Audio(src);
+      const a = new Audio();
+      a.preload = 'auto';
       currentClip = a;
-      a.onerror = () => { if (currentClip === a) currentClip = null; speak(fallback); };
-      a.play().catch(() => { if (currentClip === a) currentClip = null; speak(fallback); });
+      let fell = false;
+      const fail = () => { if (fell) return; fell = true; if (currentClip === a) currentClip = null; speak(fallback); };
+      a.addEventListener('error', fail);
+      a.src = src;
+      const p = a.play();
+      // Only fall back on a genuine playback failure — a rapid re-tap aborts
+      // the previous play() with AbortError, which is not a real error.
+      if (p && p.catch) p.catch((err) => { if (!err || err.name !== 'AbortError') fail(); });
     } catch (e) { speak(fallback); }
   }
   function narrate(raw) {
@@ -1244,7 +1251,9 @@
 
     const hello = 'Hi <strong>' + kidName() + '</strong> ' + state.avatar + '! Pick a spot on the map — every game pays <strong>Penny Coins</strong> ' + emoji('🪙', 'coin') + ' you can bank, grow, and spend in my shop!';
     const hero = speechRow(hello);
-    hero.appendChild(readBtn(() => 'Hi ' + kidName() + '! Pick a spot on the map. Every game pays Penny Coins you can bank, grow, and spend in my shop!'));
+    // Read a generic, name-free line so this (most-tapped) button uses the
+    // pre-generated AI voice instead of falling back to the device engine.
+    hero.appendChild(readBtn(() => 'Hi there! Pick a spot on the map. Every game pays Penny Coins you can bank, grow, and spend in my shop!'));
     app.appendChild(hero);
     if (gotAllowance) {
       app.appendChild(el('div', { class: 'allowance-banner', html: emoji('🎁', 'gift') + ' Daily allowance: <strong>+5 coins</strong> for coming back today!' }));
