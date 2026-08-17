@@ -1881,7 +1881,8 @@ safety(onDone) {
 
     const world = el("section", { class: "town-world", "aria-label": "Penny Town winding adventure path" });
     const canvas = el("div", { class: "town-canvas" });
-    canvas.innerHTML = townBackdrop();
+    const narrow = window.matchMedia && window.matchMedia("(max-width: 760px)").matches;
+    if (!narrow) canvas.innerHTML = townBackdrop();
 
     canvas.appendChild(el("div", {
       class: "color-legend",
@@ -1948,7 +1949,6 @@ safety(onDone) {
     pennyBox.style.left = dest.pos.x + "%";
     pennyBox.style.top = dest.pos.y + "%";
     pennyBox.appendChild(pennyEl(110, "idle"));
-    const narrow = window.matchMedia && window.matchMedia("(max-width: 760px)").matches;
     if (narrow && trail.children[destIdx]) {
       trail.children[destIdx].appendChild(pennyBox);
     } else {
@@ -2095,22 +2095,16 @@ safety(onDone) {
     const card = el("section", { class: "lesson-card bank-card" });
     const balances = el("div", { class: "bank-balances" });
     balances.appendChild(el("div", { class: "balance-box wallet-box", html: "<h3>Wallet</h3><p class=\"balance-num\" id=\"bWallet\">" + Math.floor(state.coins) + "</p><p class=\"balance-sub\">coins ready to use</p>" }));
-    balances.appendChild(el("div", { class: "balance-box bank-box", html: "<h3>In the bank</h3><p class=\"balance-num\" id=\"bBank\">" + Math.floor(state.bank.balance) + "</p><p class=\"balance-sub\" id=\"bGrow\">growing every hour…</p>" }));
+    balances.appendChild(el("div", { class: "balance-box bank-box", html: "<h3>In the bank</h3><p class=\"balance-num\" id=\"bBank\">" + Math.floor(state.bank.balance) + "</p><p class=\"balance-sub\" id=\"bGrow\">Town Grow can add a little while you play. It is game magic, not a real bank.</p>" }));
     card.appendChild(balances);
     const btnRow = el("div", { class: "bank-btns" });
     const cheer = el("p", { class: "cheer", "aria-live": "polite" });
 
     function refresh() {
-      const w = $("#bWallet"); const b = $("#bBank"); const g = $("#bGrow");
+      const w = document.getElementById("bWallet"); const b = document.getElementById("bBank");
       if (w) w.textContent = Math.floor(state.coins);
       if (b) b.textContent = Math.floor(state.bank.balance);
       updateWallet();
-      const bal = state.bank.balance;
-      const day = bal * Math.pow(1 + HOURLY_RATE, 24) - bal;
-      const week = bal * Math.pow(1 + HOURLY_RATE, 24 * 7) - bal;
-      if (g) g.innerHTML = bal >= 1
-        ? "by tomorrow: <strong>+" + Math.max(1, Math.floor(day)) + "</strong> · in a week: <strong>+" + Math.floor(week) + "</strong>"
-        : "deposit coins to start growing!";
     }
 
     function move(kind, amount) {

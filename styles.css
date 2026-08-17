@@ -474,16 +474,19 @@ a { color: var(--spend); }
 
 /* stacked trail on narrow screens — still a path, not a card grid */
 @media (max-width: 760px) {
-  .town-world { min-height: 0; overflow: visible; }
+  .app { padding-top: 8px; padding-left: 12px; padding-right: 12px; }
+  .town-world { min-height: 0; height: auto; overflow: visible; background: #c5e89a; }
   .town-canvas {
-    aspect-ratio: auto;
+    aspect-ratio: unset;
     min-height: 0;
+    height: auto;
     display: flex; flex-direction: column; gap: 0;
-    padding: 16px 12px 24px;
+    padding: 8px 10px 12px;
     background:
-      linear-gradient(180deg, #7ec4ea 0%, #c9e7f7 18%, #ffe7b8 40%, #b8dc7a 100%);
+      linear-gradient(180deg, #d4eea8 0%, #c5e89a 35%, #9ed36a 100%);
   }
-  .town-bg { display: none; }
+  .town-canvas > .town-bg,
+  .town-bg { display: none !important; width: 0; height: 0; overflow: hidden; }
   .color-legend { position: static; margin-bottom: 8px; }
   .town-buildings {
     grid-template-columns: 1fr 1fr;
@@ -503,10 +506,10 @@ a { color: var(--spend); }
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 18px;
+    gap: 14px;
     list-style: none;
     margin: 0;
-    padding: 12px 8px 16px 12px;
+    padding: 6px 8px 10px 12px;
   }
   .town-canvas .trail::before {
     content: "";
@@ -895,16 +898,16 @@ a { color: var(--spend); }
   position: absolute; right: 0; top: calc(100% + 6px);
   display: flex; flex-direction: column; gap: 4px;
   min-width: 140px; padding: 8px;
-  background: var(--glass-strong);
-  backdrop-filter: blur(18px) saturate(1.5);
-  -webkit-backdrop-filter: blur(18px) saturate(1.5);
-  border: 1px solid var(--glass-edge);
+  background: #fff8ee;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 2px solid #ead7b2;
   border-radius: 18px;
-  box-shadow: var(--shadow);
-  z-index: 50;
+  box-shadow: 0 12px 28px rgba(58, 39, 24, 0.18);
+  z-index: 60;
 }
 .more-pop[hidden] { display: none; }
-.more-pop .nav-link { width: 100%; justify-content: flex-start; background: transparent; }
+.more-pop .nav-link { width: 100%; justify-content: flex-start; background: #fff8ee; }
 
 /* Tab bar sits in document flow at the bottom of the viewport so it
    cannot cover landmark 1 / Penny. Header keeps its natural height
@@ -1024,10 +1027,14 @@ body {
   }
   .town-hello {
     position: static;
-    max-width: none;
-    width: auto;
+    flex: none;
+    min-height: 0;
+    width: fit-content;
+    max-width: 100%;
     order: 1;
-    margin: 4px 0 8px;
+    margin: 2px 0 6px;
+    padding: 8px 14px;
+    border-radius: 18px;
     white-space: normal;
   }
   .town-hello-copy { white-space: normal; }
@@ -1058,3 +1065,10 @@ body {
 }
 .big-btn.picked, .price-btn.picked { outline: 4px solid var(--coral); }
 .quest-chip .big-btn { text-decoration: none; }
+
+.balance-sub {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.35;
+  margin: 0.4em 0 0;
+}
