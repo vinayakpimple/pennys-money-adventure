@@ -311,8 +311,8 @@ const MODULES = [
       activity: "timeline",
       recap: [
         { icon: "work", text: "Before money, people swapped things." },
-        { icon: "coin", text: "A penny is 1¢, a nickel 5¢, a dime 10¢, a quarter 25¢, a dollar 100¢." },
-        { icon: "shop", text: "Change is money you get back." },
+        { icon: "coin", text: "Money makes trading easy." },
+        { icon: "shop", text: "A penny is 1¢, a nickel is 5¢, a dime is 10¢, a quarter is 25¢. Change is money you get back." },
       ],
       parent: "Introduces money as a tool for exchange, then US coins and making change: a 40¢ candy and change from a dollar.",
     },
@@ -330,7 +330,7 @@ const MODULES = [
       recap: [
         { icon: "apple", text: "Needs come first: food, water, home." },
         { icon: "goal", text: "Wants are extras we can wait for." },
-        { icon: "star", text: "Some things are a bit of both." },
+        { icon: "star", text: "Some things are both. The useful part can be a need. The fancy part is a want." },
         { icon: "shop", text: "Choosing one want means saying no to another." },
       ],
       parent: "Builds need vs want sorting, then a gray-area brand-name choice, then a $6 trade-off: picking one want means the other goes away.",
@@ -350,7 +350,7 @@ const MODULES = [
         { icon: "heart", text: "Family help is not a vending machine." },
         { icon: "star", text: "Allowance is for practice." },
         { icon: "work", text: "Extra jobs and gifts are more money." },
-        { icon: "jars", text: "Grown-ups still set the rules." },
+        { icon: "jars", text: "Grown-ups still set the rules for what you may use." },
       ],
       parent: "Kids sort unpaid family help, allowance for practice, and extra paid jobs or gifts. Do not pay for every chore — family help is not a vending machine.",
     },
@@ -366,7 +366,7 @@ const MODULES = [
       ],
       activity: "jars",
       recap: [
-        { icon: "bank", text: "Save some — later you says thanks!" },
+        { icon: "bank", text: "Save some for later you." },
         { icon: "shop", text: "Spend some — enjoy what you earned." },
         { icon: "heart", text: "Share to help or pay back." },
       ],
@@ -386,7 +386,7 @@ const MODULES = [
       recap: [
         { icon: "goal", text: "A budget is a plan for YOUR money." },
         { icon: "work", text: "Every dollar gets a job." },
-        { icon: "star", text: "Leave a little for surprises." },
+        { icon: "star", text: "Leave a little for surprises, not only for savings." },
       ],
       parent: "Kids plan a $10 pile that is theirs (grown-ups often pay needs). After a balanced plan, a $3 birthday surprise forces a rebalance.",
     },
@@ -398,7 +398,7 @@ const MODULES = [
       intro: [
         { icon: "bank", text: "A bank keeps your money safer than a sock under the bed." },
         { icon: "star", text: "The bank pays a little rent called interest. It grows slowly." },
-        { icon: "shield", text: "If that bank closed, a grown-up still gets the money back. That is a government promise." },
+        { icon: "shield", text: "If that bank closed, a grown-up still gets the money back. A government promise watches it." },
       ],
       activity: "garden",
       recap: [
@@ -484,7 +484,7 @@ const REFLECT = {
     earning: {
       q: "Which job could YOU really do at home this week to earn?",
       choices: [
-        ["Tidy up", "Great pick! Ask a grown-up if you can help — work first, then earn."],
+        ["Family help (no pay)", "That’s family help. It matters even when no coins show up."],
         ["Help a pet", "Lovely! Feeding or walking a pet is real, helpful work."],
         ["Help cook", "Yum! Setting the table or helping cook is a real way to pitch in."],
       ],
@@ -551,7 +551,7 @@ const QUEST_POOL = [
     { q: "A pop-up says \"FREE coins — enter your card number!\" It is…", a: [["A trick", true], ["A prize", false], ["A gift", false]] },
     { q: "A good budget gives every dollar a…", a: [["Job", true], ["Surprise only", false], ["New name", false]] },
     { q: "The longer you leave savings in the bank…", a: [["The more they grow", true], ["The smaller they get", false], ["Nothing changes", false]] },
-    { q: "The yellow SHARE jar is for…", a: [["Helping others", true], ["Buying candy", false], ["Game coins", false]] },
+    { q: "The yellow SHARE jar can be for…", a: [["Helping others or paying back", true], ["Buying candy", false], ["Game coins", false]] },
     { q: "A candy is 40¢. You pay $1. Change is…", a: [["60¢", true], ["40¢", false], ["$1", false]] },
     { q: "You have $6. A game is $5 and an art set is $4. Can you buy both?", a: [["No", true], ["Yes", false], ["Only if you borrow", false]] },
     { q: "You borrowed $2. Paying it back is…", a: [["Keeping a promise", true], ["A gift", false], ["Interest", false]] },
@@ -563,7 +563,7 @@ const GLOSSARY = [
     { term: "Earn", icon: "work", color: "var(--spend)", def: "To get money by working or helping." },
     { term: "Save", icon: "bank", color: "var(--save)", def: "To keep money for later instead of spending now." },
     { term: "Spend", icon: "shop", color: "var(--spend)", def: "To use money to buy something." },
-    { term: "Share", icon: "heart", color: "#c98f00", def: "To give some money to help others." },
+    { term: "Share", icon: "heart", color: "#c98f00", def: "To help others, or to pay back a promise." },
     { term: "Need", icon: "apple", color: "#e05656", def: "Something you must have to live, like food." },
     { term: "Want", icon: "goal", color: "#e05656", def: "Something fun you can live without." },
     { term: "Budget", icon: "chart", color: "#f2b41c", def: "A plan that gives every dollar a job." },
@@ -1059,9 +1059,9 @@ const GLOSSARY = [
           next.addEventListener("click", showTrade);
           phase.appendChild(el("p", { style: "text-align:center;margin-top:12px;" }, [next]));
         }
-        needBtn.addEventListener("click", () => pickGray("Shoes you need. The brand name is the extra want on top."));
-        wantBtn.addEventListener("click", () => pickGray("Yes — your old ones still fit, so the new brand is a want."));
-        bothBtn.addEventListener("click", () => pickGray("Yes. You need shoes. The brand name is a want on top."));
+        needBtn.addEventListener("click", () => pickGray("Your feet need shoes. The brand name is the want part."));
+        wantBtn.addEventListener("click", () => pickGray("Yes, the name is extra. Shoes themselves can be a need if you have none."));
+        bothBtn.addEventListener("click", () => pickGray("Yes. The shoes can be a need. The brand is a want."));
         row.appendChild(needBtn); row.appendChild(wantBtn); row.appendChild(bothBtn);
         phase.appendChild(card);
         phase.appendChild(row);
@@ -1368,8 +1368,8 @@ const GLOSSARY = [
           }
           if (phaseNum === 1 && vals.birthday === 3 && !finished) {
             finished = true;
-            if (vals.savings >= 1) cheer.textContent = "You made room for a surprise and still have savings. That is a plan.";
-            else cheer.textContent = "You used some savings for a surprise. That is okay — you still have a plan.";
+            if (vals.savings >= 1) cheer.textContent = "You made room and kept your save. That is a sturdy plan.";
+            else cheer.textContent = "You solved it. Next time a little extra in Spend or Save helps surprises.";
             onDone();
           }
         }
@@ -1427,7 +1427,7 @@ const GLOSSARY = [
         else readout.innerHTML = "After <strong>" + years + " years</strong>: about <span class=\"grow-amt\">$" + raw.toFixed(2) + "</span>.";
         if (years >= 1 && !doneFired) {
           doneFired = true;
-          cheer.textContent = "One year is the first wow. Ten years is optional — it stays slow.";
+          cheer.textContent = "You can slide farther if you want. It stays slow. That is real.";
           onDone();
         }
       }
@@ -1623,7 +1623,7 @@ lemonade(onDone) {
           opened = true;
           accrueBank();
           if (Math.floor(state.coins) < 5) {
-            state.coins = 5;
+            state.coins += 5;
             cheer.textContent = "A grown-up stakes you 5 coins to try. Real stands need money first too.";
           } else {
             cheer.textContent = "That is startup money. You spend it before you earn.";
@@ -2446,7 +2446,7 @@ safety(onDone) {
       "<li><strong>At the checkout:</strong> “This costs $4. If your allowance is $2 a week, how long to save for it?”</li>" +
       "<li><strong>Paying by card/phone:</strong> “That card isn’t magic — it takes real money from the bank. Where did that money come from?”</li>" +
       "<li><strong>When they want something now:</strong> “Want to buy it today, or save and have something bigger later?” (then honor their choice)</li>" +
-      "<li><strong>After a chore:</strong> “You earned this. Save some, spend some, share some?”</li></ul>";
+      "<li><strong>After a chore:</strong> “Was that family help, or an extra job? Only extra jobs get pay.”</li></ul>";
     room.appendChild(scripts);
 
     const kit = el("div", { class: "info-card family-kit" });
@@ -2455,7 +2455,7 @@ safety(onDone) {
       "<li><strong>Give a small real allowance</strong> (even a few coins) and let your child split it across the jars themselves. Resist steering — mistakes are the lesson.</li>" +
       "<li><strong>Pick one real savings goal</strong> together and tape a picture of it to the SAVE jar. Add to it weekly and watch it fill.</li>" +
       "<li><strong>Choose who the SHARE jar helps</strong> — a charity, a sibling, a neighbor. Let them decide; don’t reward it.</li>" +
-      "<li><strong>Revisit weekly for a month.</strong> Habits form through repetition, not a single talk.</li><li>Make change from a dollar for a treat that costs 40 cents.</li><li>When they tap in a game: that card is the same pile as cash.</li></ol>";
+      "<li><strong>Revisit weekly for a month.</strong> Habits form through repetition, not a single talk.</li><li><strong>Make change from a dollar for a 40¢ treat.</strong></li><li><strong>When they tap in a game: that card is the same pile as cash.</strong></li></ol>";
     const printBtn = el("button", { class: "big-btn gold no-print", type: "button", text: "Print this kit" });
     printBtn.addEventListener("click", () => {
       document.body.classList.add("print-kit-only");
