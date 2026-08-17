@@ -264,9 +264,9 @@
       <path d="M-20 260 C160 200 280 280 420 230 C560 180 700 260 860 210 C1000 170 1140 230 1220 200 L1220 800 L-20 800Z" fill="#9ed36a" opacity="0.55"/>
       <path d="M-20 360 C140 300 300 380 480 320 C660 260 820 360 1000 300 C1100 270 1180 320 1220 300 L1220 800 L-20 800Z" fill="url(#hillA)"/>
       <path d="M-20 520 C200 460 360 560 560 500 C760 440 940 540 1220 480 L1220 800 L-20 800Z" fill="#6fb248"/>
-      <path class="path-glow winding-path" d="M90 730 C200 690 230 630 170 550 C110 470 290 430 370 490 C450 550 570 510 630 410 C690 310 810 370 890 290 C970 210 870 150 790 130" />
-      <path class="winding-path" d="M90 730 C200 690 230 630 170 550 C110 470 290 430 370 490 C450 550 570 510 630 410 C690 310 810 370 890 290 C970 210 870 150 790 130" fill="none" stroke="#e8c48a" stroke-width="46" stroke-linecap="round"/>
-      <path d="M90 730 C200 690 230 630 170 550 C110 470 290 430 370 490 C450 550 570 510 630 410 C690 310 810 370 890 290 C970 210 870 150 790 130" fill="none" stroke="#f6d7a0" stroke-width="18" stroke-linecap="round" stroke-dasharray="10 22"/>
+      <path class="path-glow winding-path" d="M 180 720 C 201 707 267 669 308 644 C 350 619 391 593 431 568 C 470 543 510 517 546 492 C 582 467 616 441 648 416 C 680 391 710 365 738 340 C 766 315 790 289 815 264 C 839 239 862 213 884 188 C 907 163 937 125 948 112" />
+      <path class="winding-path" d="M 180 720 C 201 707 267 669 308 644 C 350 619 391 593 431 568 C 470 543 510 517 546 492 C 582 467 616 441 648 416 C 680 391 710 365 738 340 C 766 315 790 289 815 264 C 839 239 862 213 884 188 C 907 163 937 125 948 112" fill="none" stroke="#e8c48a" stroke-width="46" stroke-linecap="round"/>
+      <path d="M 180 720 C 201 707 267 669 308 644 C 350 619 391 593 431 568 C 470 543 510 517 546 492 C 582 467 616 441 648 416 C 680 391 710 365 738 340 C 766 315 790 289 815 264 C 839 239 862 213 884 188 C 907 163 937 125 948 112" fill="none" stroke="#f6d7a0" stroke-width="18" stroke-linecap="round" stroke-dasharray="10 22"/>
       <g fill="#4d8a32">
         <ellipse cx="240" cy="300" rx="28" ry="40"/><rect x="234" y="330" width="12" height="30" fill="#7a4a20"/>
         <ellipse cx="980" cy="260" rx="34" ry="48"/><rect x="973" y="300" width="14" height="36" fill="#7a4a20"/>
@@ -301,7 +301,7 @@
     {
       id: "what-is-money", title: "What Is Money?", icon: "coin", color: "#8e7cf2",
       tagline: "Where did money come from?",
-      pos: { x: 16, y: 91 },
+      pos: { x: 15.0, y: 90.0 },
       bubble: "Long ago, there was no money at all. Tap the cards to travel through time!",
       intro: [
         { icon: "apple", text: "Long ago, people swapped things. A chicken for some corn!" },
@@ -319,7 +319,7 @@
     {
       id: "needs-wants", title: "Needs vs. Wants", icon: "apple", color: "#e05656",
       tagline: "Must-haves and nice-to-haves",
-      pos: { x: 30, y: 72 },
+      pos: { x: 25.7, y: 80.5 },
       bubble: "A NEED keeps you healthy and safe. A WANT is fun but you can live without it. Can you sort them?",
       intro: [
         { icon: "apple", text: "NEEDS are things we must have to live — food, water, a home." },
@@ -337,7 +337,7 @@
     {
       id: "earning", title: "Earning Money", icon: "work", color: "#3b7dd8",
       tagline: "Work turns into money!",
-      pos: { x: 16, y: 64 },
+      pos: { x: 35.9, y: 71.0 },
       bubble: "Money does not fall from the sky — people EARN it by helping and working. Try some jobs!",
       intro: [
         { icon: "work", text: "Grown-ups earn money by doing jobs that help people." },
@@ -355,7 +355,7 @@
     {
       id: "three-jars", title: "The 3 Jars", icon: "jars", color: "#2e9d5c",
       tagline: "Save, Spend, Share",
-      pos: { x: 30, y: 56 },
+      pos: { x: 45.5, y: 61.5 },
       bubble: "When money arrives, split it into 3 jars: green to SAVE, blue to SPEND, yellow to SHARE. You choose how!",
       intro: [
         { icon: "bank", text: "The green SAVE jar grows your money for big dreams." },
@@ -373,7 +373,7 @@
     {
       id: "budgeting", title: "Make a Budget", icon: "chart", color: "#f2b41c",
       tagline: "A plan for every coin",
-      pos: { x: 42, y: 62 },
+      pos: { x: 54.0, y: 52.0 },
       bubble: "A budget is a PLAN for your money before you spend it. You have $10 — plan every dollar!",
       intro: [
         { icon: "goal", text: "A budget is like a map — it tells your money where to go." },
@@ -391,7 +391,7 @@
     {
       id: "banks-interest", title: "The Money Garden", icon: "plant", color: "#2e9d5c",
       tagline: "How banks grow your money",
-      pos: { x: 54, y: 50 },
+      pos: { x: 61.5, y: 42.5 },
       bubble: "A bank is a super-safe piggy bank. It even pays you a little extra — called INTEREST — for keeping money there. Watch it grow!",
       intro: [
         { icon: "bank", text: "A bank keeps your money safe — safer than under your bed!" },
@@ -409,7 +409,7 @@
     {
       id: "goals", title: "Super Saver Goals", icon: "goal", color: "#3b7dd8",
       tagline: "Wait for it... it is worth it!",
-      pos: { x: 64, y: 40 },
+      pos: { x: 67.9, y: 33.0 },
       bubble: "Big things cost more than one allowance. Pick a dream, save week by week, and watch yourself get there!",
       intro: [
         { icon: "goal", text: "See something big you want? That is a savings goal!" },
@@ -427,7 +427,7 @@
     {
       id: "lemonade", title: "Lemonade Boss", icon: "lemon", color: "#f2b41c",
       tagline: "Run your own stand!",
-      pos: { x: 78, y: 36 },
+      pos: { x: 73.7, y: 23.5 },
       bubble: "You are the boss of a lemonade stand! Each cup costs you 20¢ to make. Pick a price and see what happens!",
       intro: [
         { icon: "lemon", text: "Making things costs money. Lemons, water, cups: 20¢ per cup." },
@@ -445,7 +445,7 @@
     {
       id: "digital-safety", title: "Money Safety Shield", icon: "shield", color: "#e05656",
       tagline: "Be smart with digital money",
-      pos: { x: 70, y: 18 },
+      pos: { x: 79.0, y: 14.0 },
       bubble: "Money lives on screens now too! Flip each card and guess: smart move or danger zone?",
       intro: [
         { icon: "shop", text: "Money can be invisible — on cards, phones, and games." },
@@ -1394,7 +1394,7 @@
       { href: "#/kindness", cls: "kindness", title: "Kindness Corner", tag: "Give — just because", icon: "heart", x: 10, y: 26, locked: false },
       { href: "#/bank", cls: "bank", title: "Penny Bank", tag: "Grows 1% every hour", icon: "bank", x: 40, y: 20, locked: false },
       { href: "#/shop", cls: "shop", title: "Penny Shop", tag: "Dress up Penny", icon: "shop", x: 88, y: 70, locked: false },
-      { href: "#/quest", cls: "quest" + (questOpen ? "" : " locked"), title: "Quest Castle", tag: questOpen ? (state.questDone ? "Conquered!" : "The final challenge") : "Earn all 9 badges", icon: "castle", x: 90, y: 14, locked: !questOpen },
+      { href: "#/quest", cls: "quest" + (questOpen ? "" : " locked"), title: "Quest Castle", tag: questOpen ? (state.questDone ? "Conquered!" : "The final challenge") : "Earn all 9 badges", icon: "castle", x: 93, y: 8, locked: !questOpen },
     ];
     places.forEach((p) => {
       const a = el("a", { class: "building " + p.cls, href: p.href, style: "left:" + p.x + "%;top:" + p.y + "%;" });
@@ -1410,9 +1410,10 @@
     MODULES.forEach((m, i) => {
       const st = lessonState(m, i);
       const a = el("a", {
-        class: "landmark " + st,
+        class: "landmark " + st + (i % 2 ? " label-up" : " label-down"),
         href: "#/module/" + m.id,
         style: "left:" + m.pos.x + "%;top:" + m.pos.y + "%;",
+        "aria-label": (i + 1) + ". " + m.title,
       });
       const btn = el("span", { class: "landmark-btn" });
       btn.innerHTML = "<span class=\"landmark-num\">" + (i + 1) + "</span>" + iconSVG(m.icon) +
@@ -1435,9 +1436,9 @@
     hello.append("Hi ", el("strong", { text: kidName() }), " " + state.avatar + "! Follow the glowing path. Every landmark pays Penny Coins you can bank, grow, or spend in my shop.");
     canvas.appendChild(hello);
 
-    canvas.appendChild(buildDailyChallenge());
     world.appendChild(canvas);
     app.appendChild(world);
+    app.appendChild(buildDailyChallenge());
 
     const readRow = el("p", { style: "text-align:center;margin-top:14px;" });
     readRow.appendChild(readBtn(() => "Hi there! Follow the glowing path. Every landmark pays Penny Coins you can bank, grow, or spend in my shop!"));
