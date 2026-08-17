@@ -1764,8 +1764,10 @@
         sfx.win();
         cheer.classList.remove("oops");
         cheer.textContent = c.thanks;
-        giving = false;
-        syncGiveButtons();
+        setTimeout(() => {
+          giving = false;
+          syncGiveButtons();
+        }, 400);
       });
       cc.appendChild(give);
       grid.appendChild(cc);
