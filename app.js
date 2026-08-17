@@ -297,7 +297,7 @@
     { id: "crown", name: "Royal Crown", price: 150, slot: "head", icon: "crown" },
   ];
 
-  const MODULES = [
+const MODULES = [
     {
       id: "what-is-money", title: "What Is Money?", icon: "coin", color: "#8e7cf2",
       tagline: "Where did money come from?",
@@ -311,10 +311,10 @@
       activity: "timeline",
       recap: [
         { icon: "work", text: "Before money, people swapped things." },
-        { icon: "coin", text: "Money makes trading easy for everyone." },
-        { icon: "shop", text: "Money keeps changing — even into numbers on a screen!" },
+        { icon: "coin", text: "A penny is 1¢, a nickel 5¢, a dime 10¢, a quarter 25¢, a dollar 100¢." },
+        { icon: "shop", text: "Change is money you get back." },
       ],
-      parent: "Introduces money as a tool for exchange: bartering, why it was hard, and how coins, paper bills, and digital money evolved.",
+      parent: "Introduces money as a tool for exchange, then US coins and making change: a 40¢ candy and change from a dollar.",
     },
     {
       id: "needs-wants", title: "Needs vs. Wants", icon: "apple", color: "#e05656",
@@ -330,87 +330,89 @@
       recap: [
         { icon: "apple", text: "Needs come first: food, water, home." },
         { icon: "goal", text: "Wants are extras we can wait for." },
-        { icon: "star", text: "Needs first, wants second — that is the money champion rule!" },
+        { icon: "star", text: "Some things are a bit of both." },
+        { icon: "shop", text: "Choosing one want means saying no to another." },
       ],
-      parent: "Builds the core prioritization skill: distinguishing essential needs from optional wants through a sorting game.",
+      parent: "Builds need vs want sorting, then a gray-area brand-name choice, then a $6 trade-off: picking one want means the other goes away.",
     },
     {
       id: "earning", title: "Earning Money", icon: "work", color: "#3b7dd8",
       tagline: "Work turns into money!",
       pos: { x: 35.9, y: 71.0 },
-      bubble: "Money does not fall from the sky — people EARN it by helping and working. Try some jobs!",
+      bubble: "Money arrives in different ways. Sort what is family help, practice money, or extra.",
       intro: [
-        { icon: "work", text: "Grown-ups earn money by doing jobs that help people." },
-        { icon: "plant", text: "Kids can earn too — chores, dog walking, watering plants!" },
-        { icon: "coin", text: "The rule is simple: work first, money after." },
+        { icon: "heart", text: "Family help is what we do because we are a family. No pay." },
+        { icon: "star", text: "Allowance is practice money, on a regular day." },
+        { icon: "coin", text: "Extra jobs and gifts are paid after you finish, or money someone gives you." },
       ],
       activity: "chores",
       recap: [
-        { icon: "work", text: "Money is earned by working and helping." },
-        { icon: "heart", text: "Even small jobs add up to real money." },
-        { icon: "jars", text: "What you earn is yours to save, spend, or share!" },
+        { icon: "heart", text: "Family help is not a vending machine." },
+        { icon: "star", text: "Allowance is for practice." },
+        { icon: "work", text: "Extra jobs and gifts are more money." },
+        { icon: "jars", text: "Grown-ups still set the rules." },
       ],
-      parent: "Connects money to work and effort. Kids complete a chore board and watch small earnings add up.",
+      parent: "Kids sort unpaid family help, allowance for practice, and extra paid jobs or gifts. Do not pay for every chore — family help is not a vending machine.",
     },
     {
       id: "three-jars", title: "The 3 Jars", icon: "jars", color: "#2e9d5c",
       tagline: "Save, Spend, Share",
       pos: { x: 45.5, y: 61.5 },
-      bubble: "When money arrives, split it into 3 jars: green to SAVE, blue to SPEND, yellow to SHARE. You choose how!",
+      bubble: "A starting idea: 5 save, 4 spend, 1 share. You may move them. Share can help someone, or pay back a promise.",
       intro: [
         { icon: "bank", text: "The green SAVE jar grows your money for big dreams." },
         { icon: "shop", text: "The blue SPEND jar is for things you buy now." },
-        { icon: "heart", text: "The yellow SHARE jar helps other people and animals." },
+        { icon: "heart", text: "Share can help someone, or pay back a promise." },
       ],
       activity: "jars",
       recap: [
-        { icon: "bank", text: "Save some — future you says thanks!" },
+        { icon: "bank", text: "Save some — later you says thanks!" },
         { icon: "shop", text: "Spend some — enjoy what you earned." },
-        { icon: "heart", text: "Share some — giving feels great." },
+        { icon: "heart", text: "Share to help or pay back." },
       ],
-      parent: "The classic save/spend/share allocation model. Kids drop 10 coins into three color-coded jars and reflect on their split.",
+      parent: "Starting idea 5 save / 4 spend / 1 share, still their choice. Share can mean pay back. After the split they repay a $2 borrow from Spend, then Save. Not credit.",
     },
     {
       id: "budgeting", title: "Make a Budget", icon: "chart", color: "#f2b41c",
       tagline: "A plan for every coin",
       pos: { x: 54.0, y: 52.0 },
-      bubble: "A budget is a PLAN for your money before you spend it. You have $10 — plan every dollar!",
+      bubble: "This $10 is YOUR pile. Grown-ups often pay needs like food and a home. You plan the money that is yours.",
       intro: [
-        { icon: "goal", text: "A budget is like a map — it tells your money where to go." },
+        { icon: "goal", text: "This $10 is YOUR pile. Grown-ups often pay needs like food and a home." },
         { icon: "coin", text: "Start with what you have. Today: 10 dollars." },
         { icon: "chart", text: "Give every dollar a job before you spend it!" },
       ],
       activity: "budget",
       recap: [
-        { icon: "goal", text: "A budget is a plan for your money." },
+        { icon: "goal", text: "A budget is a plan for YOUR money." },
         { icon: "work", text: "Every dollar gets a job." },
-        { icon: "bank", text: "A good plan always includes some saving." },
+        { icon: "star", text: "Leave a little for surprises." },
       ],
-      parent: "Hands-on budgeting: allocate a $10 allowance across categories with sliders and a live icon chart until the plan balances.",
+      parent: "Kids plan a $10 pile that is theirs (grown-ups often pay needs). After a balanced plan, a $3 birthday surprise forces a rebalance.",
     },
     {
       id: "banks-interest", title: "The Money Garden", icon: "plant", color: "#2e9d5c",
       tagline: "How banks grow your money",
       pos: { x: 61.5, y: 42.5 },
-      bubble: "A bank is a super-safe piggy bank. It even pays you a little extra — called INTEREST — for keeping money there. Watch it grow!",
+      bubble: "A bank is safer than a sock. It pays a little rent — called interest — for keeping your money. It grows slowly. Watch one year first.",
       intro: [
-        { icon: "bank", text: "A bank keeps your money safe — safer than under your bed!" },
-        { icon: "star", text: "Banks add a little extra to your savings. That gift is called interest." },
-        { icon: "plant", text: "Saved money is like a seed. Leave it alone and it grows!" },
+        { icon: "bank", text: "A bank keeps your money safer than a sock under the bed." },
+        { icon: "star", text: "The bank pays a little rent called interest. It grows slowly." },
+        { icon: "shield", text: "If that bank closed, a grown-up still gets the money back. That is a government promise." },
       ],
       activity: "garden",
       recap: [
         { icon: "bank", text: "Banks keep money safe." },
-        { icon: "star", text: "Interest is extra money the bank adds." },
-        { icon: "plant", text: "The longer you save, the bigger it grows!" },
+        { icon: "star", text: "Interest is rent the bank pays you. It grows slowly." },
+        { icon: "shield", text: "If the bank closed, a grown-up still gets the money back." },
       ],
-      parent: "Introduces banks and compound growth visually: a slider moves time forward while savings (and a plant) grow. Pairs with the site-wide Penny Bank, where deposited coins earn real interest over real time.",
+      parent: "Shows 4% a year on purpose so growth looks slow and real. Interest is rent the bank pays, not a gift. One kid sentence: if that bank closed, a grown-up still gets the money back.",
     },
     {
       id: "goals", title: "Super Saver Goals", icon: "goal", color: "#3b7dd8",
       tagline: "Wait for it... it is worth it!",
       pos: { x: 67.9, y: 33.0 },
-      bubble: "Big things cost more than one allowance. Pick a dream, save week by week, and watch yourself get there!",
+      bubble: "Big things cost more than one allowance. Pick a dream, choose how much to save each week, and watch yourself get there!",
       intro: [
         { icon: "goal", text: "See something big you want? That is a savings goal!" },
         { icon: "chart", text: "Save a little every week instead of spending it all." },
@@ -419,50 +421,51 @@
       activity: "goal",
       recap: [
         { icon: "goal", text: "A goal gives your saving a purpose." },
-        { icon: "plant", text: "Slow and steady saving wins." },
-        { icon: "star", text: "Patience pays — literally!" },
+        { icon: "chart", text: "You choose how fast: save less, wait longer." },
+        { icon: "star", text: "Waiting can get you the bigger thing." },
       ],
-      parent: "Teaches delayed gratification: choose a goal, simulate weekly saving, and experience progress toward a target. The Penny Shop reinforces this with big-ticket items kids must save real Penny Coins for.",
+      parent: "Kids pick a goal and choose a weekly amount ($2 / $4 / $6). After two successful weeks a $4 comic tempts them. Waiting can get the bigger thing.",
     },
     {
       id: "lemonade", title: "Lemonade Boss", icon: "lemon", color: "#f2b41c",
       tagline: "Run your own stand!",
       pos: { x: 73.7, y: 23.5 },
-      bubble: "You are the boss of a lemonade stand! Each cup costs you 20¢ to make. Pick a price and see what happens!",
+      bubble: "You are the boss of a lemonade stand! You need money before you buy lemons. Each cup costs $1 to make.",
       intro: [
-        { icon: "lemon", text: "Making things costs money. Lemons, water, cups: 20¢ per cup." },
-        { icon: "shop", text: "You choose the price. Too high? Fewer people buy!" },
-        { icon: "coin", text: "Money in, minus costs = PROFIT. That is business!" },
+        { icon: "lemon", text: "Each cup costs $1 to make." },
+        { icon: "shop", text: "You pick the price. Too low? You can lose money. Too high? Fewer people buy." },
+        { icon: "coin", text: "Money in, minus costs, is profit. Profit can be zero. It can be less than zero." },
       ],
       activity: "lemonade",
       recap: [
-        { icon: "chart", text: "Every business has costs." },
+        { icon: "coin", text: "You need money before you start." },
         { icon: "shop", text: "Price changes how many people buy." },
-        { icon: "coin", text: "Profit = money in − costs." },
+        { icon: "chart", text: "Profit = money in minus costs. Sometimes you lose." },
       ],
-      parent: "Basic entrepreneurship: costs, pricing, demand, and profit through a lemonade stand simulation with instant visual results.",
+      parent: "Only business sim: a 5-coin startup kit, then prices including one below cost (50¢) so kids see a loss. Cost is $1 per cup.",
     },
     {
       id: "digital-safety", title: "Money Safety Shield", icon: "shield", color: "#e05656",
       tagline: "Be smart with digital money",
       pos: { x: 79.0, y: 14.0 },
-      bubble: "Money lives on screens now too! Flip each card and guess: smart move or danger zone?",
+      bubble: "Money can hide on cards and screens. Practice with one pile — then guess smart move or danger zone.",
       intro: [
-        { icon: "shop", text: "Money can be invisible — on cards, phones, and games." },
-        { icon: "lock", text: "Passwords are secret keys. Real friends never need them." },
-        { icon: "heart", text: "Golden rule: always ask a trusted grown-up before paying online." },
+        { icon: "shop", text: "Money can be invisible: cards, phones, and games." },
+        { icon: "coin", text: "A tap can spend the same pile as cash." },
+        { icon: "lock", text: "Passwords stay secret. Ask a grown-up before you pay." },
       ],
       activity: "safety",
       recap: [
-        { icon: "lock", text: "Keep passwords secret — always." },
+        { icon: "lock", text: "Keep passwords secret." },
         { icon: "heart", text: "Ask a grown-up before buying online." },
+        { icon: "coin", text: "A tap spends the same pile as cash. It still counts." },
         { icon: "shield", text: "If it feels weird, stop and tell someone." },
       ],
-      parent: "Age-appropriate digital money safety: passwords, in-game purchases, scams, and always involving a trusted adult. No real transactions anywhere on this site.",
+      parent: "Practice first: cash, card, and an in-game tap all pull from the same $10. Then guess-first safety cards, including accidental taps and a saved parent card.",
     },
   ];
 
-  const REFLECT = {
+const REFLECT = {
     "what-is-money": {
       q: "Would you rather be paid for chores in CHICKENS or COINS?",
       choices: [
@@ -504,8 +507,8 @@
     "banks-interest": {
       q: "Your coins grow while you sleep. What would YOU do with 10 coins?",
       choices: [
-        ["Bank them & wait", "Smart saver! Left alone, they quietly grow bigger. That is interest!"],
-        ["Spend them now", "That is okay sometimes — but money left in the bank grows. Waiting can pay off!"],
+        ["Bank them & wait", "Left there, they grow a little. Slowly."],
+        ["Spend them now", "Sometimes that’s okay. Money in the bank just grows slower than a game."],
       ],
     },
     goals: {
@@ -519,7 +522,7 @@
     lemonade: {
       q: "One price sold MORE cups; another earned more PER cup. Which is smarter?",
       choices: [
-        ["The best PROFIT one", "That is the boss move — the biggest PROFIT wins, not the most cups!"],
+        ["The best PROFIT one", "That is the boss move — the biggest leftover wins, not the most cups!"],
         ["The most cups", "Selling lots is exciting — but check the profit! More cups is not always more money."],
       ],
     },
@@ -532,28 +535,30 @@
     },
   };
 
-  const QUEST_POOL = [
+const QUEST_POOL = [
     { q: "Which one is a NEED?", a: [["Food", true], ["Video game", false], ["Candy", false]] },
     { q: "Which jar grows money for later?", a: [["Save jar", true], ["Spend jar", false], ["Share jar", false]] },
-    { q: "How do people get money?", a: [["By working", true], ["By wishing", false], ["By napping", false]] },
-    { q: "What is interest?", a: [["Extra money the bank adds to savings", true], ["A fee you pay the bank", false], ["A shopping list", false]] },
-    { q: "What is a budget?", a: [["A plan for your money", true], ["Spending everything fast", false], ["Hiding coins in a hole", false]] },
+    { q: "How do people get money?", a: [["By working", true], ["By wishing", false], ["As a gift only", false]] },
+    { q: "Interest is…", a: [["Rent the bank pays you", true], ["A free gift", false], ["A fee you always pay", false]] },
+    { q: "What is a budget?", a: [["A plan for your money", true], ["Spending everything fast", false], ["A list of wants only", false]] },
     { q: "Money in is $30, costs are $6. What is the profit?", a: [["$24", true], ["$30", false], ["$6", false]] },
     { q: "A game friend asks for your password. You…", a: [["Never share it", true], ["Share it if they are nice", false], ["Trade it for coins", false]] },
     { q: "A goal costs $20. You save $4 each week. How many weeks?", a: [["5 weeks", true], ["4 weeks", false], ["10 weeks", false]] },
     { q: "Before money was invented, people…", a: [["Swapped things", true], ["Used cards", false], ["Paid by phone", false]] },
     { q: "Which one is a WANT?", a: [["A new toy", true], ["Water", false], ["A home", false]] },
-    { q: "Profit = money in minus…", a: [["Costs", true], ["Wishes", false], ["Cups", false]] },
+    { q: "Profit = money in minus…", a: [["Costs", true], ["Wishes", false], ["Only the cups you like", false]] },
     { q: "Where is money safest?", a: [["In a bank", true], ["Under the bed", false], ["A pocket with a hole", false]] },
     { q: "A pop-up says \"FREE coins — enter your card number!\" It is…", a: [["A trick", true], ["A prize", false], ["A gift", false]] },
-    { q: "A good budget gives every dollar a…", a: [["Job", true], ["Nap", false], ["Hat", false]] },
+    { q: "A good budget gives every dollar a…", a: [["Job", true], ["Surprise only", false], ["New name", false]] },
     { q: "The longer you leave savings in the bank…", a: [["The more they grow", true], ["The smaller they get", false], ["Nothing changes", false]] },
     { q: "The yellow SHARE jar is for…", a: [["Helping others", true], ["Buying candy", false], ["Game coins", false]] },
+    { q: "A candy is 40¢. You pay $1. Change is…", a: [["60¢", true], ["40¢", false], ["$1", false]] },
+    { q: "You have $6. A game is $5 and an art set is $4. Can you buy both?", a: [["No", true], ["Yes", false], ["Only if you borrow", false]] },
+    { q: "You borrowed $2. Paying it back is…", a: [["Keeping a promise", true], ["A gift", false], ["Interest", false]] },
+    { q: "A game tap and cash…", a: [["Spend the same pile", true], ["Game taps are free", false], ["Only cash is real", false]] },
+    { q: "Brand-name sneakers when your old ones fit are…", a: [["Mostly a want on top of a need", true], ["Always a need", false], ["Not a money choice", false]] },
   ];
-  const QUEST_LEN = 10;
-  const QUEST_PASS = 8;
-
-  const GLOSSARY = [
+const GLOSSARY = [
     { term: "Money", icon: "coin", color: "#8e7cf2", def: "What we trade for things we need and want." },
     { term: "Earn", icon: "work", color: "var(--spend)", def: "To get money by working or helping." },
     { term: "Save", icon: "bank", color: "var(--save)", def: "To keep money for later instead of spending now." },
@@ -563,7 +568,7 @@
     { term: "Want", icon: "goal", color: "#e05656", def: "Something fun you can live without." },
     { term: "Budget", icon: "chart", color: "#f2b41c", def: "A plan that gives every dollar a job." },
     { term: "Bank", icon: "bank", color: "var(--save)", def: "A super-safe place that keeps your money." },
-    { term: "Interest", icon: "plant", color: "var(--save)", def: "Extra money a bank adds to your savings." },
+    { term: "Interest", icon: "plant", color: "var(--save)", def: "Rent a bank pays you for keeping your money there. It grows slowly." },
     { term: "Deposit", icon: "bank", color: "var(--save)", def: "Putting money INTO the bank." },
     { term: "Withdraw", icon: "coin", color: "var(--spend)", def: "Taking money OUT of the bank." },
     { term: "Goal", icon: "goal", color: "var(--spend)", def: "Something big you save up for." },
@@ -571,6 +576,15 @@
     { term: "Cost", icon: "chart", color: "#e05656", def: "What you must pay to make or get something." },
     { term: "Allowance", icon: "star", color: "#f2b41c", def: "Money you get regularly, like every week." },
     { term: "Password", icon: "lock", color: "#e05656", def: "A secret key. Never share it with anyone!" },
+    { term: "Change", icon: "coin", color: "#8e7cf2", def: "Money you get back when you pay with more than the price." },
+    { term: "Penny", icon: "coin", color: "#c9844a", def: "1¢." },
+    { term: "Nickel", icon: "coin", color: "#8a8680", def: "5¢." },
+    { term: "Dime", icon: "coin", color: "#b8b0a0", def: "10¢." },
+    { term: "Quarter", icon: "coin", color: "#9a9488", def: "25¢." },
+    { term: "Trade-off", icon: "goal", color: "var(--spend)", def: "If you buy this, you cannot buy that." },
+    { term: "Gift", icon: "heart", color: "#c98f00", def: "Money someone gives you. You did not work for it that day." },
+    { term: "Borrow", icon: "jars", color: "var(--share-ink, #8a6400)", def: "Using someone else’s money and promising to return it." },
+    { term: "Pay back", icon: "heart", color: "#c98f00", def: "Returning money you borrowed. It is a promise, not a gift." },
   ];
 
   const BUDDIES = ["🦊", "🐼", "🦄", "🐯", "🐸", "🐙", "🦖", "🐰"];
@@ -779,219 +793,524 @@
      ================================================================ */
   const ACTIVITIES = {
     timeline(onDone) {
-      const cards = [
-        { icon: "apple", text: "Swapping animals & food", num: "1" },
-        { icon: "star", text: "Shiny shells as money", num: "2" },
-        { icon: "coin", text: "Coins & paper bills", num: "3" },
-        { icon: "shop", text: "Cards & phone money", num: "4" },
-      ];
-      let opened = 0;
       const wrap = el("div");
-      wrap.appendChild(el("p", { class: "hint", text: "Tap each mystery card in order to see how money changed through time!" }));
-      const grid = el("div", { class: "reveal-grid" });
-      const cheer = el("p", { class: "cheer", "aria-live": "polite" });
-      cards.forEach((c, i) => {
-        const btn = el("button", { class: "reveal-card", type: "button", text: "?", "aria-label": "Mystery card " + (i + 1) });
-        btn.addEventListener("click", () => {
-          if (btn.classList.contains("open")) return;
-          if (i !== opened) {
-            cheer.textContent = "Start from card " + (opened + 1) + " — time goes in order!";
-            cheer.classList.add("oops");
-            btn.classList.add("shake");
-            sfx.oops();
-            setTimeout(() => btn.classList.remove("shake"), 450);
-            return;
-          }
-          cheer.classList.remove("oops");
-          btn.classList.add("open");
-          btn.innerHTML = iconSVG(c.icon) + "<strong>" + c.num + ". " + c.text + "</strong>";
-          opened++;
-          sfx.pop();
-          cheer.textContent = opened < cards.length ? "Nice! Keep going…" : "You unlocked the whole story of money!";
-          if (opened === cards.length) onDone();
+      const phase = el("div");
+      wrap.appendChild(phase);
+      let finished = false;
+      function finish() { if (!finished) { finished = true; onDone(); } }
+
+      function showTimeline() {
+        phase.innerHTML = "";
+        const cards = [
+          { icon: "apple", text: "Swapping animals & food", num: "1" },
+          { icon: "star", text: "Shiny shells as money", num: "2" },
+          { icon: "coin", text: "Coins & paper bills", num: "3" },
+          { icon: "shop", text: "Cards & phone money", num: "4" },
+        ];
+        let opened = 0;
+        phase.appendChild(el("p", { class: "hint", text: "Tap each mystery card in order to see how money changed through time!" }));
+        const grid = el("div", { class: "reveal-grid" });
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        cards.forEach((c, i) => {
+          const btn = el("button", { class: "reveal-card", type: "button", text: "?", "aria-label": "Mystery card " + (i + 1) });
+          btn.addEventListener("click", () => {
+            if (btn.classList.contains("open")) return;
+            if (i !== opened) {
+              cheer.textContent = "Start from card " + (opened + 1) + " — time goes in order!";
+              cheer.classList.add("oops");
+              btn.classList.add("shake");
+              sfx.oops();
+              setTimeout(() => btn.classList.remove("shake"), 450);
+              return;
+            }
+            cheer.classList.remove("oops");
+            btn.classList.add("open");
+            btn.innerHTML = iconSVG(c.icon) + "<strong>" + c.num + ". " + c.text + "</strong>";
+            opened++;
+            sfx.pop();
+            if (opened === cards.length) {
+              cheer.textContent = "You unlocked the whole story of money!";
+              const next = el("button", { class: "big-btn green", type: "button", text: "Meet US coins" });
+              next.addEventListener("click", showCoins);
+              phase.appendChild(el("p", { style: "text-align:center;margin-top:12px;" }, [next]));
+            } else cheer.textContent = "Nice! Keep going…";
+          });
+          grid.appendChild(btn);
         });
-        grid.appendChild(btn);
-      });
-      wrap.appendChild(grid);
-      wrap.appendChild(cheer);
+        phase.appendChild(grid);
+        phase.appendChild(cheer);
+      }
+
+      function showCoins() {
+        phase.innerHTML = "";
+        phase.appendChild(el("h2", { text: "US coins" }));
+        phase.appendChild(el("p", { class: "hint", text: "Tap each coin to see what it is worth." }));
+        const coins = [
+          { cls: "penny", name: "Penny", val: "1¢" },
+          { cls: "nickel", name: "Nickel", val: "5¢" },
+          { cls: "dime", name: "Dime", val: "10¢" },
+          { cls: "quarter", name: "Quarter", val: "25¢" },
+          { cls: "dollar", name: "Dollar", val: "100¢ or $1" },
+        ];
+        let opened = 0;
+        const row = el("div", { class: "us-coins" });
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        coins.forEach((c) => {
+          const btn = el("button", { class: "us-coin " + c.cls, type: "button", text: c.name, "aria-label": c.name + ", tap to reveal value" });
+          btn.addEventListener("click", () => {
+            if (btn.classList.contains("open")) return;
+            btn.classList.add("open");
+            btn.innerHTML = "<strong>" + c.name + "</strong><span>" + c.val + "</span>";
+            opened++;
+            sfx.pop();
+            cheer.textContent = opened < coins.length ? "Nice! Tap the rest." : "You know the coins!";
+            if (opened === coins.length) {
+              const next = el("button", { class: "big-btn green", type: "button", text: "Make 40¢" });
+              next.addEventListener("click", showMakeChange);
+              phase.appendChild(el("p", { style: "text-align:center;margin-top:12px;" }, [next]));
+            }
+          });
+          row.appendChild(btn);
+        });
+        phase.appendChild(row);
+        phase.appendChild(cheer);
+      }
+
+      function showMakeChange() {
+        phase.innerHTML = "";
+        phase.appendChild(el("p", { class: "hint", text: "A candy costs 40¢. Which coins make 40¢?" }));
+        const values = [
+          { name: "Penny", val: 1, cls: "penny" },
+          { name: "Nickel", val: 5, cls: "nickel" },
+          { name: "Dime", val: 10, cls: "dime" },
+          { name: "Quarter", val: 25, cls: "quarter" },
+          { name: "Dollar", val: 100, cls: "dollar" },
+        ];
+        const counts = { 1: 0, 5: 0, 10: 0, 25: 0, 100: 0 };
+        const tray = el("div", { class: "coin-tray", "aria-live": "polite" });
+        const totalEl = el("p", { class: "piggy-total", text: "Total: 0¢" });
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        const addRow = el("div", { class: "us-coins" });
+        function total() { return values.reduce((s, c) => s + counts[c.val] * c.val, 0); }
+        function refresh() {
+          tray.innerHTML = "";
+          values.forEach((c) => {
+            for (let i = 0; i < counts[c.val]; i++) {
+              tray.appendChild(el("span", { class: "us-coin " + c.cls, style: "min-width:44px;min-height:44px;font-size:0.75rem;", text: c.val + "¢" }));
+            }
+          });
+          totalEl.textContent = "Total: " + total() + "¢";
+        }
+        values.forEach((c) => {
+          const btn = el("button", { class: "us-coin " + c.cls, type: "button", text: "+ " + c.name });
+          btn.addEventListener("click", () => { counts[c.val]++; sfx.pop(); refresh(); });
+          addRow.appendChild(btn);
+        });
+        const clear = el("button", { class: "big-btn ghost", type: "button", text: "Clear coins" });
+        clear.addEventListener("click", () => { values.forEach((c) => { counts[c.val] = 0; }); refresh(); });
+        const check = el("button", { class: "big-btn", type: "button", text: "Check 40¢" });
+        check.addEventListener("click", () => {
+          const t = total();
+          if (t > 40) { cheer.classList.add("oops"); cheer.textContent = "That’s more than 40¢. Try again."; sfx.oops(); return; }
+          if (t < 40) { cheer.classList.add("oops"); cheer.textContent = "Not enough yet."; sfx.oops(); return; }
+          cheer.classList.remove("oops");
+          const common = counts[25] === 1 && counts[10] === 1 && counts[5] === 1 && counts[1] === 0 && counts[100] === 0;
+          cheer.textContent = common ? "Star combo! Quarter + dime + nickel makes 40¢." : "Yes — that makes exactly 40¢.";
+          sfx.win();
+          const next = el("button", { class: "big-btn green", type: "button", text: "Get change" });
+          next.addEventListener("click", showChangeQ);
+          phase.appendChild(el("p", { style: "text-align:center;margin-top:12px;" }, [next]));
+        });
+        phase.appendChild(addRow);
+        phase.appendChild(tray);
+        phase.appendChild(totalEl);
+        phase.appendChild(el("p", { style: "text-align:center;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;" }, [clear, check]));
+        phase.appendChild(cheer);
+      }
+
+      function showChangeQ() {
+        phase.innerHTML = "";
+        phase.appendChild(el("p", { class: "hint", text: "You pay with $1. Candy is 40¢. How much change comes back?" }));
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        const row = el("div", { class: "guess-btns" });
+        [["40¢", false], ["50¢", false], ["60¢", true]].forEach((opt) => {
+          const btn = el("button", { class: "big-btn ghost", type: "button", text: opt[0] });
+          btn.addEventListener("click", () => {
+            if (opt[1]) {
+              cheer.classList.remove("oops");
+              cheer.textContent = "Change is money you get back. $1 is 100¢. 100 minus 40 is 60.";
+              sfx.win();
+              Array.from(row.querySelectorAll("button")).forEach((b) => { b.disabled = true; });
+              finish();
+            } else {
+              cheer.classList.add("oops");
+              cheer.textContent = "Not that much. Change is what comes back after the price.";
+              sfx.oops();
+            }
+          });
+          row.appendChild(btn);
+        });
+        phase.appendChild(row);
+        phase.appendChild(cheer);
+      }
+
+      showTimeline();
       return wrap;
     },
 
     needsWants(onDone) {
-      const items = [
-        { name: "Food", kind: "need", icon: "apple" },
-        { name: "Water", kind: "need", icon: "plant" },
-        { name: "A home", kind: "need", icon: "bank" },
-        { name: "Warm coat", kind: "need", icon: "shield" },
-        { name: "Candy", kind: "want", icon: "star" },
-        { name: "Video game", kind: "want", icon: "goal" },
-        { name: "New toy", kind: "want", icon: "heart" },
-        { name: "Theme park", kind: "want", icon: "lemon" },
-      ];
-      let placed = 0;
-      let selected = null;
       const wrap = el("div");
-      wrap.appendChild(el("p", { class: "hint", text: "Tap a card, then tap the basket where it belongs!" }));
-      const pool = el("div", { class: "sorter-pool", "aria-label": "Things to sort" });
-      const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+      const phase = el("div");
+      wrap.appendChild(phase);
+      let finished = false;
+      function finish() { if (!finished) { finished = true; onDone(); } }
 
-      function pick(chip) {
-        $$(".chip", pool).forEach((c) => c.classList.remove("selected"));
-        selected = chip;
-        chip.classList.add("selected");
-        sfx.pop();
-        bins.forEach((b) => b.node.classList.add("armed"));
+      function showSort() {
+        phase.innerHTML = "";
+        const items = [
+          { name: "Food", kind: "need", icon: "apple" },
+          { name: "Water", kind: "need", icon: "plant" },
+          { name: "A home", kind: "need", icon: "bank" },
+          { name: "Warm coat", kind: "need", icon: "shield" },
+          { name: "Candy", kind: "want", icon: "star" },
+          { name: "Video game", kind: "want", icon: "goal" },
+          { name: "New toy", kind: "want", icon: "heart" },
+          { name: "Theme park", kind: "want", icon: "lemon" },
+        ];
+        let placed = 0;
+        let selected = null;
+        phase.appendChild(el("p", { class: "hint", text: "Tap a card, then tap the basket where it belongs!" }));
+        const pool = el("div", { class: "sorter-pool", "aria-label": "Things to sort" });
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        function pick(chip) {
+          Array.from(pool.querySelectorAll(".chip")).forEach((c) => c.classList.remove("selected"));
+          selected = chip;
+          chip.classList.add("selected");
+          sfx.pop();
+          bins.forEach((b) => b.node.classList.add("armed"));
+        }
+        items.forEach((it) => {
+          const chip = el("button", { class: "chip", type: "button", html: iconSVG(it.icon) + it.name });
+          chip.dataset.kind = it.kind;
+          chip.addEventListener("click", () => pick(chip));
+          pool.appendChild(chip);
+        });
+
+        const bins = [
+          { kind: "need", title: "NEEDS", sub: "must-haves", color: "var(--save)", soft: "var(--save-soft)" },
+          { kind: "want", title: "WANTS", sub: "nice-to-haves", color: "var(--spend)", soft: "var(--spend-soft)" },
+        ].map((b) => {
+          const node = el("div", { class: "bin", role: "button", tabindex: "0", "aria-label": b.title + " basket" });
+          node.style.setProperty("--bin-color", b.color);
+          node.style.setProperty("--bin-soft", b.soft);
+          node.innerHTML = "<h3>" + b.title + "<br><small>" + b.sub + "</small></h3><div class=\"bin-items\"></div>";
+          function drop() {
+            if (!selected) return;
+            if (selected.dataset.kind === b.kind) {
+              selected.classList.remove("selected");
+              selected.disabled = true;
+              node.querySelector(".bin-items").appendChild(selected);
+              selected = null;
+              placed++;
+              sfx.coin();
+              cheer.classList.remove("oops");
+              cheer.textContent = placed === items.length ? "All sorted!" : "Great sorting! " + (items.length - placed) + " to go";
+              if (placed === items.length) {
+                const next = el("button", { class: "big-btn green", type: "button", text: "One more card" });
+                next.addEventListener("click", showGray);
+                phase.appendChild(el("p", { style: "text-align:center;margin-top:12px;" }, [next]));
+              }
+            } else {
+              cheer.classList.add("oops");
+              cheer.textContent = "Hmm, try the other basket! Think: can you live without it?";
+              sfx.oops();
+              selected.classList.add("shake");
+              const s = selected;
+              setTimeout(() => s.classList.remove("shake"), 450);
+            }
+            bins.forEach((x) => x.node.classList.remove("armed"));
+          }
+          node.addEventListener("click", drop);
+          node.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); drop(); } });
+          return Object.assign({}, b, { node: node });
+        });
+        const binWrap = el("div", { class: "bins" });
+        bins.forEach((b) => binWrap.appendChild(b.node));
+        phase.appendChild(pool);
+        phase.appendChild(binWrap);
+        phase.appendChild(cheer);
       }
 
-      items.forEach((it) => {
-        const chip = el("button", { class: "chip", type: "button", html: iconSVG(it.icon) + it.name });
-        chip.dataset.kind = it.kind;
-        chip.addEventListener("click", () => pick(chip));
-        pool.appendChild(chip);
-      });
-
-      const bins = [
-        { kind: "need", title: "NEEDS", sub: "must-haves", color: "var(--save)", soft: "var(--save-soft)" },
-        { kind: "want", title: "WANTS", sub: "nice-to-haves", color: "var(--spend)", soft: "var(--spend-soft)" },
-      ].map((b) => {
-        const node = el("div", { class: "bin", role: "button", tabindex: "0", "aria-label": b.title + " basket" });
-        node.style.setProperty("--bin-color", b.color);
-        node.style.setProperty("--bin-soft", b.soft);
-        node.innerHTML = "<h3>" + b.title + "<br><small>" + b.sub + "</small></h3><div class=\"bin-items\"></div>";
-        function drop() {
-          if (!selected) return;
-          if (selected.dataset.kind === b.kind) {
-            selected.classList.remove("selected");
-            selected.disabled = true;
-            $(".bin-items", node).appendChild(selected);
-            selected = null;
-            placed++;
-            sfx.coin();
-            cheer.classList.remove("oops");
-            cheer.textContent = placed === items.length ? "All sorted — you are a Needs & Wants champ!" : "Great sorting! " + (items.length - placed) + " to go";
-            if (placed === items.length) onDone();
-          } else {
-            cheer.classList.add("oops");
-            cheer.textContent = "Hmm, try the other basket! Think: can you live without it?";
-            sfx.oops();
-            selected.classList.add("shake");
-            const s = selected;
-            setTimeout(() => s.classList.remove("shake"), 450);
-          }
-          bins.forEach((x) => x.node.classList.remove("armed"));
+      function showGray() {
+        phase.innerHTML = "";
+        phase.appendChild(el("p", { class: "hint", text: "Some things sit in the middle." }));
+        const card = el("div", { class: "gray-card", text: "Brand-name sneakers. Your old ones still fit." });
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        const row = el("div", { class: "guess-btns" });
+        const needBtn = el("button", { class: "big-btn ghost", type: "button", text: "Need" });
+        const wantBtn = el("button", { class: "big-btn ghost", type: "button", text: "Want" });
+        const bothBtn = el("button", { class: "big-btn ghost", type: "button", text: "A bit of both" });
+        function pickGray(msg) {
+          cheer.classList.remove("oops");
+          cheer.textContent = msg;
+          sfx.pop();
+          needBtn.disabled = true; wantBtn.disabled = true; bothBtn.disabled = true;
+          const next = el("button", { class: "big-btn green", type: "button", text: "A $6 choice" });
+          next.addEventListener("click", showTrade);
+          phase.appendChild(el("p", { style: "text-align:center;margin-top:12px;" }, [next]));
         }
-        node.addEventListener("click", drop);
-        node.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); drop(); } });
-        return { ...b, node };
-      });
+        needBtn.addEventListener("click", () => pickGray("Shoes you need. The brand name is the extra want on top."));
+        wantBtn.addEventListener("click", () => pickGray("Yes — your old ones still fit, so the new brand is a want."));
+        bothBtn.addEventListener("click", () => pickGray("Yes. You need shoes. The brand name is a want on top."));
+        row.appendChild(needBtn); row.appendChild(wantBtn); row.appendChild(bothBtn);
+        phase.appendChild(card);
+        phase.appendChild(row);
+        phase.appendChild(cheer);
+      }
 
-      const binWrap = el("div", { class: "bins" });
-      bins.forEach((b) => binWrap.appendChild(b.node));
-      wrap.appendChild(pool);
-      wrap.appendChild(binWrap);
-      wrap.appendChild(cheer);
+      function showTrade() {
+        phase.innerHTML = "";
+        phase.appendChild(el("p", { class: "hint", text: "You have $6. You want a $5 game and a $4 art set. You can pick ONE." }));
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        const row = el("div", { class: "goal-choices" });
+        const game = el("button", { class: "goal-card", type: "button", html: iconSVG("goal") + "$5 game" });
+        const art = el("button", { class: "goal-card", type: "button", html: iconSVG("star") + "$4 art set" });
+        function pick(keep, other) {
+          keep.classList.add("picked");
+          other.classList.add("gone");
+          keep.disabled = true;
+          other.disabled = true;
+          cheer.textContent = "If you buy this, you cannot buy that. That is a trade-off.";
+          sfx.pop();
+          finish();
+        }
+        game.addEventListener("click", () => pick(game, art));
+        art.addEventListener("click", () => pick(art, game));
+        row.appendChild(game);
+        row.appendChild(art);
+        phase.appendChild(row);
+        phase.appendChild(cheer);
+      }
+
+      showSort();
       return wrap;
     },
 
     chores(onDone) {
-      const jobs = [
-        { name: "Walk the dog", pay: 2, icon: "heart" },
-        { name: "Sweep the floor", pay: 1, icon: "work" },
-        { name: "Water the plants", pay: 1, icon: "plant" },
-        { name: "Set the table", pay: 1, icon: "jars" },
-        { name: "Wash the car", pay: 3, icon: "shop" },
-        { name: "Tidy the books", pay: 2, icon: "chart" },
-      ];
-      let earned = 0;
-      let doneCount = 0;
       const wrap = el("div");
-      wrap.appendChild(el("p", { class: "hint", text: "Tap each chore to do it and watch your piggy bank grow!" }));
-      const board = el("div", { class: "chores" });
-      const total = el("div", { class: "piggy-total", html: "You earned: <span class=\"amount\">$0</span>" });
-      const cheer = el("p", { class: "cheer", "aria-live": "polite" });
-      jobs.forEach((j) => {
-        const btn = el("button", { class: "chore", type: "button", html: iconSVG(j.icon) + j.name + "<span class=\"chore-pay\">+$" + j.pay + "</span>" });
-        btn.addEventListener("click", () => {
-          if (btn.classList.contains("done")) return;
-          btn.classList.add("done");
-          btn.disabled = true;
-          earned += j.pay;
-          doneCount++;
-          sfx.coin();
-          $(".amount", total).textContent = "$" + earned;
-          total.classList.remove("bump");
-          void total.offsetWidth;
-          total.classList.add("bump");
-          cheer.textContent = doneCount === jobs.length ? "WOW — you earned $" + earned + " all by yourself!" : "Ka-ching! +$" + j.pay;
-          if (doneCount === jobs.length) onDone();
+      const phase = el("div");
+      wrap.appendChild(phase);
+      let finished = false;
+      function finish() { if (!finished) { finished = true; onDone(); } }
+
+      function showEarnSort() {
+        phase.innerHTML = "";
+        const items = [
+          { name: "Set the table", kind: "family", icon: "jars" },
+          { name: "Help cook dinner", kind: "family", icon: "heart" },
+          { name: "Weekly allowance $5", kind: "allow", icon: "star" },
+          { name: "Walk the neighbor’s dog for $3", kind: "extra", icon: "work" },
+          { name: "Wash the car for $4", kind: "extra", icon: "shop" },
+          { name: "Birthday $10 from Grandma", kind: "extra", icon: "coin" },
+        ];
+        let placed = 0;
+        let selected = null;
+        phase.appendChild(el("p", { class: "hint", text: "Sort each card: family help, practice money, or extra." }));
+        const pool = el("div", { class: "sorter-pool" });
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        function pick(chip) {
+          Array.from(pool.querySelectorAll(".chip")).forEach((c) => c.classList.remove("selected"));
+          selected = chip;
+          chip.classList.add("selected");
+          sfx.pop();
+          bins.forEach((b) => b.node.classList.add("armed"));
+        }
+        items.forEach((it) => {
+          const chip = el("button", { class: "chip", type: "button", html: iconSVG(it.icon) + it.name });
+          chip.dataset.kind = it.kind;
+          chip.addEventListener("click", () => pick(chip));
+          pool.appendChild(chip);
         });
-        board.appendChild(btn);
-      });
-      wrap.appendChild(board);
-      wrap.appendChild(total);
-      wrap.appendChild(cheer);
+
+        const bins = [
+          { kind: "family", title: "Family help", sub: "We do this because we are a family. No pay.", color: "var(--share)", soft: "var(--share-soft)" },
+          { kind: "allow", title: "Allowance", sub: "Practice money, on a regular day.", color: "var(--spend)", soft: "var(--spend-soft)" },
+          { kind: "extra", title: "Extra jobs and gifts", sub: "Paid after you finish, or money someone gives you.", color: "var(--save)", soft: "var(--save-soft)" },
+        ].map((b) => {
+          const node = el("div", { class: "bin", role: "button", tabindex: "0", "aria-label": b.title });
+          node.style.setProperty("--bin-color", b.color);
+          node.style.setProperty("--bin-soft", b.soft);
+          node.innerHTML = "<h3>" + b.title + "<br><small>" + b.sub + "</small></h3><div class=\"bin-items\"></div>";
+          function drop() {
+            if (!selected) return;
+            if (selected.dataset.kind === b.kind) {
+              selected.classList.remove("selected");
+              selected.disabled = true;
+              node.querySelector(".bin-items").appendChild(selected);
+              selected = null;
+              placed++;
+              sfx.coin();
+              cheer.classList.remove("oops");
+              cheer.textContent = placed === items.length ? "Sorted!" : (items.length - placed) + " to go";
+              if (placed === items.length) {
+                const next = el("button", { class: "big-btn green", type: "button", text: "Try two extra jobs" });
+                next.addEventListener("click", showExtraJobs);
+                phase.appendChild(el("p", { style: "text-align:center;margin-top:12px;" }, [next]));
+              }
+            } else {
+              cheer.classList.add("oops");
+              cheer.textContent = "Hmm. Is this a family job, practice money, or extra?";
+              sfx.oops();
+            }
+            bins.forEach((x) => x.node.classList.remove("armed"));
+          }
+          node.addEventListener("click", drop);
+          node.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); drop(); } });
+          return Object.assign({}, b, { node: node });
+        });
+        const binWrap = el("div", { class: "bins", style: "grid-template-columns:repeat(3,1fr);" });
+        bins.forEach((b) => binWrap.appendChild(b.node));
+        phase.appendChild(pool);
+        phase.appendChild(binWrap);
+        phase.appendChild(cheer);
+      }
+
+      function showExtraJobs() {
+        phase.innerHTML = "";
+        phase.appendChild(el("p", { class: "hint", text: "These extra jobs pay after you finish. Family help still does not pay." }));
+        let earned = 0;
+        let doneCount = 0;
+        const jobs = [
+          { name: "Walk the neighbor’s dog", pay: 3, icon: "work" },
+          { name: "Wash the car", pay: 4, icon: "shop" },
+        ];
+        const board = el("div", { class: "chores" });
+        const total = el("div", { class: "piggy-total", html: "You earned: <span class=\"amount\">$0</span>" });
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        jobs.forEach((j) => {
+          const btn = el("button", { class: "chore", type: "button", html: iconSVG(j.icon) + j.name + "<span class=\"chore-pay\">+$" + j.pay + "</span>" });
+          btn.addEventListener("click", () => {
+            if (btn.classList.contains("done")) return;
+            btn.classList.add("done");
+            btn.disabled = true;
+            earned += j.pay;
+            doneCount++;
+            sfx.coin();
+            total.querySelector(".amount").textContent = "$" + earned;
+            cheer.textContent = doneCount === jobs.length ? "Extra jobs add more money. Family help still is not a vending machine." : "Ka-ching! +$" + j.pay;
+            if (doneCount === jobs.length) finish();
+          });
+          board.appendChild(btn);
+        });
+        phase.appendChild(board);
+        phase.appendChild(total);
+        phase.appendChild(cheer);
+      }
+      showEarnSort();
       return wrap;
     },
 
     jars(onDone) {
-      const TOTAL = 10;
-      let selected = null;
-      const counts = { save: 0, spend: 0, share: 0 };
       const wrap = el("div");
-      wrap.appendChild(el("p", { class: "hint", html: "You earned <strong>10 coins</strong>! Tap a coin, then tap a jar. YOU decide the split!" }));
-      wrap.appendChild(el("div", { class: "color-legend", style: "position:static;margin:0 auto 10px;", html: "<span class=\"l-save\">Save</span> · <span class=\"l-spend\">Spend</span> · <span class=\"l-share\">Share</span>" }));
-      const pool = el("div", { class: "sorter-pool", "aria-label": "Your coins" });
-      const cheer = el("p", { class: "cheer", "aria-live": "polite" });
-      for (let i = 0; i < TOTAL; i++) {
-        const coin = el("button", { class: "coin", type: "button", html: "$1", "aria-label": "One dollar coin" });
-        coin.addEventListener("click", () => {
-          $$(".coin", pool).forEach((c) => c.classList.remove("selected"));
-          selected = coin;
-          coin.classList.add("selected");
-          sfx.pop();
-          jarNodes.forEach((j) => j.node.classList.add("armed"));
-        });
-        pool.appendChild(coin);
-      }
-      const jarNodes = [
-        { key: "save", title: "SAVE", color: "var(--save)" },
-        { key: "spend", title: "SPEND", color: "var(--spend)" },
-        { key: "share", title: "SHARE", color: "#c98f00" },
-      ].map((j) => {
-        const node = el("div", { class: "money-jar", role: "button", tabindex: "0", "aria-label": j.title + " jar" });
-        node.style.setProperty("--jar-color", j.color);
-        node.style.setProperty("--bin-color", j.color);
-        node.innerHTML = "<h3>" + j.title + "</h3><div class=\"jar-glass-big\"><div class=\"jar-coins\"></div></div><div class=\"jar-count\">0 coins</div>";
-        function drop() {
-          if (!selected) return;
-          selected.remove();
-          selected = null;
-          counts[j.key]++;
-          sfx.coin();
-          $(".jar-coins", node).style.height = counts[j.key] * 10 + "%";
-          $(".jar-count", node).textContent = counts[j.key] + (counts[j.key] === 1 ? " coin" : " coins");
-          jarNodes.forEach((x) => x.node.classList.remove("armed"));
-          const placed = counts.save + counts.spend + counts.share;
-          if (placed === TOTAL) {
-            let msg = "All 10 coins have a home! ";
-            if (counts.save === 0) msg += "Next time, try feeding the green SAVE jar too — future you will cheer!";
-            else if (counts.share === 0) msg += "You are saving like a pro! Maybe share a coin next time too.";
-            else msg += "Saving AND sharing — Penny is so proud!";
-            cheer.textContent = msg;
-            onDone();
-          } else {
-            cheer.textContent = (TOTAL - placed) + " coins left to place";
-          }
+      const phase = el("div");
+      wrap.appendChild(phase);
+      let finished = false;
+      function finish() { if (!finished) { finished = true; onDone(); } }
+      const counts = { save: 5, spend: 4, share: 1 };
+      let selectedKey = null;
+
+      function showSplit() {
+        phase.innerHTML = "";
+        phase.appendChild(el("p", { class: "hint", text: "A starting idea: 5 save, 4 spend, 1 share. You may move them." }));
+        phase.appendChild(el("div", { class: "color-legend", style: "position:static;margin:0 auto 10px;", html: "<span class=\"l-save\">Save</span> · <span class=\"l-spend\">Spend</span> · <span class=\"l-share\">Share</span>" }));
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        const lockBtn = el("button", { class: "big-btn green", type: "button", text: "Lock my split" });
+        const jarNodes = {};
+        function paintJar(key) {
+          const node = jarNodes[key];
+          node.querySelector(".jar-coins").style.height = counts[key] * 10 + "%";
+          node.querySelector(".jar-count").textContent = counts[key] + (counts[key] === 1 ? " coin" : " coins");
         }
-        node.addEventListener("click", drop);
-        node.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); drop(); } });
-        return { ...j, node };
-      });
-      const row = el("div", { class: "jars-row" });
-      jarNodes.forEach((j) => row.appendChild(j.node));
-      wrap.appendChild(pool);
-      wrap.appendChild(row);
-      wrap.appendChild(cheer);
+        function refreshLock() {
+          lockBtn.disabled = counts.save < 1;
+          cheer.textContent = counts.save < 1 ? "Keep at least 1 in Save." : "Move coins, then lock your split.";
+        }
+        [["save", "SAVE", "var(--save)"], ["spend", "SPEND", "var(--spend)"], ["share", "SHARE", "#c98f00"]].forEach((pair) => {
+          const key = pair[0], title = pair[1], color = pair[2];
+          const node = el("div", { class: "money-jar", role: "button", tabindex: "0", "aria-label": title + " jar" });
+          node.style.setProperty("--bin-color", color);
+          const sub = key === "share" ? "<small>Help others, or pay someone back.</small>" : "";
+          node.innerHTML = "<h3>" + title + "</h3>" + sub + "<div class=\"jar-glass-big\"><div class=\"jar-coins\"></div></div><div class=\"jar-count\"></div>";
+          jarNodes[key] = node;
+          function tap() {
+            if (selectedKey == null) {
+              if (counts[key] <= 0) return;
+              selectedKey = key;
+              node.classList.add("armed");
+              sfx.pop();
+              return;
+            }
+            if (selectedKey === key) {
+              selectedKey = null;
+              node.classList.remove("armed");
+              return;
+            }
+            counts[selectedKey]--;
+            counts[key]++;
+            jarNodes[selectedKey].classList.remove("armed");
+            selectedKey = null;
+            paintJar("save"); paintJar("spend"); paintJar("share");
+            sfx.coin();
+            refreshLock();
+          }
+          node.addEventListener("click", tap);
+          node.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tap(); } });
+        });
+        const row = el("div", { class: "jars-row" });
+        row.appendChild(jarNodes.save);
+        row.appendChild(jarNodes.spend);
+        row.appendChild(jarNodes.share);
+        paintJar("save"); paintJar("spend"); paintJar("share");
+        lockBtn.addEventListener("click", () => {
+          if (counts.save < 1) return;
+          showBorrow();
+        });
+        refreshLock();
+        phase.appendChild(row);
+        phase.appendChild(el("p", { style: "text-align:center;margin-top:12px;" }, [lockBtn]));
+        phase.appendChild(cheer);
+      }
+
+      function showBorrow() {
+        phase.innerHTML = "";
+        phase.appendChild(el("p", { class: "hint", text: "Oh! Last week you borrowed $2 from a grown-up. Today you pay it back." }));
+        let fromSpend = Math.min(2, counts.spend);
+        let fromSave = 2 - fromSpend;
+        counts.spend -= fromSpend;
+        counts.save -= fromSave;
+        const pay = 2;
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        const row = el("div", { class: "jars-row" });
+        function jarBox(title, n) {
+          const node = el("div", { class: "money-jar" });
+          node.innerHTML = "<h3>" + title + "</h3><div class=\"jar-glass-big\"><div class=\"jar-coins\" style=\"height:" + (n * 10) + "%\"></div></div><div class=\"jar-count\">" + n + (n === 1 ? " coin" : " coins") + "</div>";
+          return node;
+        }
+        row.appendChild(jarBox("SAVE", counts.save));
+        row.appendChild(jarBox("SPEND", counts.spend));
+        row.appendChild(jarBox("SHARE", counts.share));
+        const dish = el("div", { class: "payback-dish" });
+        dish.innerHTML = "<h3>Pay back</h3><p>$" + pay + "</p>";
+        phase.appendChild(row);
+        phase.appendChild(dish);
+        let msg = "Borrowing means you promise to return it. Paying back is not a gift. It is keeping a promise.";
+        if (fromSpend && fromSave) msg = "Spend had $" + fromSpend + ", so Save paid the other $" + fromSave + ". " + msg;
+        else if (fromSave) msg = "Spend was empty, so Save paid the $2. " + msg;
+        cheer.textContent = msg;
+        phase.appendChild(cheer);
+        finish();
+      }
+      showSplit();
       return wrap;
     },
 
@@ -1004,14 +1323,34 @@
         { key: "savings", name: "Savings", color: "var(--save)" },
       ];
       const vals = { snacks: 0, toys: 0, gifts: 0, savings: 0 };
+      let phaseNum = 0;
       let finished = false;
       const wrap = el("div");
+      wrap.appendChild(el("p", { class: "hint first-line", html: "This $10 is YOUR pile. Grown-ups often pay needs like food and a home. You plan the money that is yours." }));
       wrap.appendChild(el("p", { class: "hint", html: "Slide each bar until <strong>all $10 has a job</strong>. Tip: give Savings at least $1!" }));
+      const surprise = el("p", { class: "cheer", "aria-live": "polite" });
       const rowsWrap = el("div", { class: "budget-rows" });
       const meter = el("div", { class: "budget-meter", "aria-live": "polite" });
       const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+      function totalOf() { return rows.reduce((s, r) => s + vals[r.key], 0); }
+      function addBirthdayRow() {
+        if (vals.birthday != null) return;
+        vals.birthday = 3;
+        rows.push({ key: "birthday", name: "Birthday", color: "var(--coral, #FF5A5F)" });
+        const row = el("div", { class: "budget-row" });
+        row.style.setProperty("--row-color", "var(--coral, #FF5A5F)");
+        row.appendChild(el("span", { class: "b-label", text: "Birthday" }));
+        const slider = el("input", { type: "range", min: "3", max: "3", value: "3", step: "1", "aria-label": "Birthday dollars" });
+        slider.disabled = true;
+        row.appendChild(slider);
+        row.appendChild(el("span", { class: "b-val", text: "$3" }));
+        const bar = el("div", { class: "icon-bar", "aria-hidden": "true", text: "●●●" });
+        bar.style.color = "var(--coral, #FF5A5F)";
+        row.appendChild(bar);
+        rowsWrap.appendChild(row);
+      }
       function refresh() {
-        const total = rows.reduce((s, r) => s + vals[r.key], 0);
+        const total = totalOf();
         const left = ALLOWANCE - total;
         meter.classList.remove("good", "over");
         if (left > 0) meter.textContent = "$" + left + " still needs a job!";
@@ -1019,9 +1358,20 @@
         else {
           meter.classList.add("good");
           meter.textContent = "Perfect! Every dollar has a job!";
-          if (vals.savings >= 1) {
-            if (!finished) { finished = true; cheer.textContent = "A balanced budget WITH savings — that is money-boss level!"; onDone(); }
-          } else cheer.textContent = "Almost! Slide at least $1 into Savings.";
+          if (phaseNum === 0 && vals.savings >= 1) {
+            phaseNum = 1;
+            surprise.textContent = "Wait! Your friend’s birthday is tomorrow. A card and candy cost $3. Free up $3.";
+            addBirthdayRow();
+            sfx.pop();
+            refresh();
+            return;
+          }
+          if (phaseNum === 1 && vals.birthday === 3 && !finished) {
+            finished = true;
+            if (vals.savings >= 1) cheer.textContent = "You made room for a surprise and still have savings. That is a plan.";
+            else cheer.textContent = "You used some savings for a surprise. That is okay — you still have a plan.";
+            onDone();
+          }
         }
       }
       rows.forEach((r) => {
@@ -1044,196 +1394,346 @@
       refresh();
       wrap.appendChild(rowsWrap);
       wrap.appendChild(meter);
+      wrap.appendChild(surprise);
       wrap.appendChild(cheer);
       return wrap;
     },
-
     garden(onDone) {
       const START = 10;
-      const RATE = 0.1;
-      let touched = false;
+      const RATE = 0.04;
+
+      let doneFired = false;
       const wrap = el("div");
-      wrap.appendChild(el("p", { class: "hint", html: "You put <strong>$10</strong> in the bank. Slide time forward and watch your money garden grow!" }));
-      const garden = el("div", { class: "garden" });
+      wrap.appendChild(el("p", { class: "hint", html: "You put <strong>$10</strong> in the bank. Slide to 1 year first. Growth is slow and real." }));
+      const gardenBox = el("div", { class: "garden" });
       const plantHost = el("div");
       const stack = el("div", { class: "coin-stack", "aria-hidden": "true" });
-      garden.appendChild(plantHost);
-      garden.appendChild(stack);
+      gardenBox.appendChild(plantHost);
+      gardenBox.appendChild(stack);
       const readout = el("p", { class: "garden-readout", "aria-live": "polite" });
       const slider = el("input", { class: "year-slider", type: "range", min: "0", max: "10", value: "0", step: "1", "aria-label": "Years of saving" });
-      const labels = el("div", { class: "year-labels", html: "<span>Now</span><span>5 years</span><span>10 years</span>" });
+      const labels = el("div", { class: "year-labels", html: "<span>Now</span><span>1 year</span><span>10 years</span>" });
       const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+
       function refresh() {
         const years = Number(slider.value);
-        const amount = Math.round(START * Math.pow(1 + RATE, years));
+        const raw = START * Math.pow(1 + RATE, years);
         plantHost.innerHTML = plantSVG(years);
-        const coins = Math.min(amount, 26);
-        stack.innerHTML = "<div class=\"stack-coin\"></div>".repeat(coins);
-        readout.innerHTML = "After <strong>" + years + (years === 1 ? " year" : " years") + "</strong>: <span class=\"grow-amt\">$" + amount + "</span>" +
-          (years > 0 ? " — the bank added <strong>$" + (amount - START) + "</strong> for free!" : " — your seed is planted.");
-        if (years >= 8 && !touched) {
-          touched = true;
-          cheer.innerHTML = "Your $10 more than doubled without any work. That is the magic of interest! Pssst — the <a href=\"#/bank\">Penny Bank</a> does this with YOUR coins.";
+        stack.innerHTML = "<div class=\"stack-coin\"></div>".repeat(Math.min(10 + years, 20));
+        if (years === 0) readout.innerHTML = "After <strong>0 years</strong>: <span class=\"grow-amt\">$10</span> — your seed is planted.";
+        else if (years === 1) readout.innerHTML = "After 1 year: $10.40. The bank paid 40¢ of rent. Slow, and real.";
+        else if (years === 5) readout.innerHTML = "After <strong>5 years</strong>: about <span class=\"grow-amt\">$12</span>.";
+        else if (years === 10) readout.innerHTML = "After 10 years: about $15. Your $10 did not double. Real interest is patient.";
+        else readout.innerHTML = "After <strong>" + years + " years</strong>: about <span class=\"grow-amt\">$" + raw.toFixed(2) + "</span>.";
+        if (years >= 1 && !doneFired) {
+          doneFired = true;
+          cheer.textContent = "One year is the first wow. Ten years is optional — it stays slow.";
           onDone();
-        } else if (!touched && years > 0) {
-          cheer.textContent = "Keep sliding to 8 years or more…";
         }
       }
       slider.addEventListener("input", refresh);
       refresh();
-      wrap.appendChild(garden);
+      wrap.appendChild(gardenBox);
       wrap.appendChild(readout);
       wrap.appendChild(slider);
       wrap.appendChild(labels);
       wrap.appendChild(cheer);
       return wrap;
     },
-
-    goal(onDone) {
-      const WEEKLY = 4;
+goal(onDone) {
       const goals = [
         { name: "Art set", price: 12, icon: "star" },
         { name: "Skateboard", price: 20, icon: "goal" },
         { name: "Robot kit", price: 32, icon: "work" },
       ];
-      let picked = null, saved = 0, weeks = 0, finished = false;
+      let picked = null, weekly = 0, saved = 0, weeks = 0, successWeeks = 0, finished = false, tempted = false;
       const wrap = el("div");
-      wrap.appendChild(el("p", { class: "hint", html: "Step 1: pick your dream. Step 2: save <strong>$4 every week</strong> until you reach it!" }));
+      wrap.appendChild(el("p", { class: "hint", text: "Step 1: pick your dream. Step 2: choose how much to save each week." }));
       const choices = el("div", { class: "goal-choices" });
+      const weekRow = el("div", { class: "guess-btns" });
       const track = el("div", { class: "goal-track", "aria-hidden": "true" });
       const fill = el("div", { class: "goal-fill" });
       track.appendChild(fill);
       const status = el("p", { class: "garden-readout", "aria-live": "polite" });
-      const saveBtn = el("button", { class: "big-btn green", type: "button", text: "Save this week’s $4" });
+      const saveBtn = el("button", { class: "big-btn green", type: "button", text: "Save this week" });
       saveBtn.disabled = true;
+      const temptBox = el("div");
       const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+      function paint() {
+        if (!picked) return;
+        const pct = Math.round((saved / picked.price) * 100);
+        fill.style.width = Math.min(pct, 100) + "%";
+        fill.textContent = "$" + saved;
+      }
+      function reach() {
+        finished = true;
+        saveBtn.disabled = true;
+        status.innerHTML = "<span class=\"grow-amt\">GOAL REACHED in " + weeks + " weeks!</span> Enjoy your " + picked.name + " — you earned it!";
+        cheer.textContent = "Waiting can get you the bigger thing.";
+        confetti();
+        sfx.win();
+        onDone();
+      }
+      function addWeek() {
+        if (!picked || finished || !weekly) return;
+        saved = Math.min(saved + weekly, picked.price);
+        weeks++;
+        successWeeks++;
+        sfx.coin();
+        paint();
+        if (saved >= picked.price) { reach(); return; }
+        status.innerHTML = "Week " + weeks + ": you saved <strong>$" + saved + "</strong> of $" + picked.price + ". Keep going!";
+        if (successWeeks === 2 && !tempted && saved < picked.price) showTempt();
+      }
+      function showTempt() {
+        tempted = true;
+        saveBtn.disabled = true;
+        temptBox.innerHTML = "";
+        temptBox.appendChild(el("p", { class: "hint", text: "A $4 comic is on the counter. Buy it this week? You would not add to your goal." }));
+        const keep = el("button", { class: "big-btn green", type: "button", text: "Keep saving" });
+        const buy = el("button", { class: "big-btn ghost", type: "button", text: "Buy the comic" });
+        keep.addEventListener("click", () => {
+          temptBox.innerHTML = "";
+          saveBtn.disabled = false;
+          cheer.textContent = "You waited. The goal is closer.";
+          addWeek();
+        });
+        buy.addEventListener("click", () => {
+          temptBox.innerHTML = "";
+          weeks++;
+          saveBtn.disabled = false;
+          cheer.textContent = "That’s okay sometimes. Your goal just takes longer.";
+          status.innerHTML = "Week " + weeks + ": still <strong>$" + saved + "</strong> of $" + picked.price + ".";
+          sfx.pop();
+        });
+        temptBox.appendChild(keep);
+        temptBox.appendChild(buy);
+      }
       goals.forEach((g) => {
         const card = el("button", { class: "goal-card", type: "button", html: iconSVG(g.icon) + g.name + "<br><span class=\"goal-price\">$" + g.price + "</span>" });
         card.addEventListener("click", () => {
           if (finished) return;
-          $$(".goal-card", choices).forEach((c) => c.classList.remove("picked"));
+          Array.from(choices.querySelectorAll(".goal-card")).forEach((c) => c.classList.remove("picked"));
           card.classList.add("picked");
           sfx.pop();
-          picked = g; saved = 0; weeks = 0;
-          saveBtn.disabled = false;
+          picked = g; saved = 0; weeks = 0; successWeeks = 0; weekly = 0; tempted = false;
+          saveBtn.disabled = true;
           fill.style.width = "0%";
           fill.textContent = "";
-          status.innerHTML = "Goal: <strong>" + g.name + " ($" + g.price + ")</strong>. That is about " + Math.ceil(g.price / WEEKLY) + " weeks of saving. You got this!";
           cheer.textContent = "";
+          temptBox.innerHTML = "";
+          weekRow.innerHTML = "";
+          status.textContent = "How much will you save each week?";
+          [2, 4, 6].forEach((n) => {
+            const b = el("button", { class: "big-btn ghost", type: "button", text: "$" + n });
+            b.addEventListener("click", () => {
+              weekly = n;
+              Array.from(weekRow.querySelectorAll("button")).forEach((x) => x.classList.remove("picked"));
+              b.classList.add("picked");
+              status.textContent = "That’s about " + Math.ceil(g.price / weekly) + " weeks.";
+              saveBtn.disabled = false;
+              sfx.pop();
+            });
+            weekRow.appendChild(b);
+          });
         });
         choices.appendChild(card);
       });
-      saveBtn.addEventListener("click", () => {
-        if (!picked || finished) return;
-        saved = Math.min(saved + WEEKLY, picked.price);
-        weeks++;
-        sfx.coin();
-        const pct = Math.round((saved / picked.price) * 100);
-        fill.style.width = pct + "%";
-        fill.textContent = "$" + saved;
-        if (saved >= picked.price) {
-          finished = true;
-          saveBtn.disabled = true;
-          status.innerHTML = "<span class=\"grow-amt\">GOAL REACHED in " + weeks + " weeks!</span> Enjoy your " + picked.name + " — you earned it!";
-          cheer.textContent = "That waiting superpower is called patience — and it just paid off!";
-          confetti();
-          sfx.win();
-          onDone();
-        } else {
-          status.innerHTML = "Week " + weeks + ": you saved <strong>$" + saved + "</strong> of $" + picked.price + ". Keep going!";
-        }
-      });
+      saveBtn.addEventListener("click", addWeek);
       wrap.appendChild(choices);
+      wrap.appendChild(weekRow);
       wrap.appendChild(track);
       wrap.appendChild(status);
       wrap.appendChild(el("p", { style: "text-align:center;margin-top:10px;" }, [saveBtn]));
+      wrap.appendChild(temptBox);
       wrap.appendChild(cheer);
       return wrap;
     },
-
-    lemonade(onDone) {
-      const COST = 0.2;
+lemonade(onDone) {
+      const COST = 1;
       const options = [
-        { price: 0.25, cups: 40 },
-        { price: 0.5, cups: 30 },
-        { price: 1.0, cups: 18 },
-        { price: 2.0, cups: 5 },
+        { price: 0.5, cups: 24, income: 12, costs: 24, profit: -12, note: "You sold a lot and lost money. Price was below cost." },
+        { price: 1.0, cups: 16, income: 16, costs: 16, profit: 0, note: "Even. No leftover." },
+        { price: 2.0, cups: 10, income: 20, costs: 10, profit: 10, note: "" },
+        { price: 4.0, cups: 4, income: 16, costs: 4, profit: 12, note: "" },
       ];
       const tried = new Set();
+      let seenLow = false;
       let doneFired = false;
+      let opened = false;
       const wrap = el("div");
-      wrap.appendChild(el("p", { class: "hint", html: "Each cup costs you <strong>20¢</strong> to make. Try at least <strong>two prices</strong> and find the best profit!" }));
-      const grid = el("div", { class: "lemonade-grid" });
-      const btns = el("div", { class: "price-btns" });
-      const report = el("div", { class: "stand-report", "aria-live": "polite" });
-      report.innerHTML = "<p style=\"text-align:center;font-weight:700;\">Pick a price to open your stand!</p>";
-      const cheer = el("p", { class: "cheer", "aria-live": "polite" });
-      const money = (n) => "$" + n.toFixed(2);
-      options.forEach((o) => {
-        const b = el("button", { class: "price-btn", type: "button", text: money(o.price) + " per cup" });
-        b.addEventListener("click", () => {
-          $$(".price-btn", btns).forEach((x) => x.classList.remove("picked"));
-          b.classList.add("picked");
-          sfx.pop();
-          tried.add(o.price);
-          const income = o.price * o.cups;
-          const costs = COST * o.cups;
-          const profit = income - costs;
-          report.innerHTML =
-            "<div class=\"cup-row\" role=\"img\" aria-label=\"" + o.cups + " cups sold\">" + "●".repeat(o.cups) + "</div>" +
-            "<div class=\"report-line\"><span>Cups sold</span><span>" + o.cups + "</span></div>" +
-            "<div class=\"report-line\"><span>Money in</span><span class=\"pos\">+" + money(income) + "</span></div>" +
-            "<div class=\"report-line\"><span>Costs</span><span class=\"neg\">−" + money(costs) + "</span></div>" +
-            "<div class=\"report-line profit\"><span>PROFIT</span><span class=\"pos\">" + money(profit) + "</span></div>";
-          if (tried.size >= 2 && !doneFired) {
-            doneFired = true;
-            cheer.textContent = "You compared prices like a real business boss! Which one made the most profit?";
-            onDone();
-          } else if (!doneFired) {
-            cheer.textContent = "Interesting! Now try a different price to compare.";
-          }
+      const phase = el("div");
+      wrap.appendChild(phase);
+      function money(n) {
+        const sign = n < 0 ? "−" : "";
+        return sign + "$" + Math.abs(n).toFixed(n % 1 ? 2 : 0);
+      }
+      function maybeFinish(cheer) {
+        if (tried.size >= 2 && seenLow && !doneFired) {
+          doneFired = true;
+          cheer.textContent = "You compared prices like a real business boss! Which one made the most leftover?";
+          onDone();
+        } else if (!seenLow && tried.size >= 1) {
+          cheer.textContent = "Try the 50¢ price. Bosses look at losses too.";
+        } else if (!doneFired) {
+          cheer.textContent = "Interesting! Now try a different price to compare.";
+        }
+      }
+      function showPrices() {
+        phase.innerHTML = "";
+        phase.appendChild(el("p", { class: "hint", html: "Each cup costs you <strong>$1</strong> to make. Try at least <strong>two prices</strong>, including 50¢." }));
+        const grid = el("div", { class: "lemonade-grid" });
+        const btns = el("div", { class: "price-btns" });
+        const report = el("div", { class: "stand-report", "aria-live": "polite" });
+        report.innerHTML = "<p style=\"text-align:center;font-weight:700;\">Pick a price to open your stand!</p>";
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        options.forEach((o) => {
+          const label = o.price < 1 ? "50¢ per cup" : ("$" + o.price.toFixed(0) + " per cup");
+          const b = el("button", { class: "price-btn", type: "button", text: label });
+          b.addEventListener("click", () => {
+            Array.from(btns.querySelectorAll(".price-btn")).forEach((x) => x.classList.remove("picked"));
+            b.classList.add("picked");
+            sfx.pop();
+            tried.add(o.price);
+            if (o.price === 0.5) seenLow = true;
+            const pclass = o.profit > 0 ? "pos" : (o.profit < 0 ? "neg" : "");
+            report.innerHTML =
+              "<div class=\"cup-row\" role=\"img\" aria-label=\"" + o.cups + " cups sold\">" + "●".repeat(o.cups) + "</div>" +
+              "<div class=\"report-line\"><span>Cups sold</span><span>" + o.cups + "</span></div>" +
+              "<div class=\"report-line\"><span>Money in</span><span class=\"pos\">+" + money(o.income) + "</span></div>" +
+              "<div class=\"report-line\"><span>Costs</span><span class=\"neg\">−" + money(o.costs) + "</span></div>" +
+              "<div class=\"report-line profit\"><span>PROFIT</span><span class=\"" + pclass + "\">" + money(o.profit) + "</span></div>" +
+              (o.note ? "<p class=\"hint\">" + o.note + "</p>" : "");
+            maybeFinish(cheer);
+          });
+          btns.appendChild(b);
         });
-        btns.appendChild(b);
-      });
-      grid.appendChild(btns);
-      grid.appendChild(report);
-      wrap.appendChild(grid);
-      wrap.appendChild(cheer);
+        grid.appendChild(btns);
+        grid.appendChild(report);
+        phase.appendChild(grid);
+        phase.appendChild(cheer);
+      }
+      function showStartup() {
+        phase.innerHTML = "";
+        phase.appendChild(el("p", { class: "hint", text: "A lemon kit costs 5 coins. You need money before you open." }));
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        const go = el("button", { class: "big-btn gold", type: "button", text: "Pay 5 coins for the kit" });
+        go.addEventListener("click", () => {
+          if (opened) return;
+          opened = true;
+          accrueBank();
+          if (Math.floor(state.coins) < 5) {
+            state.coins = 5;
+            cheer.textContent = "A grown-up stakes you 5 coins to try. Real stands need money first too.";
+          } else {
+            cheer.textContent = "That is startup money. You spend it before you earn.";
+          }
+          state.coins -= 5;
+          save();
+          updateWallet(true);
+          sfx.coin();
+          const next = el("button", { class: "big-btn green", type: "button", text: "Open the stand" });
+          next.addEventListener("click", showPrices);
+          phase.appendChild(el("p", { style: "text-align:center;margin-top:12px;" }, [next]));
+        });
+        phase.appendChild(el("p", { style: "text-align:center;" }, [go]));
+        phase.appendChild(cheer);
+      }
+      showStartup();
       return wrap;
     },
-
-    safety(onDone) {
-      const cards = [
-        { text: "Ask a grown-up before buying in a game", ok: true, why: "Smart move! Always check first." },
-        { text: "Share your password with a game friend", ok: false, why: "Never! Passwords are secret keys." },
-        { text: "\"FREE coins! Just enter your card number!\"", ok: false, why: "Trick alert! Free-stuff pop-ups steal money." },
-        { text: "Feels weird? Stop and tell a trusted adult", ok: true, why: "Exactly right — that is your safety shield!" },
-        { text: "Click links from strangers about prizes", ok: false, why: "Nope! Strangers with prizes = scam." },
-        { text: "Only shop online together with your family", ok: true, why: "Yes! Shopping is a team sport." },
-      ];
-      let flipped = 0;
+safety(onDone) {
       const wrap = el("div");
-      wrap.appendChild(el("p", { class: "hint", text: "Read each card and guess: smart move or danger zone? Tap to flip and find out!" }));
-      const grid = el("div", { class: "flip-grid" });
-      const cheer = el("p", { class: "cheer", "aria-live": "polite" });
-      cards.forEach((c) => {
-        const card = el("button", { class: "flip-card", type: "button", "aria-label": c.text + " — tap to reveal answer" });
-        const inner = el("div", { class: "flip-inner" });
-        inner.appendChild(el("div", { class: "flip-face flip-front", text: c.text }));
-        inner.appendChild(el("div", { class: "flip-face flip-back " + (c.ok ? "ok" : "no"), text: (c.ok ? "Smart move. " : "Danger zone. ") + c.why }));
-        card.appendChild(inner);
-        card.addEventListener("click", () => {
-          if (card.classList.contains("flipped")) return;
-          card.classList.add("flipped");
-          flipped++;
-          if (c.ok) sfx.pop(); else sfx.oops();
-          cheer.textContent = flipped === cards.length ? "Shield complete — you are a digital money guardian!" : flipped + " of " + cards.length + " flipped";
-          if (flipped === cards.length) onDone();
+      const phase = el("div");
+      wrap.appendChild(phase);
+      let finished = false;
+      function finish() { if (!finished) { finished = true; onDone(); } }
+
+      function showPile() {
+        phase.innerHTML = "";
+        let pile = 10;
+        const used = new Set();
+        phase.appendChild(el("p", { class: "hint", text: "One pile: $10. Cash, a card, and a game shop all spend it." }));
+        const meter = el("div", { class: "pile-meter" });
+        const fill = el("div", { class: "pile-fill" });
+        meter.appendChild(fill);
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+        function paint() {
+          fill.style.width = (pile * 10) + "%";
+          fill.textContent = "$" + pile;
+        }
+        paint();
+        const row = el("div", { class: "guess-btns" });
+
+        [["cash", "Pay cash $3"], ["card", "Pay card $3"], ["game", "Game shop tap $3 (hat)"]].forEach((pair) => {
+          const key = pair[0], label = pair[1];
+          const btn = el("button", { class: "big-btn ghost", type: "button", text: label });
+          btn.addEventListener("click", () => {
+            if (pile < 3) { cheer.classList.add("oops"); cheer.textContent = "The pile is empty."; sfx.oops(); return; }
+            pile -= 3;
+            used.add(key);
+            paint();
+            sfx.coin();
+            cheer.classList.remove("oops");
+            cheer.textContent = "Same $10. Cash, a card, and a game shop all spend it. A tap is real even when you do not see a bill. It can feel like it is not money. It is.";
+            if (used.size >= 2 && used.has("cash") && used.has("game")) {
+              const next = el("button", { class: "big-btn green", type: "button", text: "Practice the shield" });
+              next.addEventListener("click", showCards);
+              phase.appendChild(el("p", { style: "text-align:center;margin-top:12px;" }, [next]));
+            } else if (used.size >= 2) {
+              cheer.textContent += " Try cash and a game tap — they spend the same pile.";
+            }
+          });
+          row.appendChild(btn);
         });
-        grid.appendChild(card);
-      });
-      wrap.appendChild(grid);
-      wrap.appendChild(cheer);
+        phase.appendChild(meter);
+        phase.appendChild(row);
+        phase.appendChild(cheer);
+      }
+
+      function showCards() {
+        phase.innerHTML = "";
+        phase.appendChild(el("p", { class: "hint", text: "Guess first: smart move or danger zone?" }));
+        const cards = [
+          { text: "Ask a grown-up before buying in a game", ok: true, why: "Always check first." },
+          { text: "Share your password with a game friend", ok: false, why: "Passwords stay secret." },
+          { text: "FREE coins! Enter your card number!", ok: false, why: "Free-stuff pop-ups steal money." },
+          { text: "You bump a 99¢ hat in a game. You did not mean to.", ok: false, why: "Accidental taps spend real money. Stop and tell a grown-up." },
+          { text: "The game already has a parent’s card saved. One tap buys.", ok: false, why: "A saved card is still real money." },
+          { text: "Feels weird? Stop and tell a trusted adult.", ok: true, why: "That is your shield." },
+        ];
+        let idx = 0;
+        const box = el("div", { class: "guess-card" });
+        const cheer = el("p", { class: "cheer", "aria-live": "polite" });
+
+        function draw() {
+          box.innerHTML = "";
+          cheer.textContent = "";
+          if (idx >= cards.length) { finish(); return; }
+          const c = cards[idx];
+          box.appendChild(el("p", { class: "reflect-q", text: c.text }));
+          const row = el("div", { class: "guess-btns" });
+          [["Smart move", true], ["Danger zone", false]].forEach((opt) => {
+            const btn = el("button", { class: "big-btn ghost", type: "button", text: opt[0] });
+            btn.addEventListener("click", () => {
+              const right = opt[1] === c.ok;
+              cheer.classList.toggle("oops", !right);
+              cheer.textContent = (right ? "Yes. " : "Not quite. ") + (c.ok ? "Smart move. " : "Danger zone. ") + c.why;
+              if (right) sfx.pop(); else sfx.oops();
+              Array.from(row.querySelectorAll("button")).forEach((b) => { b.disabled = true; });
+              const next = el("button", { class: "big-btn green", type: "button", text: idx === cards.length - 1 ? "Done" : "Next card" });
+              next.addEventListener("click", () => { idx++; draw(); });
+              box.appendChild(el("p", { style: "text-align:center;margin-top:10px;" }, [next]));
+            });
+            row.appendChild(btn);
+          });
+          box.appendChild(row);
+        }
+        phase.appendChild(box);
+        phase.appendChild(cheer);
+        draw();
+      }
+      showPile();
       return wrap;
     },
   };
@@ -1392,7 +1892,7 @@
     const questOpen = state.badges.length === MODULES.length;
     const places = [
       { href: "#/kindness", cls: "kindness", title: "Kindness Corner", tag: "Give — just because", icon: "heart", locked: false },
-      { href: "#/bank", cls: "bank", title: "Penny Bank", tag: "Grows 1% every hour", icon: "bank", locked: false },
+      { href: "#/bank", cls: "bank", title: "Penny Bank", tag: "Town Grow", icon: "bank", locked: false },
       { href: "#/shop", cls: "shop", title: "Penny Shop", tag: "Dress up Penny", icon: "shop", locked: false },
       { href: "#/quest", cls: "quest" + (questOpen ? "" : " locked"), title: "Quest Castle", tag: questOpen ? (state.questDone ? "Conquered!" : "The final challenge") : "Earn all 9 badges", icon: "castle", locked: !questOpen },
     ];
@@ -1407,9 +1907,18 @@
 
     const hello = el("div", { class: "town-hello speech-bubble" });
     const helloCopy = el("p", { class: "town-hello-copy" });
-    helloCopy.append("Hi ", el("strong", { text: kidName() }), " " + state.avatar + "! Follow the glowing path. Every landmark pays Penny Coins you can bank, grow, or spend in my shop.");
+    helloCopy.append("Hi ", el("strong", { text: kidName() }));
     hello.appendChild(helloCopy);
     canvas.appendChild(hello);
+    const firstOpen = MODULES.find((m) => !state.badges.includes(m.id));
+    const nextMod = firstOpen || MODULES[MODULES.length - 1];
+    const chip = el("div", { class: "quest-chip" });
+    const chipLab = el("span", { class: "quest-chip-label" });
+    chipLab.append("Next: ", el("strong", { text: nextMod.title }));
+    const go = el("a", { class: "big-btn", href: "#/module/" + nextMod.id, text: "Go" });
+    chip.appendChild(chipLab);
+    chip.appendChild(go);
+    canvas.appendChild(chip);
 
     const trail = el("ol", { class: "trail", "aria-label": "Nine lesson landmarks on the path" });
     MODULES.forEach((m, i) => {
@@ -1433,9 +1942,18 @@
     });
     canvas.appendChild(trail);
 
-    const pennyBox = el("div", { class: "town-penny" });
+    const pennyBox = el("div", { class: "town-penny on-landmark" });
+    const dest = firstOpen || MODULES[0];
+    const destIdx = MODULES.findIndex((m) => m.id === dest.id);
+    pennyBox.style.left = dest.pos.x + "%";
+    pennyBox.style.top = dest.pos.y + "%";
     pennyBox.appendChild(pennyEl(110, "idle"));
-    canvas.appendChild(pennyBox);
+    const narrow = window.matchMedia && window.matchMedia("(max-width: 760px)").matches;
+    if (narrow && trail.children[destIdx]) {
+      trail.children[destIdx].appendChild(pennyBox);
+    } else {
+      canvas.appendChild(pennyBox);
+    }
 
     world.appendChild(canvas);
     app.appendChild(world);
@@ -1443,7 +1961,7 @@
     app.appendChild(buildDailyChallenge());
 
     const readRow = el("p", { style: "text-align:center;margin-top:14px;" });
-    readRow.appendChild(readBtn(() => "Hi there! Follow the glowing path. Every landmark pays Penny Coins you can bank, grow, or spend in my shop!"));
+    readRow.appendChild(readBtn(() => "Hi " + kidName() + ". Next: " + nextMod.title));
     app.appendChild(readRow);
   }
 
@@ -1566,11 +2084,11 @@
     const room = el("section", { class: "room room-bank" });
     room.appendChild(el("div", { class: "room-deco", html: "<div class=\"vault-door\" aria-hidden=\"true\"></div>" }));
     room.appendChild(el("p", { class: "crumbs", html: "<a href=\"#/\">Back to the path</a>" }));
-    room.appendChild(el("h1", { text: "Penny Bank" }));
-    room.appendChild(speechRow("Welcome to my bank, " + escapeHtml(kidName()) + "! Coins you keep here earn <strong>1% interest every hour</strong> — even while you sleep. Come back tomorrow and see the magic.", { expr: "talk", size: 100 }));
+    room.appendChild(el("h1", { text: "Town Grow" }));
+    room.appendChild(speechRow("This is game magic so town coins can grow while you play. It is not how a real bank pays interest. Real interest is slow. You learned that in <a href=\"#/module/banks-interest\">The Money Garden</a>.", { expr: "talk", size: 100 }));
 
     if (gained >= 1) {
-      room.appendChild(el("div", { class: "allowance-banner grow-banner", html: "While you were away, your savings grew by <strong>+" + Math.floor(gained) + " coins</strong> — that is interest!" }));
+      room.appendChild(el("div", { class: "allowance-banner grow-banner", html: "While you were away, Town Grow added <strong>+" + Math.floor(gained) + " coins</strong> — game magic, not a real bank." }));
       sfx.win();
     }
 
@@ -1603,7 +2121,7 @@
         state.coins -= amt;
         state.bank.balance += amt;
         cheer.classList.remove("oops");
-        cheer.textContent = "Deposited " + amt + " coins — watch them grow!";
+        cheer.textContent = "Deposited " + amt + " coins — Town Grow can add a little while you play.";
         sfx.coin();
       } else {
         const avail = Math.floor(state.bank.balance);
@@ -1627,7 +2145,7 @@
     ].forEach((b) => btnRow.appendChild(el("button", { class: "big-btn " + b.cls, type: "button", text: b.label, onclick: b.fn })));
     card.appendChild(btnRow);
     card.appendChild(cheer);
-    card.appendChild(el("div", { class: "hint", html: "<strong>Why does the bank pay you?</strong> Real banks pay interest too (a little slower!). Money you do not spend today quietly earns more money. Total interest earned here: <strong>" + Math.floor(state.bankEarned) + " coins</strong>." }));
+    card.appendChild(el("div", { class: "hint", html: "Town Grow is game magic so the shop still works. For the real, slow idea, open <a href=\"#/module/banks-interest\">The Money Garden</a>. Town Grow so far: <strong>" + Math.floor(state.bankEarned) + " coins</strong>." }));
     room.appendChild(card);
     app.appendChild(room);
     refresh();
@@ -1911,11 +2429,11 @@
     room.appendChild(el("p", { class: "subtitle", text: "Penny’s Money Adventure teaches personal finance to kids ages 7–12, designed visual-first for visual learners. Everything runs in the browser: no accounts, no ads, no data collection, and no real money anywhere. Progress is stored only on this device." }));
 
     const stats = el("div", { class: "info-card" });
-    stats.innerHTML = "<h3>This device’s adventurer</h3><p><strong>" + escapeHtml(kidName()) + "</strong> " + state.avatar + " · Badges: <strong>" + state.badges.length + "/9</strong> · Coins earned all-time: <strong>" + Math.floor(state.totalEarned) + "</strong> · Bank balance: <strong>" + Math.floor(state.bank.balance) + "</strong> · Interest earned: <strong>" + Math.floor(state.bankEarned) + "</strong> · Quest: <strong>" + (state.questDone ? "passed" : "not yet") + "</strong></p>";
+    stats.innerHTML = "<h3>This device’s adventurer</h3><p><strong>" + escapeHtml(kidName()) + "</strong> " + state.avatar + " · Badges: <strong>" + state.badges.length + "/9</strong> · Coins earned all-time: <strong>" + Math.floor(state.totalEarned) + "</strong> · Bank balance: <strong>" + Math.floor(state.bank.balance) + "</strong> · Town Grow: <strong>" + Math.floor(state.bankEarned) + "</strong> · Quest: <strong>" + (state.questDone ? "passed" : "not yet") + "</strong></p>";
     room.appendChild(stats);
 
     const eco = el("div", { class: "info-card" });
-    eco.innerHTML = "<h3>How the coin economy teaches</h3><p>Kids earn Penny Coins from lessons (+10 first time, +2 on replays), a daily allowance (+5), and badges (+5). They can deposit coins in the Penny Bank — which pays 1% interest per real hour, so returning tomorrow makes compound growth tangible — spend them in the Penny Shop (where expensive items become genuine savings goals), or give them away in the Kindness Corner. Each lesson also ends with a short <em>reflection</em> step, and a daily challenge resurfaces one past question to help it stick. It is the save/spend/give/earn cycle, practiced rather than described.</p>";
+    eco.innerHTML = "<h3>How the coin economy teaches</h3><p>Kids earn Penny Coins from lessons (+10 first time, +2 on replays), a daily allowance (+5), and badges (+5). They can deposit coins in the Penny Bank — Town Grow is game magic so coins can grow while they play. It is not interest. The real idea lives in The Money Garden — spend them in the Penny Shop (where expensive items become genuine savings goals), or give them away in the Kindness Corner. Each lesson also ends with a short <em>reflection</em> step, and a daily challenge resurfaces one past question to help it stick. It is the save/spend/give/earn cycle, practiced rather than described.</p>";
     room.appendChild(eco);
 
     const research = el("div", { class: "info-card" });
@@ -1937,7 +2455,7 @@
       "<li><strong>Give a small real allowance</strong> (even a few coins) and let your child split it across the jars themselves. Resist steering — mistakes are the lesson.</li>" +
       "<li><strong>Pick one real savings goal</strong> together and tape a picture of it to the SAVE jar. Add to it weekly and watch it fill.</li>" +
       "<li><strong>Choose who the SHARE jar helps</strong> — a charity, a sibling, a neighbor. Let them decide; don’t reward it.</li>" +
-      "<li><strong>Revisit weekly for a month.</strong> Habits form through repetition, not a single talk.</li></ol>";
+      "<li><strong>Revisit weekly for a month.</strong> Habits form through repetition, not a single talk.</li><li>Make change from a dollar for a treat that costs 40 cents.</li><li>When they tap in a game: that card is the same pile as cash.</li></ol>";
     const printBtn = el("button", { class: "big-btn gold no-print", type: "button", text: "Print this kit" });
     printBtn.addEventListener("click", () => {
       document.body.classList.add("print-kit-only");
@@ -2013,11 +2531,12 @@
     const hash = location.hash || "#/";
     const modMatch = hash.match(/^#\/module\/([\w-]+)/);
     const siteTitle = "Penny’s Money Adventure";
+    try {
     if (modMatch) {
       const mod = MODULES.find((m) => m.id === modMatch[1]);
       if (mod) { renderModule(app, mod); document.title = mod.title + " · " + siteTitle; return; }
     }
-    if (hash.startsWith("#/bank")) { renderBank(app); document.title = "Penny Bank · " + siteTitle; return; }
+    if (hash.startsWith("#/bank")) { renderBank(app); document.title = "Town Grow · " + siteTitle; return; }
     if (hash.startsWith("#/shop")) { renderShop(app); document.title = "Penny Shop · " + siteTitle; return; }
     if (hash.startsWith("#/kindness")) { renderKindness(app); document.title = "Kindness Corner · " + siteTitle; return; }
     if (hash.startsWith("#/quest")) { renderQuest(app); document.title = "Money Master Quest · " + siteTitle; return; }
@@ -2026,6 +2545,9 @@
     if (hash.startsWith("#/glossary")) { renderGlossary(app); document.title = "Money Words · " + siteTitle; return; }
     renderHome(app);
     document.title = siteTitle;
+    } finally {
+      syncTabBar();
+    }
   }
 
   function applyFontPref() {
@@ -2041,6 +2563,37 @@
     const icon = $("#soundIcon");
     if (t) t.setAttribute("aria-pressed", String(!!state.sound));
     if (icon) icon.textContent = state.sound ? "🔊" : "🔇";
+  }
+
+
+  function syncTabBar() {
+    const hash = location.hash || "#/";
+    document.querySelectorAll(".tab-link").forEach((a) => {
+      const tab = a.getAttribute("data-tab");
+      let on = false;
+      if (tab === "town") on = hash === "#/" || hash === "" || hash.startsWith("#/module") || hash.startsWith("#/quest") || hash.startsWith("#/certificate");
+      else on = hash.startsWith("#/" + tab);
+      a.classList.toggle("on", on);
+    });
+  }
+
+  function setupMoreMenu() {
+    const btn = document.getElementById("moreToggle");
+    const pop = document.getElementById("morePop");
+    if (!btn || !pop || btn.dataset.ready) return;
+    btn.dataset.ready = "1";
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = pop.hasAttribute("hidden");
+      if (open) pop.removeAttribute("hidden");
+      else pop.setAttribute("hidden", "");
+      btn.setAttribute("aria-expanded", String(open));
+    });
+    document.addEventListener("click", () => {
+      pop.setAttribute("hidden", "");
+      btn.setAttribute("aria-expanded", "false");
+    });
+    pop.addEventListener("click", (e) => e.stopPropagation());
   }
 
   /* ---------- boot ---------- */
@@ -2066,6 +2619,7 @@
   const walletCoin = $(".wallet-coin");
   if (walletCoin) walletCoin.innerHTML = coinSVG(28);
 
+  setupMoreMenu();
   applyFontPref();
   applySoundPref();
   refreshHeaderPenny();

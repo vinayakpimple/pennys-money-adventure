@@ -8,7 +8,7 @@
   <title>Penny’s Money Adventure</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
@@ -25,13 +25,13 @@
     </a>
 
     <div class="topbar-tools">
-      <div class="wallet-chip" id="walletChip" aria-live="polite">
+      <div class="hud-pill wallet-chip" id="walletChip" aria-live="polite">
         <span class="wallet-coin" aria-hidden="true"></span>
         <span class="wallet-count" id="coinCount">0</span>
         <span class="sr-only">Penny coins in wallet</span>
       </div>
 
-      <div class="progress-jar" title="Badges collected" aria-label="Lesson badges">
+      <div class="hud-pill progress-jar" title="Badges collected" aria-label="Lesson badges">
         <div class="jar-glass">
           <div class="jar-fill" id="jarFill"></div>
         </div>
@@ -39,8 +39,15 @@
       </div>
 
       <nav class="top-nav" aria-label="More">
-        <a class="nav-link" href="#/glossary">Words</a>
-        <a class="nav-link" href="#/parents">Grown-ups</a>
+        <div class="more-wrap">
+          <button class="icon-btn more-btn" id="moreToggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="morePop" aria-label="More pages">
+            <span aria-hidden="true">...</span>
+          </button>
+          <div class="more-pop" id="morePop" hidden>
+            <a class="nav-link" href="#/glossary">Words</a>
+            <a class="nav-link" href="#/parents">Grown-ups</a>
+          </div>
+        </div>
         <button class="icon-btn" id="soundToggle" type="button" aria-pressed="true" aria-label="Sound on">
           <span id="soundIcon" aria-hidden="true">🔊</span>
         </button>
@@ -67,6 +74,25 @@
       <p class="town-fallback-note">Follow the glowing path. Nine landmarks, four town buildings, and Penny waiting at the start.</p>
     </section>
   </main>
+
+  <nav class="tabbar" aria-label="Town places">
+    <a class="tab-link on" href="#/" data-tab="town">
+      <span class="tab-ico" aria-hidden="true">1</span>
+      <span>Town</span>
+    </a>
+    <a class="tab-link" href="#/shop" data-tab="shop">
+      <span class="tab-ico" aria-hidden="true">2</span>
+      <span>Shop</span>
+    </a>
+    <a class="tab-link" href="#/bank" data-tab="bank">
+      <span class="tab-ico" aria-hidden="true">3</span>
+      <span>Bank</span>
+    </a>
+    <a class="tab-link" href="#/kindness" data-tab="kindness">
+      <span class="tab-ico" aria-hidden="true">4</span>
+      <span>Kindness</span>
+    </a>
+  </nav>
 
   <footer class="site-foot">
     <p>Made for curious kids. No ads, no sign-ups, no real money — just learning.</p>
