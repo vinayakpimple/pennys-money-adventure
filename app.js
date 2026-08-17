@@ -1413,6 +1413,7 @@
         class: "landmark " + st + (i % 2 ? " label-up" : " label-down"),
         href: "#/module/" + m.id,
         style: "left:" + m.pos.x + "%;top:" + m.pos.y + "%;",
+        "aria-label": (i + 1) + ". " + m.title,
       });
       const btn = el("span", { class: "landmark-btn" });
       btn.innerHTML = "<span class=\"landmark-num\">" + (i + 1) + "</span>" + iconSVG(m.icon) +
