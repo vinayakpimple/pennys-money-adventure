@@ -1,66 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Penny's Money Adventure</title>
-  <meta name="description" content="A visual-first personal finance adventure for kids: earn, save, spend, and grow Penny Coins across 9 interactive lessons.">
-  <meta name="theme-color" content="#f7a8c4">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#5aa8d6">
+  <meta name="description" content="Penny's Money Adventure — a picture-book money game for kids ages 7–12. No ads, no accounts, no real money.">
+  <title>Penny’s Money Adventure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="icon-192.png" type="image/png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
-  <header class="topbar">
-    <a href="#/" class="brand" aria-label="Penny's Money Adventure — home">
-      <svg class="penny" viewBox="0 0 120 100" role="img" aria-label="Penny the piggy bank mascot">
-        <ellipse cx="60" cy="58" rx="44" ry="34" fill="#f7a8c4"/>
-        <ellipse cx="60" cy="58" rx="44" ry="34" fill="none" stroke="#d97ba3" stroke-width="3"/>
-        <rect x="48" y="20" width="24" height="8" rx="4" fill="#d97ba3"/>
-        <circle class="penny-eye" cx="38" cy="52" r="5" fill="#3a2b33"/>
-        <circle cx="40" cy="50" r="1.6" fill="#fff"/>
-        <ellipse cx="88" cy="60" rx="12" ry="10" fill="#f2c1d6" stroke="#d97ba3" stroke-width="3"/>
-        <circle cx="84" cy="59" r="2.4" fill="#b05c86"/>
-        <circle cx="92" cy="59" r="2.4" fill="#b05c86"/>
-        <path d="M28 34 Q22 22 34 24 Q38 30 32 36 Z" fill="#f7a8c4" stroke="#d97ba3" stroke-width="3"/>
-        <rect x="34" y="88" width="10" height="8" rx="3" fill="#d97ba3"/>
-        <rect x="72" y="88" width="10" height="8" rx="3" fill="#d97ba3"/>
-        <circle cx="58" cy="24" r="9" fill="#f5b301" stroke="#c98f00" stroke-width="2"/>
-        <text x="58" y="28" text-anchor="middle" font-size="11" font-weight="bold" fill="#8a6200">$</text>
-      </svg>
-      <span class="brand-name">Penny's Money Adventure</span>
+  <a class="skip-link" href="#app">Skip to adventure</a>
+
+  <header class="topbar" role="banner">
+    <a class="brand" href="#/" aria-label="Penny’s Money Adventure home">
+      <span class="brand-penny" id="headerPenny" aria-hidden="true"></span>
+      <span class="brand-text">
+        <span class="brand-kicker">A picture-book money game</span>
+        <span class="brand-title">Penny’s Money Adventure</span>
+      </span>
     </a>
 
-    <div class="topbar-right">
-      <a href="#/bank" class="wallet-chip" id="walletChip" title="Your Penny Coins — tap to visit the bank">
-        <span role="img" aria-label="coin">🪙</span>
-        <b id="coinCount" aria-live="polite">0</b>
-      </a>
-      <div class="progress-jar" id="progressJar" title="Your adventure progress">
-        <div class="jar">
+    <div class="topbar-tools">
+      <div class="wallet-chip" id="walletChip" aria-live="polite">
+        <span class="wallet-coin" aria-hidden="true"></span>
+        <span class="wallet-count" id="coinCount">0</span>
+        <span class="sr-only">Penny coins in wallet</span>
+      </div>
+
+      <div class="progress-jar" title="Badges collected" aria-label="Lesson badges">
+        <div class="jar-glass">
           <div class="jar-fill" id="jarFill"></div>
         </div>
         <span class="jar-label" id="jarLabel">0 / 9</span>
       </div>
-      <nav class="topnav" aria-label="Site">
-        <a href="#/glossary" class="nav-btn" title="Picture dictionary"><span role="img" aria-label="Glossary">📖</span><span class="nav-word">Words</span></a>
-        <a href="#/parents" class="nav-btn" title="For parents and teachers"><span role="img" aria-label="Parents">🧑‍🏫</span><span class="nav-word">Grown-ups</span></a>
-        <button class="nav-btn" id="soundToggle" title="Sounds on or off" aria-pressed="true"><span id="soundIcon" role="img" aria-label="Sound">🔊</span></button>
-        <button class="nav-btn" id="fontToggle" title="Easy-read letters" aria-pressed="false"><span role="img" aria-label="Easy read font">🔤</span><span class="nav-word">Easy read</span></button>
+
+      <nav class="top-nav" aria-label="More">
+        <a class="nav-link" href="#/glossary">Words</a>
+        <a class="nav-link" href="#/parents">Grown-ups</a>
+        <button class="icon-btn" id="soundToggle" type="button" aria-pressed="true" aria-label="Sound on">
+          <span id="soundIcon" aria-hidden="true">🔊</span>
+        </button>
+        <button class="icon-btn" id="fontToggle" type="button" aria-pressed="false" aria-label="Easy-read text">
+          <span aria-hidden="true">Aa</span>
+        </button>
       </nav>
     </div>
   </header>
 
-  <main id="app" tabindex="-1"></main>
+  <main id="app" class="app" tabindex="-1">
+    <section class="town-world" aria-label="Penny Town winding path">
+      <svg class="town-skyline" viewBox="0 0 1200 800" role="img" aria-label="Illustrated town with a winding adventure path">
+        <defs>
+          <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#7ec4ea"/>
+            <stop offset="55%" stop-color="#c9e7f7"/>
+            <stop offset="100%" stop-color="#ffe7b8"/>
+          </linearGradient>
+        </defs>
+        <rect width="1200" height="800" fill="url(#skyG)"/>
+        <path class="winding-path" d="M80 720 C180 680 220 620 160 540 C100 460 280 420 360 480 C440 540 560 500 620 400 C680 300 800 360 880 280 C960 200 860 140 780 120" fill="none" stroke="#e8c48a" stroke-width="42" stroke-linecap="round"/>
+      </svg>
+      <p class="town-fallback-note">Follow the glowing path. Nine landmarks, four town buildings, and Penny waiting at the start.</p>
+    </section>
+  </main>
 
-  <footer class="footer">
-    <p><span role="img" aria-label="sparkles">✨</span> Made for curious kids. No ads, no sign-ups, no real money — just learning! <span role="img" aria-label="sparkles">✨</span></p>
+  <footer class="site-foot">
+    <p>Made for curious kids. No ads, no sign-ups, no real money — just learning.</p>
   </footer>
 
-  <div id="confetti-layer" aria-hidden="true"></div>
-  <div id="coin-layer" aria-hidden="true"></div>
-  <script src="audio-manifest.js"></script>
+  <div id="coin-layer" class="fx-layer" aria-hidden="true"></div>
+  <div id="confetti-layer" class="fx-layer" aria-hidden="true"></div>
+
   <script src="app.js"></script>
 </body>
 </html>
