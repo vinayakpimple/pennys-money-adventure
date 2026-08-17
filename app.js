@@ -1405,6 +1405,12 @@
       buildings.appendChild(a);
     });
 
+    const hello = el("div", { class: "town-hello speech-bubble" });
+    const helloCopy = el("p", { class: "town-hello-copy" });
+    helloCopy.append("Hi ", el("strong", { text: kidName() }), " " + state.avatar + "! Follow the glowing path. Every landmark pays Penny Coins you can bank, grow, or spend in my shop.");
+    hello.appendChild(helloCopy);
+    canvas.appendChild(hello);
+
     const trail = el("ol", { class: "trail", "aria-label": "Nine lesson landmarks on the path" });
     MODULES.forEach((m, i) => {
       const st = lessonState(m, i);
@@ -1430,12 +1436,6 @@
     const pennyBox = el("div", { class: "town-penny" });
     pennyBox.appendChild(pennyEl(110, "idle"));
     canvas.appendChild(pennyBox);
-
-    const hello = el("div", { class: "town-hello speech-bubble" });
-    const helloCopy = el("p", { class: "town-hello-copy" });
-    helloCopy.append("Hi ", el("strong", { text: kidName() }), " " + state.avatar + "! Follow the glowing path. Every landmark pays Penny Coins you can bank, grow, or spend in my shop.");
-    hello.appendChild(helloCopy);
-    canvas.appendChild(hello);
 
     world.appendChild(canvas);
     app.appendChild(world);

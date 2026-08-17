@@ -279,21 +279,34 @@ a { color: var(--spend); }
 .town-buildings {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  justify-items: center;
+  justify-items: stretch;
   align-items: start;
-  gap: 12px 10px;
+  gap: 12px 16px;
   width: 100%;
+  max-width: none;
   margin: 16px 0 0;
 }
 .building {
   position: static;
   transform: none;
-  width: auto;
-  max-width: 100%;
+  width: 100%;
+  max-width: none;
   z-index: 4;
   pointer-events: auto;
 }
 .building-btn { width: 110px; height: 110px; border-radius: 22px; }
+@media (min-width: 761px) {
+  .town-buildings .building-btn {
+    width: 100%;
+    height: clamp(110px, 14vw, 160px);
+    max-width: none;
+    border-radius: 22px;
+  }
+  .town-buildings .building-btn svg:first-child {
+    width: 56px;
+    height: 56px;
+  }
+}
 .building.bank .building-btn { background: var(--save-soft); border-color: var(--save); }
 .building.shop .building-btn { background: var(--spend-soft); border-color: var(--spend); }
 .building.kindness .building-btn { background: var(--share-soft); border-color: var(--share); }
@@ -416,10 +429,17 @@ a { color: var(--spend); }
   .color-legend { position: static; margin-bottom: 8px; }
   .town-buildings {
     grid-template-columns: 1fr 1fr;
+    justify-items: center;
     gap: 10px;
     margin-top: 14px;
   }
-  .building-btn { width: 84px; height: 84px; margin: 0 auto; }
+  .town-buildings .building { width: auto; max-width: 100%; }
+  .building-btn,
+  .town-buildings .building-btn {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto;
+  }
   .town-canvas .trail {
     position: relative;
     display: flex;
@@ -470,12 +490,16 @@ a { color: var(--spend); }
     display: block;
     margin-top: 12px;
   }
+  .color-legend { order: 0; }
   .town-hello {
     position: static;
     width: auto;
     display: block;
-    margin-top: 12px;
+    margin: 4px 0 14px;
+    order: 1;
   }
+  .town-canvas .trail { order: 2; }
+  .town-penny { order: 3; }
   .town-hello-copy { margin: 0; }
   .daily-board { position: static; width: auto; margin-top: 14px; }
 }
