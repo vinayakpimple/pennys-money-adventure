@@ -145,7 +145,7 @@ a { color: var(--spend); }
 .icon-btn[aria-pressed="true"] { background: var(--save-soft); border-color: var(--save); }
 
 /* ---------- layout ---------- */
-.app { max-width: 1180px; margin: 0 auto; padding: 18px 16px 108px; outline: none; }
+.app { max-width: 1180px; margin: 0 auto; padding: 18px 16px 24px; outline: none; }
 .site-foot { text-align: center; padding: 20px 16px 40px; color: var(--ink-soft); font-size: 0.95rem; }
 .fx-layer { position: fixed; inset: 0; pointer-events: none; z-index: 70; overflow: hidden; }
 
@@ -206,6 +206,7 @@ a { color: var(--spend); }
   aspect-ratio: 3 / 2;
   min-height: 800px;
 }
+
 .town-bg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .winding-path { filter: drop-shadow(0 2px 0 #c9a05e); }
 .path-glow {
@@ -905,8 +906,29 @@ a { color: var(--spend); }
 .more-pop[hidden] { display: none; }
 .more-pop .nav-link { width: 100%; justify-content: flex-start; background: transparent; }
 
+/* Tab bar sits in document flow at the bottom of the viewport so it
+   cannot cover landmark 1 / Penny. Header keeps its natural height
+   (390 wrap is not clipped). Map / buildings / daily scroll in #app. */
+html, body { height: 100%; }
+body {
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.topbar { flex-shrink: 0; }
+.app {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  width: 100%;
+}
 .tabbar {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
+  position: relative;
+  left: auto; right: auto; bottom: auto;
+  z-index: 45;
+  flex-shrink: 0;
   display: flex; justify-content: space-around; align-items: stretch;
   gap: 4px;
   padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
@@ -931,7 +953,38 @@ a { color: var(--spend); }
 }
 .tab-link.on .tab-ico { background: var(--coral); color: #fff; border-color: var(--coral); }
 
-.site-foot { padding-bottom: 88px; }
+.site-foot {
+  /* Keep the tab bar on the viewport edge; footer copy is not part of town chrome. */
+  position: absolute;
+  width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+@media (min-width: 761px) {
+  .town-world { min-height: 0; }
+  .town-canvas {
+    --map-safe-bottom: calc(160px + env(safe-area-inset-bottom, 0px));
+    min-height: 0;
+    padding-bottom: var(--map-safe-bottom);
+  }
+  .town-canvas .town-bg {
+    inset: auto;
+    top: 0; left: 0; right: 0;
+    bottom: var(--map-safe-bottom);
+    height: auto;
+  }
+  .town-canvas .trail {
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: calc(100% - var(--map-safe-bottom));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .town-canvas > .town-penny,
+  .town-canvas > .town-penny.on-landmark {
+    transform: translate(-30%, calc(-118% - var(--map-safe-bottom)));
+  }
+}
 
 .us-coins { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 10px 0; }
 .us-coin {
