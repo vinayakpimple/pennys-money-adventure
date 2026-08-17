@@ -315,14 +315,19 @@ a { color: var(--spend); }
 .l-share { color: var(--share-ink); }
 
 .daily-board {
-  position: absolute; right: 3%; bottom: 6%; z-index: 6;
-  width: min(320px, 42vw);
+  position: static;
+  width: min(560px, 100%);
+  margin: 16px auto 0;
   background: #f6e2b0;
   border: 6px solid #b8894a;
   border-radius: 8px 8px 14px 14px;
   box-shadow: 0 10px 0 rgba(80,50,20,0.18);
   padding: 12px 14px;
+  z-index: 1;
 }
+.landmark.label-up { flex-direction: column-reverse; }
+.landmark.label-up .landmark-copy { margin-top: 0; margin-bottom: 2px; }
+.landmark-title { max-width: 130px; }
 .daily-board.done { background: #d8f3e4; border-color: var(--save); }
 .daily-head { font-family: var(--font-display); font-weight: 700; margin-bottom: 6px; }
 .daily-reward { float: right; background: var(--gold); padding: 2px 8px; border-radius: 999px; font-size: 0.78rem; }

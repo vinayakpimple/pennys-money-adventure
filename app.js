@@ -301,7 +301,7 @@
     {
       id: "what-is-money", title: "What Is Money?", icon: "coin", color: "#8e7cf2",
       tagline: "Where did money come from?",
-      pos: { x: 16, y: 91 },
+      pos: { x: 15.2, y: 84.1 },
       bubble: "Long ago, there was no money at all. Tap the cards to travel through time!",
       intro: [
         { icon: "apple", text: "Long ago, people swapped things. A chicken for some corn!" },
@@ -319,7 +319,7 @@
     {
       id: "needs-wants", title: "Needs vs. Wants", icon: "apple", color: "#e05656",
       tagline: "Must-haves and nice-to-haves",
-      pos: { x: 30, y: 72 },
+      pos: { x: 14.9, y: 70.2 },
       bubble: "A NEED keeps you healthy and safe. A WANT is fun but you can live without it. Can you sort them?",
       intro: [
         { icon: "apple", text: "NEEDS are things we must have to live — food, water, a home." },
@@ -337,7 +337,7 @@
     {
       id: "earning", title: "Earning Money", icon: "work", color: "#3b7dd8",
       tagline: "Work turns into money!",
-      pos: { x: 16, y: 64 },
+      pos: { x: 19.4, y: 58.0 },
       bubble: "Money does not fall from the sky — people EARN it by helping and working. Try some jobs!",
       intro: [
         { icon: "work", text: "Grown-ups earn money by doing jobs that help people." },
@@ -355,7 +355,7 @@
     {
       id: "three-jars", title: "The 3 Jars", icon: "jars", color: "#2e9d5c",
       tagline: "Save, Spend, Share",
-      pos: { x: 30, y: 56 },
+      pos: { x: 32.9, y: 63.1 },
       bubble: "When money arrives, split it into 3 jars: green to SAVE, blue to SPEND, yellow to SHARE. You choose how!",
       intro: [
         { icon: "bank", text: "The green SAVE jar grows your money for big dreams." },
@@ -373,7 +373,7 @@
     {
       id: "budgeting", title: "Make a Budget", icon: "chart", color: "#f2b41c",
       tagline: "A plan for every coin",
-      pos: { x: 42, y: 62 },
+      pos: { x: 46.9, y: 60.3 },
       bubble: "A budget is a PLAN for your money before you spend it. You have $10 — plan every dollar!",
       intro: [
         { icon: "goal", text: "A budget is like a map — it tells your money where to go." },
@@ -391,7 +391,7 @@
     {
       id: "banks-interest", title: "The Money Garden", icon: "plant", color: "#2e9d5c",
       tagline: "How banks grow your money",
-      pos: { x: 54, y: 50 },
+      pos: { x: 57.1, y: 45.0 },
       bubble: "A bank is a super-safe piggy bank. It even pays you a little extra — called INTEREST — for keeping money there. Watch it grow!",
       intro: [
         { icon: "bank", text: "A bank keeps your money safe — safer than under your bed!" },
@@ -409,7 +409,7 @@
     {
       id: "goals", title: "Super Saver Goals", icon: "goal", color: "#3b7dd8",
       tagline: "Wait for it... it is worth it!",
-      pos: { x: 64, y: 40 },
+      pos: { x: 71.0, y: 39.7 },
       bubble: "Big things cost more than one allowance. Pick a dream, save week by week, and watch yourself get there!",
       intro: [
         { icon: "goal", text: "See something big you want? That is a savings goal!" },
@@ -427,7 +427,7 @@
     {
       id: "lemonade", title: "Lemonade Boss", icon: "lemon", color: "#f2b41c",
       tagline: "Run your own stand!",
-      pos: { x: 78, y: 36 },
+      pos: { x: 76.0, y: 25.6 },
       bubble: "You are the boss of a lemonade stand! Each cup costs you 20¢ to make. Pick a price and see what happens!",
       intro: [
         { icon: "lemon", text: "Making things costs money. Lemons, water, cups: 20¢ per cup." },
@@ -445,7 +445,7 @@
     {
       id: "digital-safety", title: "Money Safety Shield", icon: "shield", color: "#e05656",
       tagline: "Be smart with digital money",
-      pos: { x: 70, y: 18 },
+      pos: { x: 65.8, y: 16.2 },
       bubble: "Money lives on screens now too! Flip each card and guess: smart move or danger zone?",
       intro: [
         { icon: "shop", text: "Money can be invisible — on cards, phones, and games." },
@@ -1410,7 +1410,7 @@
     MODULES.forEach((m, i) => {
       const st = lessonState(m, i);
       const a = el("a", {
-        class: "landmark " + st,
+        class: "landmark " + st + (i % 2 ? " label-up" : " label-down"),
         href: "#/module/" + m.id,
         style: "left:" + m.pos.x + "%;top:" + m.pos.y + "%;",
       });
@@ -1435,9 +1435,9 @@
     hello.append("Hi ", el("strong", { text: kidName() }), " " + state.avatar + "! Follow the glowing path. Every landmark pays Penny Coins you can bank, grow, or spend in my shop.");
     canvas.appendChild(hello);
 
-    canvas.appendChild(buildDailyChallenge());
     world.appendChild(canvas);
     app.appendChild(world);
+    app.appendChild(buildDailyChallenge());
 
     const readRow = el("p", { style: "text-align:center;margin-top:14px;" });
     readRow.appendChild(readBtn(() => "Hi there! Follow the glowing path. Every landmark pays Penny Coins you can bank, grow, or spend in my shop!"));
