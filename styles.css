@@ -85,16 +85,18 @@ a { color: var(--spend); }
   background: rgba(255, 248, 238, 0.88);
   backdrop-filter: blur(10px);
   border-bottom: 3px solid rgba(58, 39, 24, 0.08);
+  flex-wrap: wrap;
 }
 .brand {
-  display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; min-width: 0;
+  display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit;
+  min-width: 0; flex: 1 1 180px; overflow: hidden;
 }
 .brand-penny { width: 56px; height: 62px; flex: 0 0 auto; }
 .brand-penny .penny-wrap { width: 56px !important; }
-.brand-text { display: flex; flex-direction: column; min-width: 0; }
+.brand-text { display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
 .brand-kicker { font-size: 0.72rem; color: var(--ink-soft); letter-spacing: 0.04em; }
 .brand-title { font-size: 1.05rem; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.topbar-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+.topbar-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; flex: 0 1 auto; }
 .wallet-chip {
   display: flex; align-items: center; gap: 6px;
   background: #fff; border: 3px solid #f0d48a; border-radius: 999px;
@@ -206,6 +208,7 @@ a { color: var(--spend); }
   text-decoration: none; color: inherit;
   display: flex; flex-direction: column; align-items: center; gap: 8px;
   z-index: 4;
+  pointer-events: none;
 }
 .landmark-btn, .building-btn {
   width: 92px; height: 92px; border-radius: 50%;
@@ -213,6 +216,8 @@ a { color: var(--spend); }
   box-shadow: 0 8px 0 rgba(58,39,24,0.18), 0 0 0 3px rgba(255,255,255,0.4);
   display: grid; place-items: center;
   padding: 0; position: relative;
+  z-index: 5;
+  pointer-events: auto;
   transition: transform 0.15s var(--ease);
 }
 .landmark:hover .landmark-btn,
@@ -246,6 +251,8 @@ a { color: var(--spend); }
   gap: 8px;
   width: 100%;
   margin-top: 2px;
+  pointer-events: none;
+  z-index: 1;
 }
 .landmark-title, .building-title {
   display: block;
@@ -254,6 +261,7 @@ a { color: var(--spend); }
   text-align: center; background: rgba(255,248,238,0.92);
   padding: 4px 10px; border-radius: 999px; line-height: 1.25;
   box-shadow: 0 2px 0 rgba(58,39,24,0.08);
+  pointer-events: none;
 }
 .landmark-tag {
   display: block;
@@ -264,6 +272,7 @@ a { color: var(--spend); }
   text-align: center;
   max-width: 140px;
   margin: 0;
+  pointer-events: none;
 }
 .building { width: min(190px, 32vw); z-index: 4; }
 .building-btn { width: 110px; height: 110px; border-radius: 22px; }
@@ -364,6 +373,9 @@ a { color: var(--spend); }
     border-radius: 999px;
     box-shadow: 0 0 0 6px rgba(255, 210, 70, 0.25);
   }
+  .landmark, .building {
+    pointer-events: auto;
+  }
   .landmark {
     position: static; transform: none; width: auto;
     flex-direction: row; align-items: center; gap: 12px;
@@ -377,6 +389,27 @@ a { color: var(--spend); }
   }
   .town-hello { width: auto; }
   .daily-board { position: static; width: auto; margin-top: 14px; }
+}
+
+/* narrow header: hide the long tagline, wrap tools so title cannot overlap nav */
+@media (max-width: 639px) {
+  .brand-kicker { display: none; }
+  .brand-title { font-size: 0.98rem; }
+}
+@media (max-width: 480px) {
+  .topbar {
+    align-items: flex-start;
+    row-gap: 8px;
+  }
+  .brand {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+  .topbar-tools {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .nav-link { padding: 0 10px; font-size: 0.88rem; }
 }
 
 /* ---------- rooms ---------- */
