@@ -26,11 +26,16 @@
   --gold: #f2b41c;
   --castle: #8e7cf2;
   --danger: #e05656;
+  --coral: #FF5A5F;
+  --coral-deep: #e0444a;
+  --glass: rgba(255, 255, 255, 0.38);
+  --glass-strong: rgba(255, 255, 255, 0.55);
+  --glass-edge: rgba(255, 255, 255, 0.72);
   --shadow: 0 10px 28px rgba(58, 39, 24, 0.14);
   --radius: 22px;
   --hit: 48px;
-  --font-display: "Fredoka", "Nunito", system-ui, sans-serif;
-  --font-body: "Source Serif 4", Georgia, serif;
+  --font-display: "Fredoka", system-ui, sans-serif;
+  --font-body: "Fredoka", system-ui, sans-serif;
   --ease: cubic-bezier(.2, .8, .2, 1);
 }
 
@@ -49,8 +54,8 @@ body {
   background-attachment: fixed;
 }
 body.easy-read {
-  --font-display: "Atkinson Hyperlegible", "Comic Neue", system-ui, sans-serif;
-  --font-body: "Atkinson Hyperlegible", "Comic Neue", system-ui, sans-serif;
+  --font-display: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", system-ui, sans-serif;
   font-size: 1.22rem;
   letter-spacing: 0.01em;
   word-spacing: 0.04em;
@@ -82,9 +87,10 @@ a { color: var(--spend); }
   position: sticky; top: 0; z-index: 40;
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
   padding: 10px 16px;
-  background: rgba(255, 248, 238, 0.88);
-  backdrop-filter: blur(10px);
-  border-bottom: 3px solid rgba(58, 39, 24, 0.08);
+  background: rgba(255, 248, 238, 0.52);
+  backdrop-filter: blur(18px) saturate(1.45);
+  -webkit-backdrop-filter: blur(18px) saturate(1.45);
+  border-bottom: 1px solid var(--glass-edge);
   flex-wrap: wrap;
 }
 .brand {
@@ -97,19 +103,27 @@ a { color: var(--spend); }
 .brand-kicker { font-size: 0.72rem; color: var(--ink-soft); letter-spacing: 0.04em; }
 .brand-title { font-size: 1.05rem; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .topbar-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; flex: 0 1 auto; }
-.wallet-chip {
+.hud-pill, .wallet-chip, .progress-jar {
   display: flex; align-items: center; gap: 6px;
-  background: #fff; border: 3px solid #f0d48a; border-radius: 999px;
-  padding: 4px 12px 4px 6px; font-family: var(--font-display); font-weight: 700;
-  box-shadow: 0 4px 0 #e0c06a;
+  background: var(--glass);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  border: 1px solid var(--glass-edge);
+  border-radius: 999px;
+  padding: 4px 12px 4px 6px;
+  font-family: var(--font-display); font-weight: 700;
+  box-shadow: 0 8px 20px rgba(58, 39, 24, 0.08), inset 0 1px 0 rgba(255,255,255,0.85);
+}
+.wallet-chip {
+  padding: 4px 12px 4px 6px;
 }
 .wallet-chip.bump { animation: bump 0.4s var(--ease); }
 .wallet-coin { width: 28px; height: 28px; }
 .wallet-count { font-size: 1.1rem; }
-.progress-jar { display: flex; align-items: center; gap: 6px; }
+.progress-jar { padding: 4px 12px 4px 8px; }
 .jar-glass {
-  width: 22px; height: 32px; border: 3px solid #8ecf9a; border-radius: 0 0 8px 8px;
-  background: rgba(255,255,255,0.6); position: relative; overflow: hidden;
+  width: 22px; height: 22px; border: 1px solid var(--glass-edge); border-radius: 999px;
+  background: rgba(255,255,255,0.35); position: relative; overflow: hidden;
 }
 .jar-fill {
   position: absolute; left: 0; right: 0; bottom: 0; height: 0%;
@@ -131,7 +145,7 @@ a { color: var(--spend); }
 .icon-btn[aria-pressed="true"] { background: var(--save-soft); border-color: var(--save); }
 
 /* ---------- layout ---------- */
-.app { max-width: 1180px; margin: 0 auto; padding: 18px 16px 80px; outline: none; }
+.app { max-width: 1180px; margin: 0 auto; padding: 18px 16px 24px; outline: none; }
 .site-foot { text-align: center; padding: 20px 16px 40px; color: var(--ink-soft); font-size: 0.95rem; }
 .fx-layer { position: fixed; inset: 0; pointer-events: none; z-index: 70; overflow: hidden; }
 
@@ -192,6 +206,7 @@ a { color: var(--spend); }
   aspect-ratio: 3 / 2;
   min-height: 800px;
 }
+
 .town-bg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .winding-path { filter: drop-shadow(0 2px 0 #c9a05e); }
 .path-glow {
@@ -315,11 +330,12 @@ a { color: var(--spend); }
 
 .town-penny {
   position: absolute;
-  left: 0.4%;
-  bottom: 0.6%;
+  left: 15%;
+  top: 90%;
   width: min(88px, 11.5vw);
-  z-index: 2;
+  z-index: 3;
   pointer-events: none;
+  transform: translate(-30%, -118%);
 }
 .town-penny .penny-wrap { width: 100% !important; }
 .town-penny .penny-portrait { width: 100%; height: auto; }
@@ -331,9 +347,51 @@ a { color: var(--spend); }
   left: 16px;
   top: 48px;
   bottom: auto;
-  width: min(300px, 36vw);
-  z-index: 2;
+  width: auto;
+  max-width: min(280px, 42vw);
+  z-index: 6;
   pointer-events: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--glass);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid var(--glass-edge);
+  box-shadow: 0 8px 20px rgba(58, 39, 24, 0.08);
+}
+.town-hello.speech-bubble::after { display: none; }
+.town-hello-copy { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; white-space: nowrap; }
+.quest-chip {
+  position: absolute;
+  left: 16px;
+  top: 88px;
+  z-index: 6;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--glass-strong);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  border: 1px solid var(--glass-edge);
+  border-radius: 999px;
+  padding: 6px 6px 6px 14px;
+  box-shadow: 0 8px 20px rgba(58, 39, 24, 0.08);
+  pointer-events: auto;
+  max-width: min(360px, 46vw);
+}
+.quest-chip-label {
+  font-family: var(--font-display); font-weight: 600; font-size: 0.92rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.quest-chip .big-btn {
+  min-height: 40px; padding: 6px 16px; border-radius: 999px;
+  background: var(--coral); box-shadow: 0 4px 0 var(--coral-deep);
+  font-size: 0.92rem;
+}
+.quest-chip .big-btn:active { box-shadow: 0 1px 0 var(--coral-deep); }
+.color-legend {
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-edge);
 }
 .color-legend {
   position: absolute; left: 16px; top: 14px; z-index: 6;
@@ -823,3 +881,180 @@ a { color: var(--spend); }
 @media (prefers-reduced-motion: reduce) {
   .penny-talk .penny-portrait, .penny-cheer { animation: none; }
 }
+
+
+/* ---------- liquid glass chrome ---------- */
+.icon-btn {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-edge);
+}
+.more-wrap { position: relative; }
+.more-pop {
+  position: absolute; right: 0; top: calc(100% + 6px);
+  display: flex; flex-direction: column; gap: 4px;
+  min-width: 140px; padding: 8px;
+  background: var(--glass-strong);
+  backdrop-filter: blur(18px) saturate(1.5);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  border: 1px solid var(--glass-edge);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  z-index: 50;
+}
+.more-pop[hidden] { display: none; }
+.more-pop .nav-link { width: 100%; justify-content: flex-start; background: transparent; }
+
+/* Tab bar sits in document flow at the bottom of the viewport so it
+   cannot cover landmark 1 / Penny. Header keeps its natural height
+   (390 wrap is not clipped). Map / buildings / daily scroll in #app. */
+html, body { height: 100%; }
+body {
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.topbar { flex-shrink: 0; }
+.app {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  width: 100%;
+}
+.tabbar {
+  position: relative;
+  left: auto; right: auto; bottom: auto;
+  z-index: 45;
+  flex-shrink: 0;
+  display: flex; justify-content: space-around; align-items: stretch;
+  gap: 4px;
+  padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+  background: rgba(255, 248, 238, 0.48);
+  backdrop-filter: blur(20px) saturate(1.55);
+  -webkit-backdrop-filter: blur(20px) saturate(1.55);
+  border-top: 1px solid var(--glass-edge);
+}
+.tab-link {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px; min-height: 52px; text-decoration: none; color: var(--ink-soft);
+  font-family: var(--font-display); font-weight: 600; font-size: 0.78rem;
+  border-radius: 16px; padding: 4px 6px;
+}
+.tab-link.on { color: var(--coral); background: rgba(255, 90, 95, 0.12); }
+.tab-ico {
+  width: 22px; height: 22px; border-radius: 999px;
+  display: grid; place-items: center;
+  font-size: 0.72rem; font-weight: 700;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid var(--glass-edge);
+}
+.tab-link.on .tab-ico { background: var(--coral); color: #fff; border-color: var(--coral); }
+
+.site-foot {
+  /* Keep the tab bar on the viewport edge; footer copy is not part of town chrome. */
+  position: absolute;
+  width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
+}
+@media (min-width: 761px) {
+  .town-world { min-height: 0; }
+  .town-canvas {
+    --map-safe-bottom: calc(160px + env(safe-area-inset-bottom, 0px));
+    min-height: 0;
+    padding-bottom: var(--map-safe-bottom);
+  }
+  .town-canvas .town-bg {
+    inset: auto;
+    top: 0; left: 0; right: 0;
+    bottom: var(--map-safe-bottom);
+    height: auto;
+  }
+  .town-canvas .trail {
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: calc(100% - var(--map-safe-bottom));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .town-canvas > .town-penny,
+  .town-canvas > .town-penny.on-landmark {
+    transform: translate(-30%, calc(-118% - var(--map-safe-bottom)));
+  }
+}
+
+.us-coins { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 10px 0; }
+.us-coin {
+  min-width: 88px; min-height: 88px; border-radius: 50%;
+  border: 3px solid #ead7b2; background: #fff; font-family: var(--font-display);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-weight: 700;
+}
+.us-coin.penny { background: #f3c6a5; }
+.us-coin.nickel { background: #d8d8d4; }
+.us-coin.dime { background: #e8e4dc; }
+.us-coin.quarter { background: #dcd8d0; }
+.us-coin.dollar { background: #e8f3d8; border-radius: 18px; }
+.us-coin.open { box-shadow: 0 0 0 4px rgba(255, 90, 95, 0.25); }
+.coin-tray { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; min-height: 64px; margin: 8px 0; }
+.gray-card {
+  background: #d8d6d2; border: 3px dashed #8a8680; border-radius: 18px;
+  padding: 16px; text-align: center; font-family: var(--font-display); font-weight: 650;
+}
+.trade-card.gone { opacity: 0.35; filter: grayscale(0.8); pointer-events: none; }
+.payback-dish {
+  min-height: 120px; border-radius: 20px; padding: 10px; text-align: center;
+  background: #fff3c4; border: 4px solid #c98f00;
+}
+.pile-meter { height: 28px; background: #efe0c4; border-radius: 999px; overflow: hidden; margin: 12px 0; }
+.pile-fill { height: 100%; background: var(--coral); color: #fff; font-family: var(--font-display); font-size: 0.85rem; display: grid; place-items: center; transition: width 0.3s; }
+.guess-card { background: #fff; border: 3px solid #ead7b2; border-radius: 18px; padding: 16px; text-align: center; margin-bottom: 12px; }
+.guess-btns { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+@media (max-width: 760px) {
+  .quest-chip {
+    position: static;
+    max-width: none;
+    width: 100%;
+    order: 1;
+    margin: 0 0 10px;
+  }
+  .town-hello {
+    position: static;
+    max-width: none;
+    width: auto;
+    order: 1;
+    margin: 4px 0 8px;
+    white-space: normal;
+  }
+  .town-hello-copy { white-space: normal; }
+  .town-penny, .town-penny.on-landmark {
+    position: static;
+    transform: none;
+    width: min(72px, 22vw);
+    margin: 0;
+  }
+  .trail-stop {
+    display: flex; align-items: center; gap: 8px;
+  }
+}
+
+@media print {
+  .tabbar, .more-pop { display: none !important; }
+}
+
+.trail > li { list-style: none; }
+@media (max-width: 760px) {
+  .trail > li {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .trail > li .town-penny { margin-left: auto; }
+}
+.big-btn.picked, .price-btn.picked { outline: 4px solid var(--coral); }
+.quest-chip .big-btn { text-decoration: none; }
