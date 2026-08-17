@@ -202,13 +202,15 @@ a { color: var(--spend); }
 .town-fallback-note { position: absolute; left: -9999px; }
 
 .landmark, .building {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  width: min(168px, 28vw);
   text-decoration: none; color: inherit;
   display: flex; flex-direction: column; align-items: center; gap: 8px;
   z-index: 4;
   pointer-events: none;
+}
+.landmark {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: min(168px, 28vw);
 }
 .landmark-btn, .building-btn {
   width: 64px; height: 64px; border-radius: 50%;
@@ -274,7 +276,23 @@ a { color: var(--spend); }
   margin: 0;
   pointer-events: none;
 }
-.building { width: min(190px, 32vw); z-index: 4; }
+.town-buildings {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-items: center;
+  align-items: start;
+  gap: 12px 10px;
+  width: 100%;
+  margin: 16px 0 0;
+}
+.building {
+  position: static;
+  transform: none;
+  width: auto;
+  max-width: 100%;
+  z-index: 4;
+  pointer-events: auto;
+}
 .building-btn { width: 110px; height: 110px; border-radius: 22px; }
 .building.bank .building-btn { background: var(--save-soft); border-color: var(--save); }
 .building.shop .building-btn { background: var(--spend-soft); border-color: var(--spend); }
@@ -397,20 +415,28 @@ a { color: var(--spend); }
   .town-bg { display: none; }
   .color-legend { position: static; margin-bottom: 8px; }
   .town-buildings {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px;
-  }
-  .building {
-    position: static; transform: none; width: auto;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px;
   }
   .building-btn { width: 84px; height: 84px; margin: 0 auto; }
-  .trail {
+  .town-canvas .trail {
     position: relative;
-    display: flex; flex-direction: column; gap: 18px;
-    padding: 10px 0 10px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    list-style: none;
+    margin: 0;
+    padding: 12px 8px 16px 12px;
   }
-  .trail::before {
+  .town-canvas .trail::before {
     content: "";
-    position: absolute; left: 18px; top: 12px; bottom: 12px; width: 14px;
+    position: absolute;
+    left: 38px;
+    top: 20px;
+    bottom: 20px;
+    width: 24px;
     background: repeating-linear-gradient(180deg, var(--path) 0 22px, var(--path-edge) 22px 24px);
     border-radius: 999px;
     box-shadow: 0 0 0 6px rgba(255, 210, 70, 0.25);
@@ -418,18 +444,39 @@ a { color: var(--spend); }
   .landmark, .building {
     pointer-events: auto;
   }
-  .landmark {
-    position: static; transform: none; width: auto;
-    flex-direction: row; align-items: center; gap: 12px;
+  .town-canvas .landmark,
+  .town-canvas .landmark.label-up,
+  .town-canvas .landmark.label-down {
+    position: static;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+  .town-canvas .landmark.label-up .landmark-copy {
+    margin-top: 0;
+    margin-bottom: 0;
   }
   .landmark-btn { width: 76px; height: 76px; flex: 0 0 auto; }
   .landmark-copy { text-align: left; align-items: flex-start; gap: 6px; }
   .landmark-title { display: block; }
-  .town-penny, .town-hello {
-    position: static; width: auto; display: flex; align-items: flex-end; gap: 10px;
+  .town-penny {
+    position: static;
+    width: min(88px, 28vw);
+    display: block;
     margin-top: 12px;
   }
-  .town-hello { width: auto; }
+  .town-hello {
+    position: static;
+    width: auto;
+    display: block;
+    margin-top: 12px;
+  }
+  .town-hello-copy { margin: 0; }
   .daily-board { position: static; width: auto; margin-top: 14px; }
 }
 
@@ -716,6 +763,7 @@ a { color: var(--spend); }
 }
 
 .trail { list-style: none; margin: 0; padding: 0; }
+.town-hello-copy { margin: 0; }
 .landmark-star svg, .landmark-lock svg { width: 22px; height: 22px; }
 .building-btn { position: relative; }
 .building-btn svg:last-child:not(:only-child) {

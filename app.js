@@ -1388,23 +1388,22 @@
       html: "Money colors: <span class=\"l-save\">Save</span> · <span class=\"l-spend\">Spend</span> · <span class=\"l-share\">Share</span>",
     }));
 
-    const buildings = el("div", { class: "town-buildings" });
+    const buildings = el("div", { class: "town-buildings", "aria-label": "Town buildings" });
     const questOpen = state.badges.length === MODULES.length;
     const places = [
-      { href: "#/kindness", cls: "kindness", title: "Kindness Corner", tag: "Give — just because", icon: "heart", x: 10, y: 26, locked: false },
-      { href: "#/bank", cls: "bank", title: "Penny Bank", tag: "Grows 1% every hour", icon: "bank", x: 40, y: 20, locked: false },
-      { href: "#/shop", cls: "shop", title: "Penny Shop", tag: "Dress up Penny", icon: "shop", x: 88, y: 70, locked: false },
-      { href: "#/quest", cls: "quest" + (questOpen ? "" : " locked"), title: "Quest Castle", tag: questOpen ? (state.questDone ? "Conquered!" : "The final challenge") : "Earn all 9 badges", icon: "castle", x: 93, y: 8, locked: !questOpen },
+      { href: "#/kindness", cls: "kindness", title: "Kindness Corner", tag: "Give — just because", icon: "heart", locked: false },
+      { href: "#/bank", cls: "bank", title: "Penny Bank", tag: "Grows 1% every hour", icon: "bank", locked: false },
+      { href: "#/shop", cls: "shop", title: "Penny Shop", tag: "Dress up Penny", icon: "shop", locked: false },
+      { href: "#/quest", cls: "quest" + (questOpen ? "" : " locked"), title: "Quest Castle", tag: questOpen ? (state.questDone ? "Conquered!" : "The final challenge") : "Earn all 9 badges", icon: "castle", locked: !questOpen },
     ];
     places.forEach((p) => {
-      const a = el("a", { class: "building " + p.cls, href: p.href, style: "left:" + p.x + "%;top:" + p.y + "%;" });
+      const a = el("a", { class: "building " + p.cls, href: p.href });
       const btn = el("span", { class: "building-btn", html: iconSVG(p.icon) + (p.locked ? iconSVG("lock") : "") });
       a.appendChild(btn);
       a.appendChild(el("span", { class: "building-title", text: p.title }));
       a.appendChild(el("span", { class: "landmark-tag", text: p.tag }));
       buildings.appendChild(a);
     });
-    canvas.appendChild(buildings);
 
     const trail = el("ol", { class: "trail", "aria-label": "Nine lesson landmarks on the path" });
     MODULES.forEach((m, i) => {
@@ -1433,11 +1432,14 @@
     canvas.appendChild(pennyBox);
 
     const hello = el("div", { class: "town-hello speech-bubble" });
-    hello.append("Hi ", el("strong", { text: kidName() }), " " + state.avatar + "! Follow the glowing path. Every landmark pays Penny Coins you can bank, grow, or spend in my shop.");
+    const helloCopy = el("p", { class: "town-hello-copy" });
+    helloCopy.append("Hi ", el("strong", { text: kidName() }), " " + state.avatar + "! Follow the glowing path. Every landmark pays Penny Coins you can bank, grow, or spend in my shop.");
+    hello.appendChild(helloCopy);
     canvas.appendChild(hello);
 
     world.appendChild(canvas);
     app.appendChild(world);
+    app.appendChild(buildings);
     app.appendChild(buildDailyChallenge());
 
     const readRow = el("p", { style: "text-align:center;margin-top:14px;" });
