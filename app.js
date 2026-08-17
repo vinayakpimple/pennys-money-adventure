@@ -20,6 +20,15 @@
     return node;
   }
 
+  function escapeHtml(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
   function prefersReduced() {
     return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
@@ -292,7 +301,7 @@
     {
       id: "what-is-money", title: "What Is Money?", icon: "coin", color: "#8e7cf2",
       tagline: "Where did money come from?",
-      pos: { x: 27, y: 87 },
+      pos: { x: 16, y: 91 },
       bubble: "Long ago, there was no money at all. Tap the cards to travel through time!",
       intro: [
         { icon: "apple", text: "Long ago, people swapped things. A chicken for some corn!" },
@@ -310,7 +319,7 @@
     {
       id: "needs-wants", title: "Needs vs. Wants", icon: "apple", color: "#e05656",
       tagline: "Must-haves and nice-to-haves",
-      pos: { x: 22, y: 78 },
+      pos: { x: 30, y: 72 },
       bubble: "A NEED keeps you healthy and safe. A WANT is fun but you can live without it. Can you sort them?",
       intro: [
         { icon: "apple", text: "NEEDS are things we must have to live — food, water, a home." },
@@ -1422,7 +1431,8 @@
     pennyBox.appendChild(pennyEl(110, "idle"));
     canvas.appendChild(pennyBox);
 
-    const hello = el("div", { class: "town-hello speech-bubble", html: "Hi <strong>" + kidName() + "</strong> " + state.avatar + "! Follow the glowing path. Every landmark pays Penny Coins you can bank, grow, or spend in my shop." });
+    const hello = el("div", { class: "town-hello speech-bubble" });
+    hello.append("Hi ", el("strong", { text: kidName() }), " " + state.avatar + "! Follow the glowing path. Every landmark pays Penny Coins you can bank, grow, or spend in my shop.");
     canvas.appendChild(hello);
 
     canvas.appendChild(buildDailyChallenge());
@@ -1554,7 +1564,7 @@
     room.appendChild(el("div", { class: "room-deco", html: "<div class=\"vault-door\" aria-hidden=\"true\"></div>" }));
     room.appendChild(el("p", { class: "crumbs", html: "<a href=\"#/\">Back to the path</a>" }));
     room.appendChild(el("h1", { text: "Penny Bank" }));
-    room.appendChild(speechRow("Welcome to my bank, " + kidName() + "! Coins you keep here earn <strong>1% interest every hour</strong> — even while you sleep. Come back tomorrow and see the magic.", { expr: "talk", size: 100 }));
+    room.appendChild(speechRow("Welcome to my bank, " + escapeHtml(kidName()) + "! Coins you keep here earn <strong>1% interest every hour</strong> — even while you sleep. Come back tomorrow and see the magic.", { expr: "talk", size: 100 }));
 
     if (gained >= 1) {
       room.appendChild(el("div", { class: "allowance-banner grow-banner", html: "While you were away, your savings grew by <strong>+" + Math.floor(gained) + " coins</strong> — that is interest!" }));
@@ -1594,9 +1604,9 @@
         sfx.coin();
       } else {
         const avail = Math.floor(state.bank.balance);
-        const amt = Math.min(amount === "all" ? avail : amount, avail);
+        const amt = Math.floor(Math.min(amount === "all" ? avail : amount, avail));
         if (amt <= 0) { cheer.classList.add("oops"); cheer.textContent = "Nothing in the bank yet!"; sfx.oops(); return; }
-        state.bank.balance -= amt;
+        state.bank.balance = Math.floor(state.bank.balance - amt);
         state.coins += amt;
         cheer.classList.remove("oops");
         cheer.textContent = "Withdrew " + amt + " coins to your wallet";
@@ -1723,18 +1733,27 @@
     }
     drawNote();
     const grid = el("div", { class: "cause-grid" });
+    let giving = false;
+    function syncGiveButtons() {
+      const can = !giving && Math.floor(state.coins) >= 5;
+      $$(".big-btn", grid).forEach((b) => { b.disabled = !can; });
+    }
     causes.forEach((c) => {
       const cc = el("div", { class: "cause-card" });
       cc.innerHTML = iconSVG("heart") + "<h3>" + c.name + "</h3>";
       const give = el("button", { class: "big-btn gold", type: "button", text: "Give 5 coins" });
       give.addEventListener("click", () => {
+        if (giving || give.disabled) return;
         accrueBank();
         if (Math.floor(state.coins) < 5) {
           cheer.classList.add("oops");
           cheer.textContent = "You need 5 coins to give — earn a few first, then share the kindness!";
           sfx.oops();
+          syncGiveButtons();
           return;
         }
+        giving = true;
+        syncGiveButtons();
         state.coins -= 5;
         state.kindnessGiven += 5;
         save();
@@ -1745,10 +1764,13 @@
         sfx.win();
         cheer.classList.remove("oops");
         cheer.textContent = c.thanks;
+        giving = false;
+        syncGiveButtons();
       });
       cc.appendChild(give);
       grid.appendChild(cc);
     });
+    syncGiveButtons();
     card.appendChild(el("h2", { style: "text-align:center;", text: "Your Kindness Garden" }));
     card.appendChild(garden);
     card.appendChild(note);
@@ -1775,7 +1797,7 @@
       return;
     }
 
-    room.appendChild(speechRow("This is it, " + kidName() + "! Answer <strong>" + QUEST_LEN + " questions</strong>. Get <strong>" + QUEST_PASS + " or more</strong> right to become a Money Master and win <strong>50 coins</strong> + a royal certificate!", { expr: "talk", size: 100 }));
+    room.appendChild(speechRow("This is it, " + escapeHtml(kidName()) + "! Answer <strong>" + QUEST_LEN + " questions</strong>. Get <strong>" + QUEST_PASS + " or more</strong> right to become a Money Master and win <strong>50 coins</strong> + a royal certificate!", { expr: "talk", size: 100 }));
     const card = el("section", { class: "lesson-card quest-card" });
     room.appendChild(card);
     app.appendChild(room);
@@ -1863,7 +1885,7 @@
       "<p class=\"cert-eyebrow\">Penny’s Money Adventure</p>" +
       "<h1 class=\"cert-title\">Certificate of Money Mastery</h1>" +
       "<p class=\"cert-line\">proudly awarded to</p>" +
-      "<p class=\"cert-name\">" + state.avatar + " " + kidName() + " " + state.avatar + "</p>" +
+      "<p class=\"cert-name\">" + state.avatar + " " + escapeHtml(kidName()) + " " + state.avatar + "</p>" +
       "<p class=\"cert-line\">for completing all <strong>9 money adventures</strong> and conquering the<br><strong>Money Master Quest</strong> (best score: " + state.questBest + "/" + QUEST_LEN + ")</p>" +
       "<p class=\"cert-date\">" + date + "</p>" +
       "<p class=\"cert-sign\">Penny, President of Penny Bank</p>" +
@@ -1884,7 +1906,7 @@
     room.appendChild(el("p", { class: "subtitle", text: "Penny’s Money Adventure teaches personal finance to kids ages 7–12, designed visual-first for visual learners. Everything runs in the browser: no accounts, no ads, no data collection, and no real money anywhere. Progress is stored only on this device." }));
 
     const stats = el("div", { class: "info-card" });
-    stats.innerHTML = "<h3>This device’s adventurer</h3><p><strong>" + kidName() + "</strong> " + state.avatar + " · Badges: <strong>" + state.badges.length + "/9</strong> · Coins earned all-time: <strong>" + Math.floor(state.totalEarned) + "</strong> · Bank balance: <strong>" + Math.floor(state.bank.balance) + "</strong> · Interest earned: <strong>" + Math.floor(state.bankEarned) + "</strong> · Quest: <strong>" + (state.questDone ? "passed" : "not yet") + "</strong></p>";
+    stats.innerHTML = "<h3>This device’s adventurer</h3><p><strong>" + escapeHtml(kidName()) + "</strong> " + state.avatar + " · Badges: <strong>" + state.badges.length + "/9</strong> · Coins earned all-time: <strong>" + Math.floor(state.totalEarned) + "</strong> · Bank balance: <strong>" + Math.floor(state.bank.balance) + "</strong> · Interest earned: <strong>" + Math.floor(state.bankEarned) + "</strong> · Quest: <strong>" + (state.questDone ? "passed" : "not yet") + "</strong></p>";
     room.appendChild(stats);
 
     const eco = el("div", { class: "info-card" });
