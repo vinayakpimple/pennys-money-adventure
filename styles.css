@@ -420,14 +420,23 @@ a { color: var(--spend); }
     margin-top: 14px;
   }
   .building-btn { width: 84px; height: 84px; margin: 0 auto; }
-  .trail {
+  .town-canvas .trail {
     position: relative;
-    display: flex; flex-direction: column; gap: 18px;
-    padding: 10px 0 10px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    list-style: none;
+    margin: 0;
+    padding: 12px 8px 16px 12px;
   }
-  .trail::before {
+  .town-canvas .trail::before {
     content: "";
-    position: absolute; left: 18px; top: 12px; bottom: 12px; width: 14px;
+    position: absolute;
+    left: 38px;
+    top: 20px;
+    bottom: 20px;
+    width: 24px;
     background: repeating-linear-gradient(180deg, var(--path) 0 22px, var(--path-edge) 22px 24px);
     border-radius: 999px;
     box-shadow: 0 0 0 6px rgba(255, 210, 70, 0.25);
@@ -435,18 +444,39 @@ a { color: var(--spend); }
   .landmark, .building {
     pointer-events: auto;
   }
-  .landmark {
-    position: static; transform: none; width: auto;
-    flex-direction: row; align-items: center; gap: 12px;
+  .town-canvas .landmark,
+  .town-canvas .landmark.label-up,
+  .town-canvas .landmark.label-down {
+    position: static;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+  .town-canvas .landmark.label-up .landmark-copy {
+    margin-top: 0;
+    margin-bottom: 0;
   }
   .landmark-btn { width: 76px; height: 76px; flex: 0 0 auto; }
   .landmark-copy { text-align: left; align-items: flex-start; gap: 6px; }
   .landmark-title { display: block; }
-  .town-penny, .town-hello {
-    position: static; width: auto; display: flex; align-items: flex-end; gap: 10px;
+  .town-penny {
+    position: static;
+    width: min(88px, 28vw);
+    display: block;
     margin-top: 12px;
   }
-  .town-hello { width: auto; }
+  .town-hello {
+    position: static;
+    width: auto;
+    display: block;
+    margin-top: 12px;
+  }
+  .town-hello-copy { margin: 0; }
   .daily-board { position: static; width: auto; margin-top: 14px; }
 }
 
@@ -733,6 +763,7 @@ a { color: var(--spend); }
 }
 
 .trail { list-style: none; margin: 0; padding: 0; }
+.town-hello-copy { margin: 0; }
 .landmark-star svg, .landmark-lock svg { width: 22px; height: 22px; }
 .building-btn { position: relative; }
 .building-btn svg:last-child:not(:only-child) {
